@@ -211,5 +211,5 @@ def run():
         datetime.now(timezone.utc).isoformat()
     )
 
-if __name__ == "__
-run()
+if __name__ == "__main__":
+    run()
