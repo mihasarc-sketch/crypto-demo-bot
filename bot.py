@@ -212,3 +212,4 @@ def run():
 
 if __name__ == "__main__":
     run()
+    notify("🟢 Crypto Demo Bot 3.0 läuft! Telegram-Verbindung erfolgreich.")
