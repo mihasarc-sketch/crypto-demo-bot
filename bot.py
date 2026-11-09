@@ -202,14 +202,13 @@ def run():
         except Exception as error:
             print(f"{coin} Fehler: {error}")
 
-    save(data)
+        save(data)
+
+    notify("🟢 Crypto Demo Bot 3.0 läuft! Telegram-Verbindung erfolgreich.")
 
     print(
         "Bot-Lauf beendet:",
         datetime.now(timezone.utc).isoformat()
     )
 
-
-if __name__ == "__main__":
-    run()
-    notify("🟢 Crypto Demo Bot 3.0 läuft! Telegram-Verbindung erfolgreich.")
+if __name__ == "__
