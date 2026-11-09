@@ -204,7 +204,7 @@ def run():
 
         save(data)
 
-    notify("🟢 Crypto Demo Bot 3.0 läuft! Telegram-Verbindung erfolgreich.")
+    notify("Telegram Test erfolgreich!")
 
     print(
         "Bot-Lauf beendet:",
