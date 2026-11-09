@@ -1,279 +1,142 @@
-
 import json
+import os
 import urllib.request
-import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# ==================================
-# CRYPTO DEMO BOT 3.0
-# SIMULATION ONLY - NO REAL TRADES
-# ==================================
+# CRYPTO DEMO BOT 3.1
+# PAPER TRADING ONLY - NO REAL MONEY
 
-COINS = {
-    "BTC": "XBTUSD",
-    "ETH": "ETHUSD",
-    "SOL": "SOLUSD",
-    "XRP": "XRPUSD"
-}
-
+COINS = ["BTC", "ETH", "SOL", "XRP"]
 START_CASH = 1000.0
 FEE = 0.001
 RISK = 0.10
-STOP_LOSS = -0.03
+STOP_LOSS = 0.03
 TAKE_PROFIT = 0.06
-
 STATE = Path("state.json")
 
+def api(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBot/3.1"})
+    with urllib.request.urlopen(req, timeout=20) as response:
+        return json.loads(response.read().decode())
+
+def get_market(coin):
+    symbol = coin + "USDT"
+    data = api("https://api.binance.com/api/v3/klines?symbol=" + symbol + "&interval=1h&limit=100")
+    closes = [float(row[4]) for row in data]
+    price = closes[-1]
+    changes = [closes[i] - closes[i-1] for i in range(1, len(closes))]
+    gains = [max(x, 0) for x in changes[-14:]]
+    losses = [max(-x, 0) for x in changes[-14:]]
+    avg_gain = sum(gains) / 14
+    avg_loss = sum(losses) / 14
+    if avg_loss == 0:
+        rsi = 100 if avg_gain > 0 else 50
+    else:
+        rsi = 100 - (100 / (1 + avg_gain / avg_loss))
+    return price, rsi
 
 def load():
     if STATE.exists():
         try:
             return json.loads(STATE.read_text())
         except Exception:
-            print("State-Datei fehlerhaft.")
-
+            print("State file error. Starting safely.")
     return {
         "cash": START_CASH,
+        "invested": 0.0,
+        "realized": 0.0,
         "positions": {},
-        "trades": [],
-        "last": {},
-        "realized": 0.0
+        "trades": 0
     }
 
-
-def save(data):
-    temp = Path("state.tmp")
-    temp.write_text(json.dumps(data, indent=2))
-    temp.replace(STATE)
-
-
-def notify(message):
-    import os
-
+def telegram(message):
     token = os.getenv("TELEGRAM_BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
-
     if not token or not chat_id:
-        print("Telegram nicht konfiguriert.")
+        print("Telegram not configured.")
         return
-
     try:
-        url = f"https://api.telegram.org/bot{token}/sendMessage"
-        payload = urllib.parse.urlencode({
-            "chat_id": chat_id,
-            "text": message
-        }).encode()
+        url = "https://api.telegram.org/bot" + token + "/sendMessage"
+        payload = json.dumps({"chat_id": chat_id, "text": message}).encode()
+        req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+        urllib.request.urlopen(req, timeout=20).read()
+        print("Telegram message sent.")
+    except Exception as e:
+        print("Telegram error:", e)
 
-        req = urllib.request.Request(url, data=payload)
-        urllib.request.urlopen(req, timeout=15).read()
+def main():
+    state = load()
+    print("=" * 35)
+    print("CRYPTO DEMO BOT 3.1")
+    print("SIMULATION ONLY - NO REAL TRADES")
+    print("=" * 35)
 
-    except Exception as error:
-        print("Telegram Fehler:", error)
+    report = ["🤖 CRYPTO DEMO BOT 3.1"]
+    report.append("Paper trading only - no real money")
+    errors = []
 
-
-def get_prices(pair):
-    url = (
-        "https://api.kraken.com/0/public/OHLC"
-        f"?pair={pair}&interval=60"
-    )
-
-    req = urllib.request.Request(
-        url,
-        headers={"User-Agent": "CryptoDemoBot/3.0"}
-    )
-
-    with urllib.request.urlopen(req, timeout=20) as response:
-        result = json.loads(response.read())
-
-    if result.get("error"):
-        raise ValueError(str(result["error"]))
-
-    rows = next(
-        value for key, value in result["result"].items()
-        if key != "last"
-    )
-
-    return rows
-
-
-def ema(values, period):
-    if len(values) < period:
-        raise ValueError("Zu wenige Kursdaten für EMA.")
-
-    alpha = 2 / (period + 1)
-    value = sum(values[:period]) / period
-
-    for price in values[period:]:
-        value = price * alpha + value * (1 - alpha)
-
-    return value
-
-
-def rsi(values, period=14):
-    changes = [
-        values[i] - values[i - 1]
-        for i in range(1, len(values))
-    ]
-
-    gains = [max(x, 0) for x in changes]
-    losses = [max(-x, 0) for x in changes]
-
-    avg_gain = sum(gains[-period:]) / period
-    avg_loss = sum(losses[-period:]) / period
-
-    if avg_loss == 0:
-        return 100.0
-
-    rs = avg_gain / avg_loss
-    return 100 - (100 / (1 + rs))
-
-
-def buy(data, coin, price, strength):
-    budget = data["cash"] * RISK
-
-    if budget < 10:
-        return
-
-    cost = budget
-    qty = cost / (price * (1 + FEE))
-
-    data["cash"] -= cost
-
-    data["positions"][coin] = {
-        "entry": price,
-        "qty": qty,
-        "cost": cost
-    }
-
-    data["trades"].append({
-        "coin": coin,
-        "side": "BUY",
-        "price": price,
-        "cost": cost,
-        "time": datetime.now(timezone.utc).isoformat()
-    })
-
-    notify(
-        f"🟢 DEMO KAUF {coin}\n"
-        f"Kurs: {price:.4f} USD\n"
-        f"Einsatz: {cost:.2f} USD\n"
-        f"RSI: {strength:.1f}"
-    )
-
-
-def sell(data, coin, price, reason):
-    position = data["positions"][coin]
-
-    qty = position["qty"]
-    proceeds = qty * price * (1 - FEE)
-    pnl = proceeds - position["cost"]
-
-    data["cash"] += proceeds
-    data["realized"] += pnl
-
-    del data["positions"][coin]
-
-    data["trades"].append({
-        "coin": coin,
-        "side": "SELL",
-        "price": price,
-        "pnl": pnl,
-        "reason": reason,
-        "time": datetime.now(timezone.utc).isoformat()
-    })
-
-    notify(
-        f"🔴 DEMO VERKAUF {coin}\n"
-        f"Kurs: {price:.4f} USD\n"
-        f"Grund: {reason}\n"
-        f"Ergebnis: {pnl:.2f} USD"
-    )
-
-
-def run():
-    data = load()
-
-    print("================================")
-    print("CRYPTO DEMO BOT 3.0")
-    print("SIMULATION - KEIN ECHTHANDEL")
-    print("================================")
-
-    for coin, pair in COINS.items():
+    for coin in COINS:
         try:
-            rows = get_prices(pair)
-
-            prices = [float(row[4]) for row in rows]
-            candle = str(rows[-1][0])
-
-            if data["last"].get(coin) == candle:
-                print(f"{coin}: Kerze bereits verarbeitet.")
-                continue
-
-            price = prices[-1]
-            fast = ema(prices[-60:], 20)
-            slow = ema(prices[-80:], 50)
-            strength = rsi(prices)
-
-            position = data["positions"].get(coin)
+            price, rsi = get_market(coin)
+            position = state["positions"].get(coin)
+            action = "HOLD"
 
             if position:
-                change = (
-                    price / position["entry"]
-                ) - 1
+                entry = position["entry"]
+                change = (price - entry) / entry
+                if change <= -STOP_LOSS or change >= TAKE_PROFIT or rsi >= 70:
+                    quantity = position["quantity"]
+                    proceeds = quantity * price * (1 - FEE)
+                    cost = position["cost"]
+                    profit = proceeds - cost
+                    state["cash"] += proceeds
+                    state["realized"] += profit
+                    del state["positions"][coin]
+                    state["trades"] += 1
+                    action = "SELL"
+                    print(coin, "SELL:", round(profit, 2), "USD")
+            elif rsi <= 30 and state["cash"] >= 10:
+                investment = min(state["cash"], START_CASH * RISK)
+                quantity = investment / (price * (1 + FEE))
+                cost = investment
+                state["cash"] -= cost
+                state["positions"][coin] = {
+                    "entry": price,
+                    "quantity": quantity,
+                    "cost": cost
+                }
+                state["trades"] += 1
+                action = "BUY"
+                print(coin, "BUY:", round(investment, 2), "USD")
 
-                reason = None
+            print(coin, round(price, 4), "USD | RSI:", round(rsi, 1), "|", action)
+            report.append(f"{coin}: {price:.4f} USD | RSI {rsi:.1f} | {action}")
 
-                if change <= STOP_LOSS:
-                    reason = "Stop-Loss"
+        except Exception as e:
+            errors.append(coin + ": " + str(e))
+            print("Market error", coin, e)
 
-                elif change >= TAKE_PROFIT:
-                    reason = "Take-Profit"
+    invested = sum(p["cost"] for p in state["positions"].values())
+    state["invested"] = invested
+    state["updated"] = datetime.now(timezone.utc).isoformat()
+    STATE.write_text(json.dumps(state, indent=2))
 
-                elif fast < slow:
-                    reason = "Trendwechsel"
+    report.extend([
+        "----------------------",
+        f"Cash: {state['cash']:.2f} USD",
+        f"Invested: {invested:.2f} USD",
+        f"Realized profit: {state['realized']:.2f} USD",
+        f"Open positions: {len(state['positions'])}",
+        f"Trades: {state['trades']}"
+    ])
+    if errors:
+        report.append("Market errors: " + ", ".join(errors))
+    report.append("Simulation - no real trades.")
 
-                if reason:
-                    sell(data, coin, price, reason)
-
-            elif (
-                fast > slow
-                and 35 <= strength <= 65
-            ):
-                buy(data, coin, price, strength)
-
-            data["last"][coin] = candle
-
-            print(
-                f"{coin}: {price:.4f} USD | "
-                f"RSI: {strength:.1f} | "
-                f"Cash: {data['cash']:.2f} USD"
-            )
-
-        except Exception as error:
-            print(f"{coin} Fehler: {error}")
-
-    save(data)
-
-    invested = sum(
-        p["cost"] for p in data["positions"].values()
-    )
-
-    print("--------------------------------")
-    print(f"Cash: {data['cash']:.2f} USD")
-    print(f"Investiert: {invested:.2f} USD")
-    print(f"Realisierter Gewinn: {data['realized']:.2f} USD")
-    print(f"Offene Positionen: {len(data['positions'])}")
-    print(f"Trades: {len(data['trades'])}")
-    print("Bot-Lauf beendet:", datetime.now(timezone.utc).isoformat())
-
-    notify(
-        f"🤖 Crypto Demo Bot 3.0\n"
-        f"Cash: {data['cash']:.2f} USD\n"
-        f"Investiert: {invested:.2f} USD\n"
-        f"Realisierter Gewinn: {data['realized']:.2f} USD"
-    )
-
+    message = "\n".join(report)
+    print(message)
+    telegram(message)
 
 if __name__ == "__main__":
-    run()
+    main()
