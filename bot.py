@@ -107,17 +107,33 @@ def rsi(values, period=14):
 
 
 def market(coin):
-    symbol = coin + "USDT"
+    pairs = {
+        "BTC": "XBTUSD",
+        "ETH": "ETHUSD",
+        "SOL": "SOLUSD",
+        "XRP": "XRPUSD"
+    }
+
+    pair = pairs[coin]
 
     url = (
-        "https://api.binance.com/api/v3/klines"
-        f"?symbol={symbol}&interval=1h&limit=100"
+        "https://api.kraken.com/0/public/OHLC"
+        f"?pair={pair}&interval=60"
     )
 
-    candles = api(url)
+    data = api(url)
 
-    # Nur abgeschlossene Stundenkerzen verwenden
-    closes = [float(candle[4]) for candle in candles[:-1]]
+    if data.get("error"):
+        raise RuntimeError(str(data["error"]))
+
+    result = data["result"]
+
+    key = next(k for k in result if k != "last")
+    candles = result[key]
+
+    closes = [
+        float(row[4]) for row in candles[:-1]
+    ]
 
     if len(closes) < 30:
         raise RuntimeError("Zu wenige Marktdaten")
@@ -128,6 +144,7 @@ def market(coin):
     strength = rsi(closes)
 
     return price, fast, slow, strength
+
 
 
 def buy(state, coin, price):
