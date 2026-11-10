@@ -293,7 +293,7 @@ def main():
     report_text = "\n".join(report)
 
     print(report_text)
-state["updated"] = datetime.now(timezone.utc).isoformat()
+    #state["updated"] = datetime.now(timezone.utc).isoformat()
     save_state(state)
 
     telegram(report_text)
