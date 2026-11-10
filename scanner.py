@@ -76,7 +76,8 @@ if __name__ == "__main__":
 
     try:
         coins = scan()
-
+        with open("scan_results.json", "w") as file:
+            json.dump(coins, file, indent=2)
         for number, coin in enumerate(coins, 1):
             print(
                 number,
