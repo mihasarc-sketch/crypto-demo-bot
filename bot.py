@@ -88,8 +88,9 @@ def market(coin):
     if len(closes) < 50:
         raise RuntimeError("Zu wenige Marktdaten für EMA-Auswertung")
     price = closes[-1]
-    fast = ema(closes[-30:], 9)
-    slow = ema(closes[-50:], 21)
+    ema_prices = closes[-50:]
+    fast = ema(ema_prices, 9)
+    slow = ema(ema_prices, 21)
     strength = rsi(closes)
     return price, fast, slow, strength
 
@@ -126,6 +127,7 @@ def sell(state, coin, price, reason):
 def main():
     state = load_state()
     messages, market_lines, decision_lines, errors = [], [], [], []
+    signals = {}
     print("CRYPTO DEMO BOT 4.1")
     print("PAPER TRADING - KEIN ECHTHANDEL")
 
@@ -137,6 +139,7 @@ def main():
                 f"EMA9: {fast:.4f} | EMA21: {slow:.4f}"
             )
             position = state["positions"].get(coin)
+            signals[coin] = {"price": round(price, 8), "rsi": round(strength, 2), "ema9": round(fast, 8), "ema21": round(slow, 8), "ema_bullish": fast > slow, "updated": datetime.now(timezone.utc).isoformat()}
 
             if position:
                 change = price / position["entry"] - 1
@@ -151,6 +154,8 @@ def main():
                     decision_lines.append(f"{coin}: VERKAUF - EMA9 unter EMA21")
                 else:
                     decision_lines.append(f"{coin}: HALTEN - Position offen, kein Verkaufssignal")
+                    signals[coin]["decision"] = "HOLD"
+                    signals[coin]["reason"] = "Position offen; kein Verkaufssignal"
             else:
                 reasons = []
                 if fast <= slow:
@@ -164,17 +169,22 @@ def main():
 
                 if reasons:
                     decision_lines.append(f"{coin}: KEIN KAUF - " + "; ".join(reasons))
+                    signals[coin]["decision"] = "WAIT"
+                    signals[coin]["reason"] = "; ".join(reasons)
                 else:
                     result = buy(state, coin, price)
                     if result:
                         messages.append(result)
                         decision_lines.append(f"{coin}: KAUFSIGNAL JA - DEMO-KAUF ausgeführt")
+                        signals[coin]["decision"] = "BUY"
+                        signals[coin]["reason"] = "RSI und EMA-Bedingungen erfüllt"
                     else:
                         decision_lines.append(f"{coin}: KEIN KAUF - Budget zu klein")
         except Exception as error:
             msg = f"{coin}: {str(error)[:120]}"
             errors.append(msg)
             decision_lines.append(f"{coin}: NICHT AUSWERTBAR - {str(error)[:100]}")
+            signals[coin] = {"decision": "ERROR", "reason": str(error)[:160], "updated": datetime.now(timezone.utc).isoformat()}
             print(f"Fehler {coin}: {error}")
 
     invested = sum(p["cost"] for p in state["positions"].values())
@@ -216,6 +226,7 @@ def main():
 
     report_text = "\n".join(report)
     print(report_text)
+    state["signals"] = signals
     state["updated"] = datetime.now(timezone.utc).isoformat()
     save_state(state)
     telegram(report_text)
