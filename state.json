@@ -1,5 +1,5 @@
 {
-  "cash": 598.8299080717811,
+  "cash": 697.0300438385182,
   "positions": {
     "SOL": {
       "entry": 84.52,
@@ -9,11 +9,6 @@
     "BTC": {
       "entry": 74190.7,
       "quantity": 0.0013465299559109161,
-      "cost": 100.0
-    },
-    "XRP": {
-      "entry": 1.07038,
-      "quantity": 93.33134027167921,
       "cost": 100.0
     },
     "ETH": {
@@ -65,6 +60,14 @@
       "price": 2089.01,
       "cost": 100.0,
       "time": "2026-11-11T18:58:51.923446+00:00"
+    },
+    {
+      "coin": "XRP",
+      "action": "SELL",
+      "price": 1.05322,
+      "profit": -1.7998642332629657,
+      "reason": "EMA-Signal",
+      "time": "2026-11-11T23:52:08.979733+00:00"
     }
   ],
   "last": {
@@ -73,49 +76,47 @@
     "SOL": "1794250800",
     "XRP": "1794250800"
   },
-  "realized": -1.170091928218909,
+  "realized": -2.969956161481875,
   "invested": 0,
-  "updated": "2026-11-11T22:56:23.388725+00:00",
+  "updated": "2026-11-11T23:52:09.445717+00:00",
   "signals": {
     "BTC": {
-      "price": 74308.1,
-      "rsi": 55.95,
-      "ema9": 74226.62608128,
-      "ema21": 74042.32989893,
+      "price": 73854.9,
+      "rsi": 53.75,
+      "ema9": 74152.28320285,
+      "ema21": 74026.68615591,
       "ema_bullish": true,
-      "updated": "2026-11-11T22:56:22.963079+00:00",
+      "updated": "2026-11-11T23:52:08.355923+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "ETH": {
-      "price": 2067.84,
-      "rsi": 50.49,
-      "ema9": 2071.82831215,
-      "ema21": 2067.94135468,
+      "price": 2054.69,
+      "rsi": 49.33,
+      "ema9": 2068.4006383,
+      "ema21": 2066.72987124,
       "ema_bullish": true,
-      "updated": "2026-11-11T22:56:23.011438+00:00",
+      "updated": "2026-11-11T23:52:08.599675+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "SOL": {
-      "price": 84.45,
-      "rsi": 61.75,
-      "ema9": 84.57452396,
-      "ema21": 84.22129663,
+      "price": 83.41,
+      "rsi": 54.58,
+      "ema9": 84.34161703,
+      "ema21": 84.14626461,
       "ema_bullish": true,
-      "updated": "2026-11-11T22:56:23.098732+00:00",
+      "updated": "2026-11-11T23:52:08.771325+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "XRP": {
-      "price": 1.06008,
-      "rsi": 52.07,
-      "ema9": 1.06202859,
-      "ema21": 1.06194548,
-      "ema_bullish": true,
-      "updated": "2026-11-11T22:56:23.226797+00:00",
-      "decision": "HOLD",
-      "reason": "Position offen; kein Verkaufssignal"
+      "price": 1.05322,
+      "rsi": 48.12,
+      "ema9": 1.06026688,
+      "ema21": 1.06115557,
+      "ema_bullish": false,
+      "updated": "2026-11-11T23:52:08.979712+00:00"
     }
   }
 }
