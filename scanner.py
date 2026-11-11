@@ -21,12 +21,15 @@ def scan():
     tickers = api("Ticker")
 
     results = []
+    excluded_bases = {"USDT", "USDC", "DAI", "TUSD", "USDP", "FDUSD", "EUR", "GBP", "CAD", "AUD", "CHF", "JPY", "USD"}
 
     for key, info in pairs.items():
         name = info.get("wsname", "")
         status = info.get("status", "")
 
         if not name.endswith("/USD"):
+            continue
+        if name.split("/")[0] in excluded_bases:
             continue
         if status != "online":
             continue
@@ -91,3 +94,5 @@ if __name__ == "__main__":
 
     except Exception as error:
         print("Scanner-Fehler:", str(error))
+        with open("scan_results.json", "w") as file:
+            json.dump([], file, indent=2)
