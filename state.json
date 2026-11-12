@@ -86,43 +86,45 @@
   },
   "realized": -6.805117057159862,
   "invested": 0,
-  "updated": "2026-11-12T03:57:36.325054+00:00",
+  "updated": "2026-11-12T05:02:48.216690+00:00",
   "signals": {
     "BTC": {
-      "price": 73710.6,
-      "rsi": 48.19,
-      "ema9": 73936.18342317,
-      "ema21": 73955.36431272,
+      "price": 73642.1,
+      "rsi": 52.86,
+      "ema9": 73840.75467791,
+      "ema21": 73902.18984467,
       "ema_bullish": false,
-      "updated": "2026-11-12T03:57:35.780382+00:00"
-    },
-    "ETH": {
-      "price": 2055.49,
-      "rsi": 51.88,
-      "ema9": 2060.02894459,
-      "ema21": 2062.74746009,
-      "ema_bullish": false,
-      "updated": "2026-11-12T03:57:35.958842+00:00",
+      "updated": "2026-11-12T05:02:47.615651+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
-    "SOL": {
-      "price": 83.33,
-      "rsi": 45.74,
-      "ema9": 83.70953837,
-      "ema21": 83.86709901,
+    "ETH": {
+      "price": 2047.86,
+      "rsi": 48.01,
+      "ema9": 2056.37597496,
+      "ema21": 2060.44784264,
       "ema_bullish": false,
-      "updated": "2026-11-12T03:57:36.135196+00:00",
+      "updated": "2026-11-12T05:02:47.856619+00:00",
+      "decision": "WAIT",
+      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+    },
+    "SOL": {
+      "price": 83.01,
+      "rsi": 40.47,
+      "ema9": 83.49929777,
+      "ema21": 83.73566755,
+      "ema_bullish": false,
+      "updated": "2026-11-12T05:02:48.042779+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
     "XRP": {
-      "price": 1.04927,
-      "rsi": 44.16,
-      "ema9": 1.05472486,
-      "ema21": 1.05799102,
+      "price": 1.04327,
+      "rsi": 40.68,
+      "ema9": 1.05114183,
+      "ema21": 1.05566388,
       "ema_bullish": false,
-      "updated": "2026-11-12T03:57:36.325002+00:00",
+      "updated": "2026-11-12T05:02:48.216646+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     }
