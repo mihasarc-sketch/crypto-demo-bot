@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 71627.6,
-    "volume_usd_24h": 244039242.22,
+    "price_usd": 71670.9,
+    "volume_usd_24h": 255008085.27,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 2004.52,
-    "volume_usd_24h": 63925789.17,
+    "price_usd": 2013.96,
+    "volume_usd_24h": 63006396.22,
     "spread_percent": 0.0
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 949.19,
-    "volume_usd_24h": 36725744.23,
-    "spread_percent": 0.039
+    "price_usd": 940.34,
+    "volume_usd_24h": 35398322.24,
+    "spread_percent": 0.037
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 1.02171,
-    "volume_usd_24h": 27288834.19,
-    "spread_percent": 0.001
+    "price_usd": 1.02787,
+    "volume_usd_24h": 27864374.74,
+    "spread_percent": 0.006
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 81.14,
-    "volume_usd_24h": 16064710.97,
+    "price_usd": 81.47,
+    "volume_usd_24h": 15589859.4,
     "spread_percent": 0.012
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.3949,
-    "volume_usd_24h": 11615943.98,
-    "spread_percent": 0.047
+    "price_usd": 3.4218,
+    "volume_usd_24h": 11401152.86,
+    "spread_percent": 0.035
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 70.95,
-    "volume_usd_24h": 10943043.35,
+    "price_usd": 71.11,
+    "volume_usd_24h": 10766553.74,
     "spread_percent": 0.014
   },
   {
     "coin": "TAO/USD",
-    "price_usd": 207.7912,
-    "volume_usd_24h": 8161385.2,
-    "spread_percent": 0.053
+    "price_usd": 210.0608,
+    "volume_usd_24h": 8193151.36,
+    "spread_percent": 0.05
   },
   {
     "coin": "PEPE/USD",
-    "price_usd": 4.32e-06,
-    "volume_usd_24h": 5910208.8,
+    "price_usd": 4.39e-06,
+    "volume_usd_24h": 5961192.38,
     "spread_percent": 0.046
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 539.31,
-    "volume_usd_24h": 5800231.75,
-    "spread_percent": 0.057
+    "price_usd": 537.76,
+    "volume_usd_24h": 5794994.91,
+    "spread_percent": 0.069
   }
 ]
