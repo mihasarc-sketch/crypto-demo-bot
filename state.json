@@ -86,7 +86,7 @@
   },
   "realized": -6.805117057159862,
   "invested": 0,
-  "updated": "2026-11-13T11:02:39.117541+00:00",
+  "updated": "2026-11-13T11:59:43.818088+00:00",
   "signals": {
     "BTC": {
       "price": 69267.2,
@@ -94,7 +94,7 @@
       "ema9": 69237.99377273,
       "ema21": 70224.76897001,
       "ema_bullish": false,
-      "updated": "2026-11-13T11:02:38.492202+00:00",
+      "updated": "2026-11-13T11:59:43.204110+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
@@ -104,7 +104,7 @@
       "ema9": 1948.10374788,
       "ema21": 1973.4712629,
       "ema_bullish": false,
-      "updated": "2026-11-13T11:02:38.694228+00:00",
+      "updated": "2026-11-13T11:59:43.412141+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
@@ -114,7 +114,7 @@
       "ema9": 79.94783974,
       "ema21": 80.55686287,
       "ema_bullish": false,
-      "updated": "2026-11-13T11:02:38.896992+00:00",
+      "updated": "2026-11-13T11:59:43.615069+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
@@ -124,7 +124,7 @@
       "ema9": 1.02292763,
       "ema21": 1.02692869,
       "ema_bullish": false,
-      "updated": "2026-11-13T11:02:39.117484+00:00",
+      "updated": "2026-11-13T11:59:43.818038+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     }
