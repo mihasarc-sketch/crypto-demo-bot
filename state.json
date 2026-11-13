@@ -86,47 +86,47 @@
   },
   "realized": -6.805117057159862,
   "invested": 0,
-  "updated": "2026-11-13T17:54:26.928212+00:00",
+  "updated": "2026-11-13T18:55:59.173737+00:00",
   "signals": {
     "BTC": {
-      "price": 68632.0,
-      "rsi": 36.21,
-      "ema9": 69031.20299496,
-      "ema21": 69696.89063781,
+      "price": 68879.6,
+      "rsi": 49.89,
+      "ema9": 69000.88646077,
+      "ema21": 69625.01757232,
       "ema_bullish": false,
-      "updated": "2026-11-13T17:54:26.707888+00:00",
+      "updated": "2026-11-13T18:55:58.788683+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
     "ETH": {
-      "price": 1926.26,
-      "rsi": 33.39,
-      "ema9": 1944.92345237,
-      "ema21": 1961.88913449,
+      "price": 1936.62,
+      "rsi": 51.42,
+      "ema9": 1943.26280243,
+      "ema21": 1959.61613313,
       "ema_bullish": false,
-      "updated": "2026-11-13T17:54:26.763136+00:00",
+      "updated": "2026-11-13T18:55:58.865518+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+      "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "SOL": {
-      "price": 79.55,
-      "rsi": 46.25,
-      "ema9": 80.22189175,
-      "ema21": 80.50446237,
+      "price": 79.91,
+      "rsi": 62.12,
+      "ema9": 80.1595144,
+      "ema21": 80.45101663,
       "ema_bullish": false,
-      "updated": "2026-11-13T17:54:26.843828+00:00",
+      "updated": "2026-11-13T18:55:58.937153+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+      "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "XRP": {
-      "price": 1.01583,
-      "rsi": 47.74,
-      "ema9": 1.02283239,
-      "ema21": 1.02547191,
+      "price": 1.01981,
+      "rsi": 60.47,
+      "ema9": 1.0222279,
+      "ema21": 1.02495004,
       "ema_bullish": false,
-      "updated": "2026-11-13T17:54:26.928155+00:00",
+      "updated": "2026-11-13T18:55:59.173688+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+      "reason": "EMA9 liegt nicht \u00fcber EMA21"
     }
   }
 }

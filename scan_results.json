@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 68930.0,
-    "volume_usd_24h": 418680648.69,
+    "price_usd": 68904.2,
+    "volume_usd_24h": 410768277.54,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1940.51,
-    "volume_usd_24h": 102711742.12,
+    "price_usd": 1940.84,
+    "volume_usd_24h": 101152244.33,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 1.02055,
-    "volume_usd_24h": 37398866.46,
-    "spread_percent": 0.012
+    "price_usd": 1.02516,
+    "volume_usd_24h": 38396247.85,
+    "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 945.16,
-    "volume_usd_24h": 36870832.6,
-    "spread_percent": 0.043
+    "price_usd": 947.63,
+    "volume_usd_24h": 37216212.76,
+    "spread_percent": 0.035
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 80.03,
-    "volume_usd_24h": 34215731.31,
+    "price_usd": 80.11,
+    "volume_usd_24h": 33946400.73,
     "spread_percent": 0.012
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.5085,
-    "volume_usd_24h": 17843012.8,
-    "spread_percent": 0.003
+    "price_usd": 3.5147,
+    "volume_usd_24h": 18052730.49,
+    "spread_percent": 0.028
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 72.71,
-    "volume_usd_24h": 17393965.18,
-    "spread_percent": 0.041
+    "price_usd": 72.87,
+    "volume_usd_24h": 17343494.66,
+    "spread_percent": 0.027
   },
   {
     "coin": "USDG/USD",
-    "price_usd": 1.0,
-    "volume_usd_24h": 13445445.11,
+    "price_usd": 1.0001,
+    "volume_usd_24h": 14038918.42,
     "spread_percent": 0.02
   },
   {
     "coin": "AKE/USD",
-    "price_usd": 0.01224459,
-    "volume_usd_24h": 9370828.5,
-    "spread_percent": 0.5
+    "price_usd": 0.01160022,
+    "volume_usd_24h": 9234320.05,
+    "spread_percent": 0.334
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.8039,
-    "volume_usd_24h": 8302229.26,
+    "price_usd": 0.8093,
+    "volume_usd_24h": 8058158.92,
     "spread_percent": 0.012
   }
 ]
