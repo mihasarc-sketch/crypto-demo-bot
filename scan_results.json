@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 68842.7,
-    "volume_usd_24h": 435681459.44,
+    "price_usd": 68624.1,
+    "volume_usd_24h": 444884324.87,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1946.1,
-    "volume_usd_24h": 98912325.37,
-    "spread_percent": 0.026
+    "price_usd": 1929.45,
+    "volume_usd_24h": 101308614.45,
+    "spread_percent": 0.011
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 1.02988,
-    "volume_usd_24h": 37121163.26,
-    "spread_percent": 0.027
+    "price_usd": 1.01906,
+    "volume_usd_24h": 38444158.12,
+    "spread_percent": 0.014
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 955.21,
-    "volume_usd_24h": 35270406.93,
-    "spread_percent": 0.065
+    "price_usd": 945.91,
+    "volume_usd_24h": 36330065.81,
+    "spread_percent": 0.041
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 80.74,
-    "volume_usd_24h": 31682544.61,
-    "spread_percent": 0.012
+    "price_usd": 79.69,
+    "volume_usd_24h": 33049286.58,
+    "spread_percent": 0.013
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.5467,
-    "volume_usd_24h": 19221842.77,
-    "spread_percent": 0.037
+    "price_usd": 3.4886,
+    "volume_usd_24h": 17731104.45,
+    "spread_percent": 0.049
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 73.61,
-    "volume_usd_24h": 17423283.66,
+    "price_usd": 72.68,
+    "volume_usd_24h": 17543803.37,
     "spread_percent": 0.014
   },
   {
     "coin": "USDG/USD",
-    "price_usd": 1.0001,
-    "volume_usd_24h": 9236935.57,
+    "price_usd": 1.0,
+    "volume_usd_24h": 9095246.31,
     "spread_percent": 0.01
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.8181,
-    "volume_usd_24h": 8434642.65,
+    "price_usd": 0.8079,
+    "volume_usd_24h": 8576702.42,
     "spread_percent": 0.012
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 538.56,
-    "volume_usd_24h": 7279402.43,
-    "spread_percent": 0.243
+    "price_usd": 531.73,
+    "volume_usd_24h": 6974177.52,
+    "spread_percent": 0.147
   }
 ]
