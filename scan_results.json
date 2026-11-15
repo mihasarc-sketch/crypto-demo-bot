@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 64313.1,
-    "volume_usd_24h": 415170825.65,
+    "price_usd": 63921.4,
+    "volume_usd_24h": 419584853.67,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1787.98,
-    "volume_usd_24h": 134245540.82,
+    "price_usd": 1779.57,
+    "volume_usd_24h": 135345179.95,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.95479,
-    "volume_usd_24h": 82978816.11,
-    "spread_percent": 0.01
+    "price_usd": 0.94813,
+    "volume_usd_24h": 79332309.96,
+    "spread_percent": 0.009
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 893.66,
-    "volume_usd_24h": 59136575.79,
-    "spread_percent": 0.051
+    "price_usd": 890.75,
+    "volume_usd_24h": 59125754.55,
+    "spread_percent": 0.06
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 70.26,
-    "volume_usd_24h": 54492015.81,
+    "price_usd": 69.91,
+    "volume_usd_24h": 53594223.56,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 65.27,
-    "volume_usd_24h": 24701737.74,
+    "price_usd": 64.81,
+    "volume_usd_24h": 24713105.71,
     "spread_percent": 0.015
   },
   {
     "coin": "XDG/USD",
-    "price_usd": 0.0577032,
-    "volume_usd_24h": 16604273.57,
-    "spread_percent": 0.012
+    "price_usd": 0.0574584,
+    "volume_usd_24h": 16569521.44,
+    "spread_percent": 0.01
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.716,
-    "volume_usd_24h": 15309421.34,
+    "price_usd": 0.7092,
+    "volume_usd_24h": 15320332.53,
     "spread_percent": 0.014
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.1274,
-    "volume_usd_24h": 13322761.53,
-    "spread_percent": 0.048
+    "price_usd": 3.1081,
+    "volume_usd_24h": 12922352.81,
+    "spread_percent": 0.055
   },
   {
     "coin": "ADA/USD",
-    "price_usd": 0.149741,
-    "volume_usd_24h": 11320647.12,
-    "spread_percent": 0.047
+    "price_usd": 0.14931,
+    "volume_usd_24h": 11390639.91,
+    "spread_percent": 0.048
   }
 ]
