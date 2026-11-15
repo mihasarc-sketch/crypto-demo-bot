@@ -1,5 +1,5 @@
 {
-  "cash": 792.6218496161396,
+  "cash": 692.6218496161396,
   "positions": {
     "ETH": {
       "entry": 1818.55,
@@ -9,6 +9,11 @@
     "XRP": {
       "entry": 0.96356,
       "quantity": 103.67802731537218,
+      "cost": 100.0
+    },
+    "SOL": {
+      "entry": 72.39,
+      "quantity": 1.3800248653128886,
       "cost": 100.0
     }
   },
@@ -116,6 +121,13 @@
       "price": 0.96356,
       "cost": 100.0,
       "time": "2026-11-15T22:43:47.920723+00:00"
+    },
+    {
+      "coin": "SOL",
+      "action": "BUY",
+      "price": 72.39,
+      "cost": 100.0,
+      "time": "2026-11-15T23:49:44.437146+00:00"
     }
   ],
   "last": {
@@ -126,47 +138,47 @@
   },
   "realized": -7.378150383860373,
   "invested": 0,
-  "updated": "2026-11-15T22:43:48.138690+00:00",
+  "updated": "2026-11-15T23:49:44.559186+00:00",
   "signals": {
     "BTC": {
-      "price": 64956.2,
-      "rsi": 63.56,
-      "ema9": 64897.42878929,
-      "ema21": 64983.39845498,
+      "price": 65195.6,
+      "rsi": 50.07,
+      "ema9": 64957.05558405,
+      "ema21": 64998.24452447,
       "ema_bullish": false,
-      "updated": "2026-11-15T22:43:47.438223+00:00",
+      "updated": "2026-11-15T23:49:44.230529+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "ETH": {
-      "price": 1818.55,
-      "rsi": 64.94,
-      "ema9": 1817.96423469,
-      "ema21": 1817.89642803,
+      "price": 1826.61,
+      "rsi": 57.63,
+      "ema9": 1819.69310644,
+      "ema21": 1818.52067029,
       "ema_bullish": true,
-      "updated": "2026-11-15T22:43:47.621221+00:00",
-      "decision": "BUY",
-      "reason": "RSI und EMA-Bedingungen erf\u00fcllt"
+      "updated": "2026-11-15T23:49:44.262377+00:00",
+      "decision": "HOLD",
+      "reason": "Position offen; kein Verkaufssignal"
     },
     "SOL": {
-      "price": 71.92,
-      "rsi": 67.24,
-      "ema9": 71.62841874,
-      "ema21": 71.70860656,
-      "ema_bullish": false,
-      "updated": "2026-11-15T22:43:47.826737+00:00",
-      "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21"
-    },
-    "XRP": {
-      "price": 0.96356,
-      "rsi": 62.29,
-      "ema9": 0.95846021,
-      "ema21": 0.95795541,
+      "price": 72.39,
+      "rsi": 62.91,
+      "ema9": 71.78071501,
+      "ema21": 71.75862545,
       "ema_bullish": true,
-      "updated": "2026-11-15T22:43:47.920705+00:00",
+      "updated": "2026-11-15T23:49:44.437129+00:00",
       "decision": "BUY",
       "reason": "RSI und EMA-Bedingungen erf\u00fcllt"
+    },
+    "XRP": {
+      "price": 0.97028,
+      "rsi": 60.96,
+      "ema9": 0.96082405,
+      "ema21": 0.95900376,
+      "ema_bullish": true,
+      "updated": "2026-11-15T23:49:44.467274+00:00",
+      "decision": "HOLD",
+      "reason": "Position offen; kein Verkaufssignal"
     }
   }
 }
