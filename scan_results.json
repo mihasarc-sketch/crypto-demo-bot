@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 64633.5,
-    "volume_usd_24h": 412105861.38,
+    "price_usd": 64648.1,
+    "volume_usd_24h": 404642211.05,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1808.68,
-    "volume_usd_24h": 124689248.16,
-    "spread_percent": 0.001
+    "price_usd": 1814.43,
+    "volume_usd_24h": 120902392.7,
+    "spread_percent": 0.003
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.9556,
-    "volume_usd_24h": 76974738.9,
-    "spread_percent": 0.007
+    "price_usd": 0.95173,
+    "volume_usd_24h": 71094070.75,
+    "spread_percent": 0.009
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 889.21,
-    "volume_usd_24h": 61309446.49,
-    "spread_percent": 0.019
+    "price_usd": 900.79,
+    "volume_usd_24h": 59749403.26,
+    "spread_percent": 0.047
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 71.07,
-    "volume_usd_24h": 54371730.25,
+    "price_usd": 71.44,
+    "volume_usd_24h": 51557013.44,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 67.15,
-    "volume_usd_24h": 24828312.78,
-    "spread_percent": 0.015
+    "price_usd": 67.12,
+    "volume_usd_24h": 23731926.58,
+    "spread_percent": 0.03
   },
   {
     "coin": "XDG/USD",
-    "price_usd": 0.0584617,
-    "volume_usd_24h": 17243826.75,
-    "spread_percent": 0.0
+    "price_usd": 0.0584607,
+    "volume_usd_24h": 16436298.99,
+    "spread_percent": 0.009
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.7176,
-    "volume_usd_24h": 15616531.91,
+    "price_usd": 0.7188,
+    "volume_usd_24h": 15322513.58,
     "spread_percent": 0.028
   },
   {
-    "coin": "ADA/USD",
-    "price_usd": 0.152942,
-    "volume_usd_24h": 10696831.66,
-    "spread_percent": 0.049
+    "coin": "USDG/USD",
+    "price_usd": 1.0,
+    "volume_usd_24h": 10653287.23,
+    "spread_percent": 0.02
   },
   {
-    "coin": "NEAR/USD",
-    "price_usd": 3.1229,
-    "volume_usd_24h": 10693799.46,
-    "spread_percent": 0.038
+    "coin": "ADA/USD",
+    "price_usd": 0.153033,
+    "volume_usd_24h": 10339286.23,
+    "spread_percent": 0.058
   }
 ]

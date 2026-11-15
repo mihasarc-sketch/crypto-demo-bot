@@ -99,47 +99,47 @@
   },
   "realized": -6.805117057159862,
   "invested": 0,
-  "updated": "2026-11-15T15:43:51.081163+00:00",
+  "updated": "2026-11-15T16:45:46.766849+00:00",
   "signals": {
     "BTC": {
-      "price": 64719.5,
-      "rsi": 59.44,
-      "ema9": 65049.62117467,
-      "ema21": 65144.14183888,
+      "price": 64708.1,
+      "rsi": 67.35,
+      "ema9": 64981.3090128,
+      "ema21": 65099.77046833,
       "ema_bullish": false,
-      "updated": "2026-11-15T15:43:50.999608+00:00",
+      "updated": "2026-11-15T16:45:46.162228+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "ETH": {
-      "price": 1805.89,
-      "rsi": 63.85,
-      "ema9": 1815.66018239,
-      "ema21": 1818.25088482,
+      "price": 1809.77,
+      "rsi": 67.74,
+      "ema9": 1814.48192955,
+      "ema21": 1817.35075405,
       "ema_bullish": false,
-      "updated": "2026-11-15T15:43:51.021976+00:00",
+      "updated": "2026-11-15T16:45:46.325906+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "SOL": {
-      "price": 71.26,
-      "rsi": 58.7,
-      "ema9": 71.70403872,
-      "ema21": 71.87853297,
+      "price": 71.2,
+      "rsi": 67.9,
+      "ema9": 71.60322213,
+      "ema21": 71.81156665,
       "ema_bullish": false,
-      "updated": "2026-11-15T15:43:51.041969+00:00",
+      "updated": "2026-11-15T16:45:46.502896+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "XRP": {
-      "price": 0.95485,
-      "rsi": 61.0,
-      "ema9": 0.95983632,
-      "ema21": 0.95884126,
+      "price": 0.95751,
+      "rsi": 68.52,
+      "ema9": 0.95937106,
+      "ema21": 0.95872484,
       "ema_bullish": true,
-      "updated": "2026-11-15T15:43:51.062398+00:00",
-      "decision": "BUY",
-      "reason": "RSI und EMA-Bedingungen erf\u00fcllt"
+      "updated": "2026-11-15T16:45:46.676641+00:00",
+      "decision": "HOLD",
+      "reason": "Position offen; kein Verkaufssignal"
     }
   }
 }
