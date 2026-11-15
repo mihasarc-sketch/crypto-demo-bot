@@ -101,47 +101,47 @@
   },
   "realized": -7.378150383860373,
   "invested": 0,
-  "updated": "2026-11-15T19:47:25.570359+00:00",
+  "updated": "2026-11-15T20:43:55.711371+00:00",
   "signals": {
     "BTC": {
-      "price": 64693.2,
-      "rsi": 47.36,
-      "ema9": 64810.67054682,
-      "ema21": 64982.72505083,
+      "price": 64907.3,
+      "rsi": 55.67,
+      "ema9": 64829.99709113,
+      "ema21": 64976.25837768,
       "ema_bullish": false,
-      "updated": "2026-11-15T19:47:25.092597+00:00",
+      "updated": "2026-11-15T20:43:55.543808+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+      "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "ETH": {
-      "price": 1814.69,
-      "rsi": 50.8,
-      "ema9": 1814.25889962,
-      "ema21": 1816.42950498,
+      "price": 1823.25,
+      "rsi": 58.91,
+      "ema9": 1816.05720933,
+      "ema21": 1817.10304648,
       "ema_bullish": false,
-      "updated": "2026-11-15T19:47:25.193461+00:00",
+      "updated": "2026-11-15T20:43:55.566559+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "SOL": {
-      "price": 71.1,
-      "rsi": 51.93,
-      "ema9": 71.43988276,
-      "ema21": 71.67379636,
+      "price": 71.65,
+      "rsi": 56.94,
+      "ema9": 71.48190821,
+      "ema21": 71.67282565,
       "ema_bullish": false,
-      "updated": "2026-11-15T19:47:25.294644+00:00",
+      "updated": "2026-11-15T20:43:55.684786+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "XRP": {
-      "price": 0.95239,
-      "rsi": 37.81,
-      "ema9": 0.95537572,
-      "ema21": 0.95674923,
+      "price": 0.96058,
+      "rsi": 51.69,
+      "ema9": 0.95641663,
+      "ema21": 0.95713071,
       "ema_bullish": false,
-      "updated": "2026-11-15T19:47:25.570312+00:00",
+      "updated": "2026-11-15T20:43:55.711321+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+      "reason": "EMA9 liegt nicht \u00fcber EMA21"
     }
   }
 }
