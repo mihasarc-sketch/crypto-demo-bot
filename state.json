@@ -86,47 +86,47 @@
   },
   "realized": -6.805117057159862,
   "invested": 0,
-  "updated": "2026-11-15T12:55:31.594509+00:00",
+  "updated": "2026-11-15T13:56:38.303969+00:00",
   "signals": {
     "BTC": {
-      "price": 65322.7,
-      "rsi": 55.68,
-      "ema9": 64963.3734892,
-      "ema21": 65131.87332345,
+      "price": 65474.3,
+      "rsi": 63.13,
+      "ema9": 65065.55861438,
+      "ema21": 65162.89739128,
       "ema_bullish": false,
-      "updated": "2026-11-15T12:55:31.529213+00:00",
+      "updated": "2026-11-15T13:56:38.138662+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "ETH": {
-      "price": 1822.63,
-      "rsi": 59.31,
-      "ema9": 1810.20953173,
-      "ema21": 1816.63759001,
+      "price": 1834.79,
+      "rsi": 67.57,
+      "ema9": 1815.12573828,
+      "ema21": 1818.35519084,
       "ema_bullish": false,
-      "updated": "2026-11-15T12:55:31.555621+00:00",
+      "updated": "2026-11-15T13:56:38.169689+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "SOL": {
-      "price": 72.28,
-      "rsi": 60.22,
-      "ema9": 71.32786278,
-      "ema21": 71.77244108,
+      "price": 72.82,
+      "rsi": 66.43,
+      "ema9": 71.62629279,
+      "ema21": 71.86920705,
       "ema_bullish": false,
-      "updated": "2026-11-15T12:55:31.573793+00:00",
+      "updated": "2026-11-15T13:56:38.278559+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21"
     },
     "XRP": {
-      "price": 0.96209,
-      "rsi": 65.72,
-      "ema9": 0.95702173,
-      "ema21": 0.95722963,
-      "ema_bullish": false,
-      "updated": "2026-11-15T12:55:31.594473+00:00",
+      "price": 0.96753,
+      "rsi": 72.0,
+      "ema9": 0.9591234,
+      "ema21": 0.9581731,
+      "ema_bullish": true,
+      "updated": "2026-11-15T13:56:38.303920+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21"
+      "reason": "RSI \u00fcber 68"
     }
   }
 }
