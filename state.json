@@ -86,47 +86,47 @@
   },
   "realized": -6.805117057159862,
   "invested": 0,
-  "updated": "2026-11-15T05:55:52.607950+00:00",
+  "updated": "2026-11-15T07:05:15.472394+00:00",
   "signals": {
     "BTC": {
-      "price": 64903.5,
-      "rsi": 44.37,
-      "ema9": 64517.28334872,
-      "ema21": 65269.27852071,
+      "price": 64438.2,
+      "rsi": 44.88,
+      "ema9": 64495.41087603,
+      "ema21": 65121.85534435,
       "ema_bullish": false,
-      "updated": "2026-11-15T05:55:52.088987+00:00",
+      "updated": "2026-11-15T07:05:15.252565+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
     "ETH": {
-      "price": 1812.46,
-      "rsi": 43.64,
-      "ema9": 1795.39030995,
-      "ema21": 1821.82678184,
+      "price": 1792.14,
+      "rsi": 44.67,
+      "ema9": 1795.34309876,
+      "ema21": 1817.06733407,
       "ema_bullish": false,
-      "updated": "2026-11-15T05:55:52.242382+00:00",
+      "updated": "2026-11-15T07:05:15.274672+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
     "SOL": {
-      "price": 70.87,
-      "rsi": 38.27,
-      "ema9": 70.71856822,
-      "ema21": 72.18677443,
+      "price": 70.4,
+      "rsi": 41.89,
+      "ema9": 70.66148423,
+      "ema21": 71.90667296,
       "ema_bullish": false,
-      "updated": "2026-11-15T05:55:52.404118+00:00",
+      "updated": "2026-11-15T07:05:15.375509+00:00",
       "decision": "WAIT",
       "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
     },
     "XRP": {
-      "price": 0.97241,
-      "rsi": 47.76,
-      "ema9": 0.94576176,
-      "ema21": 0.95517231,
+      "price": 0.95903,
+      "rsi": 50.78,
+      "ema9": 0.9503768,
+      "ema21": 0.95579953,
       "ema_bullish": false,
-      "updated": "2026-11-15T05:55:52.607899+00:00",
+      "updated": "2026-11-15T07:05:15.472364+00:00",
       "decision": "WAIT",
-      "reason": "EMA9 liegt nicht \u00fcber EMA21; RSI unter 50"
+      "reason": "EMA9 liegt nicht \u00fcber EMA21"
     }
   }
 }
