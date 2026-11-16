@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 65066.4,
-    "volume_usd_24h": 203129751.01,
+    "price_usd": 64869.2,
+    "volume_usd_24h": 181949864.29,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1821.46,
-    "volume_usd_24h": 55447351.35,
+    "price_usd": 1819.99,
+    "volume_usd_24h": 48881931.39,
     "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 896.2,
-    "volume_usd_24h": 33016363.43,
-    "spread_percent": 0.023
+    "price_usd": 891.76,
+    "volume_usd_24h": 31413947.01,
+    "spread_percent": 0.041
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.96444,
-    "volume_usd_24h": 31385696.18,
-    "spread_percent": 0.006
+    "price_usd": 0.9615,
+    "volume_usd_24h": 26739939.21,
+    "spread_percent": 0.001
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 72.07,
-    "volume_usd_24h": 26183856.62,
+    "price_usd": 71.77,
+    "volume_usd_24h": 24858508.0,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 66.61,
-    "volume_usd_24h": 14009615.39,
+    "price_usd": 66.36,
+    "volume_usd_24h": 13151826.65,
     "spread_percent": 0.03
   },
   {
     "coin": "USDG/USD",
-    "price_usd": 1.0,
-    "volume_usd_24h": 10705293.52,
-    "spread_percent": 0.01
+    "price_usd": 1.0001,
+    "volume_usd_24h": 12327497.62,
+    "spread_percent": 0.02
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.7303,
-    "volume_usd_24h": 6013316.62,
+    "price_usd": 0.727,
+    "volume_usd_24h": 5598277.66,
     "spread_percent": 0.014
   },
   {
     "coin": "XDG/USD",
-    "price_usd": 0.0592735,
-    "volume_usd_24h": 5928406.19,
-    "spread_percent": 0.008
+    "price_usd": 0.0589443,
+    "volume_usd_24h": 5562129.98,
+    "spread_percent": 0.01
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.1978,
-    "volume_usd_24h": 4491648.74,
-    "spread_percent": 0.041
+    "price_usd": 3.1823,
+    "volume_usd_24h": 4284092.66,
+    "spread_percent": 0.031
   }
 ]
