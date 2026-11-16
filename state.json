@@ -146,83 +146,83 @@
   },
   "realized": -11.782713977089983,
   "invested": 0,
-  "updated": "2026-11-16T17:18:39.624435+00:00",
+  "updated": "2026-11-16T18:58:17.778392+00:00",
   "signals": {
     "BTC": {
-      "price": 64871.7,
-      "rsi": 47.18,
-      "ema9": 64584.29206364,
-      "ema21": 64651.90462134,
+      "price": 64839.0,
+      "rsi": 47.75,
+      "ema9": 64635.2281032,
+      "ema21": 64665.60213125,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 2,
-      "candle_time": "1794844800",
-      "updated": "2026-11-16T17:18:39.023687+00:00",
+      "bearish_candles": 3,
+      "candle_time": "1794848400",
+      "updated": "2026-11-16T18:58:17.505177+00:00",
       "decision": "WAIT",
       "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     },
     "ETH": {
-      "price": 1827.41,
-      "rsi": 51.13,
-      "ema9": 1817.17314647,
-      "ema21": 1815.15309253,
+      "price": 1819.5,
+      "rsi": 47.85,
+      "ema9": 1817.63830123,
+      "ema21": 1815.41938025,
       "ema_bullish": true,
-      "bullish_candles": 2,
+      "bullish_candles": 3,
       "bearish_candles": 0,
-      "candle_time": "1794844800",
-      "updated": "2026-11-16T17:18:39.223453+00:00",
+      "candle_time": "1794848400",
+      "updated": "2026-11-16T18:58:17.651290+00:00",
       "decision": "WAIT",
       "reason": "RSI unter 52"
     },
     "SOL": {
-      "price": 71.33,
-      "rsi": 43.37,
-      "ema9": 71.170753,
-      "ema21": 71.31930329,
+      "price": 71.17,
+      "rsi": 42.77,
+      "ema9": 71.1705817,
+      "ema21": 71.29337837,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 2,
-      "candle_time": "1794844800",
-      "updated": "2026-11-16T17:18:39.423771+00:00",
+      "bearish_candles": 3,
+      "candle_time": "1794848400",
+      "updated": "2026-11-16T18:58:17.674476+00:00",
       "decision": "WAIT",
       "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     },
     "XRP": {
-      "price": 0.95987,
-      "rsi": 46.62,
-      "ema9": 0.95519409,
-      "ema21": 0.95585017,
+      "price": 0.95632,
+      "rsi": 46.47,
+      "ema9": 0.95541906,
+      "ema21": 0.95576587,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 2,
-      "candle_time": "1794844800",
-      "updated": "2026-11-16T17:18:39.624390+00:00",
+      "bearish_candles": 3,
+      "candle_time": "1794848400",
+      "updated": "2026-11-16T18:58:17.778339+00:00",
       "decision": "WAIT",
       "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     }
   },
   "last_candle": {
-    "BTC": "1794844800",
-    "ETH": "1794844800",
-    "SOL": "1794844800",
-    "XRP": "1794844800"
+    "BTC": "1794848400",
+    "ETH": "1794848400",
+    "SOL": "1794848400",
+    "XRP": "1794848400"
   },
   "signal_streaks": {
     "BTC": {
       "bullish": 0,
-      "bearish": 2
+      "bearish": 3
     },
     "ETH": {
-      "bullish": 2,
+      "bullish": 3,
       "bearish": 0
     },
     "SOL": {
       "bullish": 0,
-      "bearish": 2
+      "bearish": 3
     },
     "XRP": {
       "bullish": 0,
-      "bearish": 2
+      "bearish": 3
     }
   }
 }
