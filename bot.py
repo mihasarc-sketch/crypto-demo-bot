@@ -84,7 +84,9 @@ def market(coin):
     key = next(k for k in result if k != "last")
     candles = result[key]
     # Only completed hourly candles are used.
-    closes = [float(row[4]) for row in candles[:-1]]
+    closed_candles = candles[:-1]
+    closes = [float(row[4]) for row in closed_candles]
+    candle_time = str(int(float(closed_candles[-1][0])))
     if len(closes) < 50:
         raise RuntimeError("Zu wenige Marktdaten für EMA-Auswertung")
     price = closes[-1]
@@ -92,7 +94,7 @@ def market(coin):
     fast = ema(ema_prices, 9)
     slow = ema(ema_prices, 21)
     strength = rsi(closes)
-    return price, fast, slow, strength
+    return price, fast, slow, strength, candle_time
 
 
 def buy(state, coin, price):
@@ -126,6 +128,8 @@ def sell(state, coin, price, reason):
 
 def main():
     state = load_state()
+    state.setdefault("last_candle", {})
+    state.setdefault("signal_streaks", {})
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals = {}
     print("CRYPTO DEMO BOT 4.1")
@@ -133,37 +137,56 @@ def main():
 
     for coin in COINS:
         try:
-            price, fast, slow, strength = market(coin)
+            price, fast, slow, strength, candle_time = market(coin)
+            previous_candle = state["last_candle"].get(coin)
+            new_candle = candle_time != previous_candle
+            streak = state["signal_streaks"].setdefault(coin, {"bullish": 0, "bearish": 0})
+            if new_candle:
+                state["last_candle"][coin] = candle_time
+                if fast > slow:
+                    streak["bullish"] += 1
+                    streak["bearish"] = 0
+                else:
+                    streak["bearish"] += 1
+                    streak["bullish"] = 0
             market_lines.append(
                 f"{coin}: {price:.4f} USD | RSI: {strength:.1f} | "
                 f"EMA9: {fast:.4f} | EMA21: {slow:.4f}"
             )
             position = state["positions"].get(coin)
-            signals[coin] = {"price": round(price, 8), "rsi": round(strength, 2), "ema9": round(fast, 8), "ema21": round(slow, 8), "ema_bullish": fast > slow, "updated": datetime.now(timezone.utc).isoformat()}
+            signals[coin] = {"price": round(price, 8), "rsi": round(strength, 2), "ema9": round(fast, 8), "ema21": round(slow, 8), "ema_bullish": fast > slow, "bullish_candles": streak["bullish"], "bearish_candles": streak["bearish"], "candle_time": candle_time, "updated": datetime.now(timezone.utc).isoformat()}
 
             if position:
                 change = price / position["entry"] - 1
-                if change <= -STOP_LOSS:
+                if not new_candle:
+                    decision_lines.append(f"{coin}: WARTEN - diese Stundenkerze wurde bereits geprüft")
+                    signals[coin]["decision"] = "WAIT"
+                    signals[coin]["reason"] = "Keine neue abgeschlossene Stundenkerze"
+                elif change <= -STOP_LOSS:
                     messages.append(sell(state, coin, price, "Stop-Loss"))
                     decision_lines.append(f"{coin}: VERKAUF - Stop-Loss erreicht")
                 elif change >= TAKE_PROFIT:
                     messages.append(sell(state, coin, price, "Take-Profit"))
                     decision_lines.append(f"{coin}: VERKAUF - Take-Profit erreicht")
-                elif fast < slow:
-                    messages.append(sell(state, coin, price, "EMA-Signal"))
-                    decision_lines.append(f"{coin}: VERKAUF - EMA9 unter EMA21")
+                elif streak["bearish"] >= 2:
+                    messages.append(sell(state, coin, price, "EMA-Signal bestätigt (2 Kerzen)"))
+                    decision_lines.append(f"{coin}: VERKAUF - EMA-Signal zwei Stunden bestätigt")
+                    streak["bullish"] = 0
+                    streak["bearish"] = 0
                 else:
                     decision_lines.append(f"{coin}: HALTEN - Position offen, kein Verkaufssignal")
                     signals[coin]["decision"] = "HOLD"
                     signals[coin]["reason"] = "Position offen; kein Verkaufssignal"
             else:
                 reasons = []
-                if fast <= slow:
-                    reasons.append("EMA9 liegt nicht über EMA21")
-                if strength < 50:
-                    reasons.append("RSI unter 50")
-                elif strength > 68:
-                    reasons.append("RSI über 68")
+                if not new_candle:
+                    reasons.append("keine neue abgeschlossene Stundenkerze")
+                if streak["bullish"] < 2:
+                    reasons.append("Aufwärtstrend noch nicht zwei Stunden bestätigt")
+                if strength < 52:
+                    reasons.append("RSI unter 52")
+                elif strength > 65:
+                    reasons.append("RSI über 65")
                 if state["cash"] < 10:
                     reasons.append("zu wenig virtuelles Guthaben")
 
@@ -191,7 +214,7 @@ def main():
     market_value = 0.0
     for coin, position in state["positions"].items():
         try:
-            price, _, _, _ = market(coin)
+            price, _, _, _, _ = market(coin)
             market_value += position["quantity"] * price
         except Exception:
             market_value += position["cost"]
