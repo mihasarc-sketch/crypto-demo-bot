@@ -5,7 +5,7 @@ import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# CRYPTO DEMO BOT 4.1 - PAPER TRADING ONLY - NO REAL ORDERS
+# CRYPTO DEMO BOT 4.2 - PAPER TRADING ONLY - NO REAL ORDERS
 COINS = ["BTC", "ETH", "SOL", "XRP"]
 START_CASH = 1000.0
 MAX_BUY = 100.0
@@ -132,7 +132,7 @@ def main():
     state.setdefault("signal_streaks", {})
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals = {}
-    print("CRYPTO DEMO BOT 4.1")
+    print("CRYPTO DEMO BOT 4.2")
     print("PAPER TRADING - KEIN ECHTHANDEL")
 
     for coin in COINS:
@@ -222,7 +222,7 @@ def main():
     total = state["cash"] + market_value
     unrealized = total - START_CASH - state["realized"]
     report = [
-        "🤖 CRYPTO DEMO BOT 4.1",
+        "🤖 CRYPTO DEMO BOT 4.2",
         "PAPER TRADING - KEIN ECHTHANDEL",
         "━━━━━━━━━━━━━━━━",
         "MARKTDATEN:",
