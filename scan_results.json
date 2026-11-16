@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 65302.3,
-    "volume_usd_24h": 244431633.88,
+    "price_usd": 65364.1,
+    "volume_usd_24h": 247698010.01,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1828.84,
-    "volume_usd_24h": 55317034.39,
-    "spread_percent": 0.005
+    "price_usd": 1828.92,
+    "volume_usd_24h": 55116621.75,
+    "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.95946,
-    "volume_usd_24h": 43091397.2,
+    "price_usd": 0.95991,
+    "volume_usd_24h": 43217404.17,
     "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 911.14,
-    "volume_usd_24h": 39622983.77,
-    "spread_percent": 0.043
+    "price_usd": 912.54,
+    "volume_usd_24h": 38633359.99,
+    "spread_percent": 0.05
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 71.92,
-    "volume_usd_24h": 20184246.08,
+    "price_usd": 71.86,
+    "volume_usd_24h": 20443786.83,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 70.61,
-    "volume_usd_24h": 13997978.82,
-    "spread_percent": 0.028
+    "price_usd": 69.76,
+    "volume_usd_24h": 14503081.68,
+    "spread_percent": 0.014
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 495.72,
-    "volume_usd_24h": 7109507.4,
-    "spread_percent": 0.093
-  },
-  {
-    "coin": "XDG/USD",
-    "price_usd": 0.0594883,
-    "volume_usd_24h": 5417179.68,
-    "spread_percent": 0.0
+    "price_usd": 499.16,
+    "volume_usd_24h": 7313973.81,
+    "spread_percent": 0.19
   },
   {
     "coin": "TAO/USD",
-    "price_usd": 192.2379,
-    "volume_usd_24h": 5397157.31,
-    "spread_percent": 0.078
+    "price_usd": 191.6118,
+    "volume_usd_24h": 5360463.92,
+    "spread_percent": 0.051
   },
   {
-    "coin": "NEAR/USD",
-    "price_usd": 3.1925,
-    "volume_usd_24h": 5037615.45,
-    "spread_percent": 0.006
+    "coin": "XDG/USD",
+    "price_usd": 0.0592818,
+    "volume_usd_24h": 5345470.12,
+    "spread_percent": 0.0
+  },
+  {
+    "coin": "NIGHT/USD",
+    "price_usd": 0.04783,
+    "volume_usd_24h": 5216236.83,
+    "spread_percent": 0.167
   }
 ]
