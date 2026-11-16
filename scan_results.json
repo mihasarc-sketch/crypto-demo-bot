@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 65283.1,
-    "volume_usd_24h": 277037335.57,
+    "price_usd": 64706.6,
+    "volume_usd_24h": 236378210.04,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1836.05,
-    "volume_usd_24h": 82472716.6,
+    "price_usd": 1808.76,
+    "volume_usd_24h": 69807417.29,
     "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 910.48,
-    "volume_usd_24h": 44535514.88,
-    "spread_percent": 0.042
+    "price_usd": 887.81,
+    "volume_usd_24h": 42728250.09,
+    "spread_percent": 0.064
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.97715,
-    "volume_usd_24h": 43134238.4,
-    "spread_percent": 0.01
+    "price_usd": 0.95726,
+    "volume_usd_24h": 37694741.62,
+    "spread_percent": 0.014
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 72.75,
-    "volume_usd_24h": 34085162.13,
+    "price_usd": 71.29,
+    "volume_usd_24h": 31682069.34,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 68.15,
-    "volume_usd_24h": 15943385.11,
-    "spread_percent": 0.029
+    "price_usd": 66.4,
+    "volume_usd_24h": 15029725.52,
+    "spread_percent": 0.015
   },
   {
     "coin": "USDG/USD",
-    "price_usd": 1.0,
-    "volume_usd_24h": 11074247.43,
+    "price_usd": 0.9999,
+    "volume_usd_24h": 10538803.06,
     "spread_percent": 0.01
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.7375,
-    "volume_usd_24h": 9862897.05,
-    "spread_percent": 0.027
+    "price_usd": 0.7215,
+    "volume_usd_24h": 8987652.73,
+    "spread_percent": 0.014
   },
   {
     "coin": "XDG/USD",
-    "price_usd": 0.0599857,
-    "volume_usd_24h": 7555199.33,
+    "price_usd": 0.0588102,
+    "volume_usd_24h": 6890379.41,
     "spread_percent": 0.0
   },
   {
-    "coin": "ADA/USD",
-    "price_usd": 0.155402,
-    "volume_usd_24h": 5696481.08,
-    "spread_percent": 0.041
+    "coin": "NEAR/USD",
+    "price_usd": 3.1333,
+    "volume_usd_24h": 5468758.13,
+    "spread_percent": 0.045
   }
 ]
