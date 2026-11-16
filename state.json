@@ -159,7 +159,7 @@
   },
   "realized": -11.782713977089983,
   "invested": 0,
-  "updated": "2026-11-16T20:00:14.052190+00:00",
+  "updated": "2026-11-16T20:54:13.476863+00:00",
   "signals": {
     "BTC": {
       "price": 64996.2,
@@ -170,9 +170,9 @@
       "bullish_candles": 1,
       "bearish_candles": 0,
       "candle_time": "1794855600",
-      "updated": "2026-11-16T20:00:13.153955+00:00",
+      "updated": "2026-11-16T20:54:13.126356+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "reason": "keine neue abgeschlossene Stundenkerze; Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
     },
     "ETH": {
       "price": 1822.05,
@@ -183,9 +183,9 @@
       "bullish_candles": 4,
       "bearish_candles": 0,
       "candle_time": "1794855600",
-      "updated": "2026-11-16T20:00:13.395884+00:00",
-      "decision": "BUY",
-      "reason": "RSI und EMA-Bedingungen erf\u00fcllt"
+      "updated": "2026-11-16T20:54:13.237074+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene Stundenkerze"
     },
     "SOL": {
       "price": 71.46,
@@ -196,9 +196,9 @@
       "bullish_candles": 0,
       "bearish_candles": 4,
       "candle_time": "1794855600",
-      "updated": "2026-11-16T20:00:13.590565+00:00",
+      "updated": "2026-11-16T20:54:13.342985+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "reason": "keine neue abgeschlossene Stundenkerze; Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
     },
     "XRP": {
       "price": 0.95935,
@@ -209,9 +209,9 @@
       "bullish_candles": 1,
       "bearish_candles": 0,
       "candle_time": "1794855600",
-      "updated": "2026-11-16T20:00:13.801462+00:00",
+      "updated": "2026-11-16T20:54:13.446169+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "reason": "keine neue abgeschlossene Stundenkerze; Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
     }
   },
   "last_candle": {
