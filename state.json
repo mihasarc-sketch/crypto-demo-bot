@@ -1,5 +1,5 @@
 {
-  "cash": 786.6885614465534,
+  "cash": 686.6885614465534,
   "positions": {
     "SOL": {
       "entry": 71.65,
@@ -9,6 +9,11 @@
     "XRP": {
       "entry": 0.95771,
       "quantity": 104.31132597550408,
+      "cost": 100.0
+    },
+    "BTC": {
+      "entry": 64954.2,
+      "quantity": 0.001538006780162022,
       "cost": 100.0
     }
   },
@@ -191,6 +196,13 @@
       "profit": -0.20756829340575678,
       "reason": "EMA-Signal best\u00e4tigt (2 Kerzen)",
       "time": "2026-11-17T13:10:39.892989+00:00"
+    },
+    {
+      "coin": "BTC",
+      "action": "BUY",
+      "price": 64954.2,
+      "cost": 100.0,
+      "time": "2026-11-17T15:59:19.670465+00:00"
     }
   ],
   "last": {
@@ -201,82 +213,82 @@
   },
   "realized": -13.311438553446592,
   "invested": 0,
-  "updated": "2026-11-17T14:57:56.978127+00:00",
+  "updated": "2026-11-17T15:59:20.709488+00:00",
   "signals": {
     "BTC": {
-      "price": 65088.5,
-      "rsi": 53.86,
-      "ema9": 64734.49990261,
-      "ema21": 64722.5929634,
+      "price": 64954.2,
+      "rsi": 55.56,
+      "ema9": 64778.43884024,
+      "ema21": 64743.00244236,
       "ema_bullish": true,
-      "bullish_candles": 1,
+      "bullish_candles": 2,
       "bearish_candles": 0,
-      "candle_time": "1794920400",
-      "updated": "2026-11-17T14:57:56.286975+00:00",
-      "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "candle_time": "1794924000",
+      "updated": "2026-11-17T15:59:19.670446+00:00",
+      "decision": "BUY",
+      "reason": "RSI und EMA-Bedingungen erf\u00fcllt"
     },
     "ETH": {
-      "price": 1827.56,
-      "rsi": 52.86,
-      "ema9": 1819.25391854,
-      "ema21": 1819.59749417,
+      "price": 1813.33,
+      "rsi": 50.07,
+      "ema9": 1818.06906661,
+      "ema21": 1818.9870033,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 1,
-      "candle_time": "1794920400",
-      "updated": "2026-11-17T14:57:56.455489+00:00",
+      "bearish_candles": 2,
+      "candle_time": "1794924000",
+      "updated": "2026-11-17T15:59:19.894668+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     },
     "SOL": {
-      "price": 73.71,
-      "rsi": 69.5,
-      "ema9": 72.96436739,
-      "ema21": 72.45312026,
+      "price": 73.73,
+      "rsi": 70.61,
+      "ema9": 73.11749034,
+      "ema21": 72.5670706,
       "ema_bullish": true,
-      "bullish_candles": 13,
+      "bullish_candles": 14,
       "bearish_candles": 0,
-      "candle_time": "1794920400",
-      "updated": "2026-11-17T14:57:56.645031+00:00",
+      "candle_time": "1794924000",
+      "updated": "2026-11-17T15:59:20.093695+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "XRP": {
-      "price": 0.97635,
-      "rsi": 66.9,
-      "ema9": 0.96564747,
-      "ema21": 0.96195252,
+      "price": 0.97161,
+      "rsi": 63.61,
+      "ema9": 0.96683999,
+      "ema21": 0.96284231,
       "ema_bullish": true,
-      "bullish_candles": 10,
+      "bullish_candles": 11,
       "bearish_candles": 0,
-      "candle_time": "1794920400",
-      "updated": "2026-11-17T14:57:56.817075+00:00",
+      "candle_time": "1794924000",
+      "updated": "2026-11-17T15:59:20.337881+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     }
   },
   "last_candle": {
-    "BTC": "1794920400",
-    "ETH": "1794920400",
-    "SOL": "1794920400",
-    "XRP": "1794920400"
+    "BTC": "1794924000",
+    "ETH": "1794924000",
+    "SOL": "1794924000",
+    "XRP": "1794924000"
   },
   "signal_streaks": {
     "BTC": {
-      "bullish": 1,
+      "bullish": 2,
       "bearish": 0
     },
     "ETH": {
       "bullish": 0,
-      "bearish": 1
+      "bearish": 2
     },
     "SOL": {
-      "bullish": 13,
+      "bullish": 14,
       "bearish": 0
     },
     "XRP": {
-      "bullish": 10,
+      "bullish": 11,
       "bearish": 0
     }
   }
