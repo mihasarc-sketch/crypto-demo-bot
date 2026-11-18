@@ -1,5 +1,5 @@
 {
-  "cash": 784.5703801829861,
+  "cash": 684.5703801829861,
   "positions": {
     "SOL": {
       "entry": 71.65,
@@ -9,6 +9,11 @@
     "XRP": {
       "entry": 0.95771,
       "quantity": 104.31132597550408,
+      "cost": 100.0
+    },
+    "ETH": {
+      "entry": 1811.18,
+      "quantity": 0.055157411190494596,
       "cost": 100.0
     }
   },
@@ -206,6 +211,13 @@
       "profit": -2.1181812635672514,
       "reason": "EMA-Signal best\u00e4tigt (2 Kerzen)",
       "time": "2026-11-17T19:03:47.097018+00:00"
+    },
+    {
+      "coin": "ETH",
+      "action": "BUY",
+      "price": 1811.18,
+      "cost": 100.0,
+      "time": "2026-11-18T10:07:25.126026+00:00"
     }
   ],
   "last": {
@@ -216,82 +228,82 @@
   },
   "realized": -15.429619817013844,
   "invested": 0,
-  "updated": "2026-11-18T08:22:52.633813+00:00",
+  "updated": "2026-11-18T10:07:25.618211+00:00",
   "signals": {
     "BTC": {
-      "price": 64805.4,
-      "rsi": 69.48,
-      "ema9": 64507.05273921,
-      "ema21": 64455.18034306,
+      "price": 64564.7,
+      "rsi": 65.64,
+      "ema9": 64535.48149904,
+      "ema21": 64475.86419054,
       "ema_bullish": true,
-      "bullish_candles": 1,
+      "bullish_candles": 2,
       "bearish_candles": 0,
-      "candle_time": "1794985200",
-      "updated": "2026-11-18T08:22:51.842655+00:00",
+      "candle_time": "1794992400",
+      "updated": "2026-11-18T10:07:24.976870+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI \u00fcber 65"
+      "reason": "RSI \u00fcber 65"
     },
     "ETH": {
-      "price": 1815.39,
-      "rsi": 68.56,
-      "ema9": 1807.81023081,
-      "ema21": 1807.5458767,
+      "price": 1811.18,
+      "rsi": 63.38,
+      "ema9": 1808.78477025,
+      "ema21": 1807.95108207,
       "ema_bullish": true,
-      "bullish_candles": 1,
+      "bullish_candles": 2,
       "bearish_candles": 0,
-      "candle_time": "1794985200",
-      "updated": "2026-11-18T08:22:52.066997+00:00",
-      "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI \u00fcber 65"
+      "candle_time": "1794992400",
+      "updated": "2026-11-18T10:07:25.126005+00:00",
+      "decision": "BUY",
+      "reason": "RSI und EMA-Bedingungen erf\u00fcllt"
     },
     "SOL": {
       "price": 75.1,
-      "rsi": 74.6,
-      "ema9": 74.59376269,
-      "ema21": 73.92187516,
+      "rsi": 69.31,
+      "ema9": 74.70880236,
+      "ema21": 74.08834885,
       "ema_bullish": true,
-      "bullish_candles": 26,
+      "bullish_candles": 27,
       "bearish_candles": 0,
-      "candle_time": "1794985200",
-      "updated": "2026-11-18T08:22:52.299687+00:00",
+      "candle_time": "1794992400",
+      "updated": "2026-11-18T10:07:25.190759+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "XRP": {
-      "price": 1.00128,
-      "rsi": 83.56,
-      "ema9": 0.98249755,
-      "ema21": 0.97461044,
+      "price": 0.99876,
+      "rsi": 78.6,
+      "ema9": 0.98827677,
+      "ema21": 0.97872754,
       "ema_bullish": true,
-      "bullish_candles": 23,
+      "bullish_candles": 24,
       "bearish_candles": 0,
-      "candle_time": "1794985200",
-      "updated": "2026-11-18T08:22:52.489621+00:00",
+      "candle_time": "1794992400",
+      "updated": "2026-11-18T10:07:25.399471+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     }
   },
   "last_candle": {
-    "BTC": "1794985200",
-    "ETH": "1794985200",
-    "SOL": "1794985200",
-    "XRP": "1794985200"
+    "BTC": "1794992400",
+    "ETH": "1794992400",
+    "SOL": "1794992400",
+    "XRP": "1794992400"
   },
   "signal_streaks": {
     "BTC": {
-      "bullish": 1,
+      "bullish": 2,
       "bearish": 0
     },
     "ETH": {
-      "bullish": 1,
+      "bullish": 2,
       "bearish": 0
     },
     "SOL": {
-      "bullish": 26,
+      "bullish": 27,
       "bearish": 0
     },
     "XRP": {
-      "bullish": 23,
+      "bullish": 24,
       "bearish": 0
     }
   }
