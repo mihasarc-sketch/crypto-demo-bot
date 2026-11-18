@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 62577.8,
-    "volume_usd_24h": 247447885.27,
+    "price_usd": 63106.7,
+    "volume_usd_24h": 253028376.83,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1747.66,
-    "volume_usd_24h": 82518185.83,
+    "price_usd": 1768.76,
+    "volume_usd_24h": 78155384.99,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.97084,
-    "volume_usd_24h": 50558719.52,
-    "spread_percent": 0.008
+    "price_usd": 0.9794,
+    "volume_usd_24h": 50115603.49,
+    "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 923.88,
-    "volume_usd_24h": 28285706.09,
-    "spread_percent": 0.039
+    "price_usd": 919.1,
+    "volume_usd_24h": 28284074.68,
+    "spread_percent": 0.001
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 72.87,
-    "volume_usd_24h": 26135827.57,
+    "price_usd": 73.81,
+    "volume_usd_24h": 27296539.72,
     "spread_percent": 0.014
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.2211,
-    "volume_usd_24h": 9040222.28,
-    "spread_percent": 0.037
+    "price_usd": 3.265,
+    "volume_usd_24h": 9151041.19,
+    "spread_percent": 0.025
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 65.7,
-    "volume_usd_24h": 8514731.53,
+    "price_usd": 67.47,
+    "volume_usd_24h": 8711534.17,
     "spread_percent": 0.03
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 492.01,
-    "volume_usd_24h": 6377953.56,
-    "spread_percent": 0.096
+    "price_usd": 500.57,
+    "volume_usd_24h": 6462557.14,
+    "spread_percent": 0.08
   },
   {
     "coin": "TAO/USD",
-    "price_usd": 190.1448,
-    "volume_usd_24h": 4259645.04,
-    "spread_percent": 0.099
+    "price_usd": 192.8631,
+    "volume_usd_24h": 4645092.74,
+    "spread_percent": 0.066
   },
   {
-    "coin": "USDG/USD",
-    "price_usd": 1.0,
-    "volume_usd_24h": 4096847.3,
-    "spread_percent": 0.01
+    "coin": "LINK/USD",
+    "price_usd": 9.10231,
+    "volume_usd_24h": 4539714.29,
+    "spread_percent": 0.0
   }
 ]
