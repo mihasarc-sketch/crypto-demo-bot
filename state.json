@@ -216,82 +216,82 @@
   },
   "realized": -15.429619817013844,
   "invested": 0,
-  "updated": "2026-11-18T02:55:57.711824+00:00",
+  "updated": "2026-11-18T03:58:59.069433+00:00",
   "signals": {
     "BTC": {
-      "price": 64235.2,
-      "rsi": 40.39,
-      "ema9": 64381.7257758,
-      "ema21": 64411.83299126,
+      "price": 64253.5,
+      "rsi": 39.5,
+      "ema9": 64356.07555249,
+      "ema21": 64394.41414541,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 6,
-      "candle_time": "1794963600",
-      "updated": "2026-11-18T02:55:56.912405+00:00",
+      "bearish_candles": 7,
+      "candle_time": "1794967200",
+      "updated": "2026-11-18T03:58:58.350822+00:00",
       "decision": "WAIT",
       "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     },
     "ETH": {
-      "price": 1800.98,
-      "rsi": 42.2,
-      "ema9": 1806.64050188,
-      "ema21": 1807.73966896,
+      "price": 1801.78,
+      "rsi": 42.03,
+      "ema9": 1805.66827534,
+      "ema21": 1807.12257688,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 10,
-      "candle_time": "1794963600",
-      "updated": "2026-11-18T02:55:57.077158+00:00",
+      "bearish_candles": 11,
+      "candle_time": "1794967200",
+      "updated": "2026-11-18T03:58:58.569763+00:00",
       "decision": "WAIT",
       "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     },
     "SOL": {
-      "price": 74.13,
-      "rsi": 55.43,
-      "ema9": 73.84901248,
-      "ema21": 73.23105666,
+      "price": 74.45,
+      "rsi": 56.76,
+      "ema9": 73.96920171,
+      "ema21": 73.33692893,
       "ema_bullish": true,
-      "bullish_candles": 22,
+      "bullish_candles": 23,
       "bearish_candles": 0,
-      "candle_time": "1794963600",
-      "updated": "2026-11-18T02:55:57.150600+00:00",
+      "candle_time": "1794967200",
+      "updated": "2026-11-18T03:58:58.750197+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "XRP": {
-      "price": 0.97273,
-      "rsi": 51.91,
-      "ema9": 0.97126424,
-      "ema21": 0.96698858,
+      "price": 0.97313,
+      "rsi": 51.72,
+      "ema9": 0.97163732,
+      "ema21": 0.96750038,
       "ema_bullish": true,
-      "bullish_candles": 19,
+      "bullish_candles": 20,
       "bearish_candles": 0,
-      "candle_time": "1794963600",
-      "updated": "2026-11-18T02:55:57.513141+00:00",
+      "candle_time": "1794967200",
+      "updated": "2026-11-18T03:58:58.973430+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     }
   },
   "last_candle": {
-    "BTC": "1794963600",
-    "ETH": "1794963600",
-    "SOL": "1794963600",
-    "XRP": "1794963600"
+    "BTC": "1794967200",
+    "ETH": "1794967200",
+    "SOL": "1794967200",
+    "XRP": "1794967200"
   },
   "signal_streaks": {
     "BTC": {
       "bullish": 0,
-      "bearish": 6
+      "bearish": 7
     },
     "ETH": {
       "bullish": 0,
-      "bearish": 10
+      "bearish": 11
     },
     "SOL": {
-      "bullish": 22,
+      "bullish": 23,
       "bearish": 0
     },
     "XRP": {
-      "bullish": 19,
+      "bullish": 20,
       "bearish": 0
     }
   }
