@@ -1,5 +1,5 @@
 {
-  "cash": 684.5703801829861,
+  "cash": 783.4205173278309,
   "positions": {
     "SOL": {
       "entry": 71.65,
@@ -9,11 +9,6 @@
     "XRP": {
       "entry": 0.95771,
       "quantity": 104.31132597550408,
-      "cost": 100.0
-    },
-    "ETH": {
-      "entry": 1811.18,
-      "quantity": 0.055157411190494596,
       "cost": 100.0
     }
   },
@@ -218,6 +213,14 @@
       "price": 1811.18,
       "cost": 100.0,
       "time": "2026-11-18T10:07:25.126026+00:00"
+    },
+    {
+      "coin": "ETH",
+      "action": "SELL",
+      "price": 1793.94,
+      "profit": -1.1498628551551917,
+      "reason": "EMA-Signal best\u00e4tigt (2 Kerzen)",
+      "time": "2026-11-18T13:17:33.629668+00:00"
     }
   ],
   "last": {
@@ -226,84 +229,82 @@
     "SOL": "1794250800",
     "XRP": "1794250800"
   },
-  "realized": -15.429619817013844,
+  "realized": -16.579482672169036,
   "invested": 0,
-  "updated": "2026-11-18T12:02:32.597032+00:00",
+  "updated": "2026-11-18T13:17:33.786766+00:00",
   "signals": {
     "BTC": {
-      "price": 64158.1,
-      "rsi": 47.5,
-      "ema9": 64421.6100425,
-      "ema21": 64433.07056076,
+      "price": 64012.2,
+      "rsi": 36.54,
+      "ema9": 64339.7261329,
+      "ema21": 64393.67492966,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 1,
-      "candle_time": "1794999600",
-      "updated": "2026-11-18T12:02:31.934597+00:00",
+      "bearish_candles": 2,
+      "candle_time": "1795003200",
+      "updated": "2026-11-18T13:17:33.440095+00:00",
       "decision": "WAIT",
       "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI unter 52"
     },
     "ETH": {
-      "price": 1798.99,
-      "rsi": 46.7,
-      "ema9": 1806.21391793,
-      "ema21": 1806.92029537,
+      "price": 1793.94,
+      "rsi": 38.01,
+      "ema9": 1803.75909524,
+      "ema21": 1805.71692769,
       "ema_bullish": false,
       "bullish_candles": 0,
-      "bearish_candles": 1,
-      "candle_time": "1794999600",
-      "updated": "2026-11-18T12:02:31.973677+00:00",
-      "decision": "HOLD",
-      "reason": "Position offen; kein Verkaufssignal"
+      "bearish_candles": 2,
+      "candle_time": "1795003200",
+      "updated": "2026-11-18T13:17:33.629647+00:00"
     },
     "SOL": {
-      "price": 74.38,
-      "rsi": 57.7,
-      "ema9": 74.63204498,
-      "ema21": 74.16728393,
+      "price": 74.2,
+      "rsi": 51.83,
+      "ema9": 74.5456317,
+      "ema21": 74.16770255,
       "ema_bullish": true,
-      "bullish_candles": 28,
+      "bullish_candles": 29,
       "bearish_candles": 0,
-      "candle_time": "1794999600",
-      "updated": "2026-11-18T12:02:32.179905+00:00",
+      "candle_time": "1795003200",
+      "updated": "2026-11-18T13:17:33.672579+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     },
     "XRP": {
-      "price": 0.98655,
-      "rsi": 62.82,
-      "ema9": 0.98951119,
-      "ema21": 0.98106885,
+      "price": 0.98184,
+      "rsi": 56.63,
+      "ema9": 0.98797697,
+      "ema21": 0.98115284,
       "ema_bullish": true,
-      "bullish_candles": 25,
+      "bullish_candles": 26,
       "bearish_candles": 0,
-      "candle_time": "1794999600",
-      "updated": "2026-11-18T12:02:32.446559+00:00",
+      "candle_time": "1795003200",
+      "updated": "2026-11-18T13:17:33.713582+00:00",
       "decision": "HOLD",
       "reason": "Position offen; kein Verkaufssignal"
     }
   },
   "last_candle": {
-    "BTC": "1794999600",
-    "ETH": "1794999600",
-    "SOL": "1794999600",
-    "XRP": "1794999600"
+    "BTC": "1795003200",
+    "ETH": "1795003200",
+    "SOL": "1795003200",
+    "XRP": "1795003200"
   },
   "signal_streaks": {
     "BTC": {
       "bullish": 0,
-      "bearish": 1
+      "bearish": 2
     },
     "ETH": {
       "bullish": 0,
-      "bearish": 1
+      "bearish": 0
     },
     "SOL": {
-      "bullish": 28,
+      "bullish": 29,
       "bearish": 0
     },
     "XRP": {
-      "bullish": 25,
+      "bullish": 26,
       "bearish": 0
     }
   }
