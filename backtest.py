@@ -117,10 +117,11 @@ def simulate(candles, config):
     position = None
     trades = []
     closes = []
+    warmup = warmup_bars(config)
 
     for index, candle in enumerate(candles):
         closes.append(candle["close"])
-        if index < 105 or index + 1 >= len(candles):
+        if index < warmup or index + 1 >= len(candles):
             continue
         enter, exit_signal, strength = signals_at(closes, index, config)
         next_open = candles[index + 1]["open"]
