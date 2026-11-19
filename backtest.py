@@ -1,8 +1,9 @@
 import json
+import math
 import urllib.request
 from datetime import datetime, timezone
 
-# Historical research only. This script NEVER submits exchange orders.
+# Historical strategy research only. This script NEVER submits exchange orders.
 BASE = "https://api.kraken.com/0/public/"
 PAIRS = {"BTC": "XBTUSD", "ETH": "ETHUSD", "SOL": "SOLUSD", "XRP": "XRPUSD"}
 FEE = 0.001
@@ -13,23 +14,19 @@ CANDLE_LIMIT = 720
 
 def fetch_ohlc(pair):
     url = f"{BASE}OHLC?pair={pair}&interval=60"
-    request = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBacktest/1.0"})
+    request = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBacktest/2.0"})
     with urllib.request.urlopen(request, timeout=30) as response:
         payload = json.loads(response.read().decode())
     if payload.get("error"):
         raise RuntimeError(str(payload["error"]))
     result = payload["result"]
     key = next(key for key in result if key != "last")
-    rows = result[key][:-1]  # exclude currently forming candle
+    rows = result[key][:-1]
     if len(rows) < 100:
         raise RuntimeError(f"Only {len(rows)} completed candles returned")
-    return [{
-        "time": int(float(row[0])),
-        "open": float(row[1]),
-        "high": float(row[2]),
-        "low": float(row[3]),
-        "close": float(row[4])
-    } for row in rows[-CANDLE_LIMIT:]]
+    return [{"time": int(float(row[0])), "open": float(row[1]), "high": float(row[2]),
+             "low": float(row[3]), "close": float(row[4])}
+            for row in rows[-CANDLE_LIMIT:]]
 
 
 def ema(values, period):
@@ -50,6 +47,47 @@ def rsi(values, period=14):
     return 100.0 - 100.0 / (1.0 + gains / losses)
 
 
+def signals_at(closes, index, config):
+    kind = config["kind"]
+    strength = rsi(closes)
+    if kind in ("ema", "macd"):
+        fast_period = config["fast"]
+        slow_period = config["slow"]
+        fast = ema(closes[-max(100, slow_period * 4):], fast_period)
+        slow = ema(closes[-max(100, slow_period * 4):], slow_period)
+        prev_closes = closes[:-1]
+        prev_fast = ema(prev_closes[-max(100, slow_period * 4):], fast_period)
+        prev_slow = ema(prev_closes[-max(100, slow_period * 4):], slow_period)
+        bull = fast > slow
+        prev_bull = prev_fast > prev_slow
+        if kind == "macd":
+            return (bull and not prev_bull and strength >= config["rsi_min"],
+                    (not bull and prev_bull), strength)
+        return (bull and prev_bull and config["rsi_min"] <= strength <= config["rsi_max"],
+                (not bull and not prev_bull), strength)
+
+    if kind == "breakout":
+        lookback = config["lookback"]
+        prior_high = max(closes[-lookback-1:-1])
+        prior_low = min(closes[-config["exit_lookback"]-1:-1])
+        return closes[-1] > prior_high, closes[-1] < prior_low, strength
+
+    if kind == "bollinger":
+        window = closes[-config["period"]:]
+        mean = sum(window) / len(window)
+        deviation = math.sqrt(sum((x - mean) ** 2 for x in window) / len(window))
+        lower = mean - config["deviations"] * deviation
+        previous_window = closes[-config["period"]-1:-1]
+        previous_mean = sum(previous_window) / len(previous_window)
+        previous_dev = math.sqrt(sum((x - previous_mean) ** 2 for x in previous_window) / len(previous_window))
+        previous_lower = previous_mean - config["deviations"] * previous_dev
+        enter = closes[-2] >= previous_lower and closes[-1] < lower and strength <= config["rsi_max"]
+        exit_signal = closes[-1] >= mean
+        return enter, exit_signal, strength
+
+    raise ValueError(f"Unknown strategy: {kind}")
+
+
 def simulate(candles, config):
     cash = START_CASH_PER_COIN
     position = None
@@ -58,38 +96,25 @@ def simulate(candles, config):
 
     for index, candle in enumerate(candles):
         closes.append(candle["close"])
-        if index < 55 or index + 1 >= len(candles):
+        if index < 105 or index + 1 >= len(candles):
             continue
-
-        window = closes[-50:]
-        fast = ema(window, config["fast"])
-        slow = ema(window, config["slow"])
-        strength = rsi(closes)
-        bullish = fast > slow
-        previous_bullish = False
-        if index >= 1:
-            previous_window = closes[-51:-1]
-            previous_bullish = ema(previous_window, config["fast"]) > ema(previous_window, config["slow"])
-
+        enter, exit_signal, strength = signals_at(closes, index, config)
         next_open = candles[index + 1]["open"]
 
         if position:
             stop_price = position["entry"] * (1 - config["stop"])
             target_price = position["entry"] * (1 + config["target"])
-            # Conservative intrabar handling: if stop and target both touched, assume stop first.
+            # Conservative OHLC assumption: stop wins if stop and target hit in same candle.
             if candle["low"] <= stop_price:
-                # A stop executes inside this candle; use its open for a gap below the stop.
                 exit_price = candle["open"] if candle["open"] <= stop_price else stop_price
                 reason = "Stop-Loss"
             elif candle["high"] >= target_price:
-                # A target limit fills at the target, or better if the candle gaps above it.
                 exit_price = candle["open"] if candle["open"] >= target_price else target_price
                 reason = "Take-Profit"
-            elif config["exit_confirm"] and not bullish and not previous_bullish:
-                exit_price, reason = next_open, "EMA exit"
+            elif exit_signal:
+                exit_price, reason = next_open, "Strategy exit"
             else:
                 continue
-
             proceeds = position["quantity"] * exit_price * (1 - FEE)
             profit = proceeds - position["cost"]
             cash += proceeds
@@ -97,14 +122,8 @@ def simulate(candles, config):
             position = None
             continue
 
-        confirmed = bullish and previous_bullish
-        if config["entry_confirm"] and not confirmed:
+        if not enter:
             continue
-        if not config["entry_confirm"] and not bullish:
-            continue
-        if not (config["rsi_min"] <= strength <= config["rsi_max"]):
-            continue
-
         budget = min(MAX_BUY, cash * 0.20)
         if budget < 10:
             continue
@@ -112,53 +131,38 @@ def simulate(candles, config):
         cash -= budget
         position = {"entry": next_open, "quantity": quantity, "cost": budget}
 
-    # Close any remaining test position at the last close so equity is comparable.
     if position:
         exit_price = candles[-1]["close"]
         proceeds = position["quantity"] * exit_price * (1 - FEE)
         profit = proceeds - position["cost"]
         cash += proceeds
         trades.append({"profit": round(profit, 6), "reason": "End of test"})
+
     wins = [trade["profit"] for trade in trades if trade["profit"] > 0]
     losses = [trade["profit"] for trade in trades if trade["profit"] < 0]
-    gross_profit = sum(wins)
-    gross_loss = abs(sum(losses))
+    gross_profit, gross_loss = sum(wins), abs(sum(losses))
     return {
         "ending_equity": round(cash, 2),
         "net_profit": round(cash - START_CASH_PER_COIN, 2),
-        "closed_trades": len(trades),
-        "wins": len(wins),
-        "losses": len(losses),
+        "closed_trades": len(trades), "wins": len(wins), "losses": len(losses),
         "win_rate_percent": round(100 * len(wins) / len(trades), 1) if trades else 0,
         "profit_factor": round(gross_profit / gross_loss, 3) if gross_loss else None,
-        "gross_profit": round(gross_profit, 2),
-        "gross_loss": round(gross_loss, 2)
+        "gross_profit": round(gross_profit, 2), "gross_loss": round(gross_loss, 2)
     }
 
 
 def main():
     configs = {
-        "current_v4_2": {
-            "fast": 9, "slow": 21, "entry_confirm": True,
-            "exit_confirm": True, "rsi_min": 52, "rsi_max": 65,
-            "stop": 0.03, "target": 0.06
-        },
-        "wider_rsi": {
-            "fast": 9, "slow": 21, "entry_confirm": True,
-            "exit_confirm": True, "rsi_min": 50, "rsi_max": 68,
-            "stop": 0.03, "target": 0.06
-        },
-        "ema_trend_20_50": {
-            "fast": 20, "slow": 50, "entry_confirm": True,
-            "exit_confirm": True, "rsi_min": 50, "rsi_max": 68,
-            "stop": 0.03, "target": 0.06
-        }
+        "current_v4_2": {"kind":"ema","fast":9,"slow":21,"rsi_min":52,"rsi_max":65,"stop":0.03,"target":0.06},
+        "ema_trend_20_50": {"kind":"ema","fast":20,"slow":50,"rsi_min":50,"rsi_max":68,"stop":0.03,"target":0.06},
+        "macd_12_26_crossover": {"kind":"macd","fast":12,"slow":26,"rsi_min":50,"rsi_max":100,"stop":0.03,"target":0.06},
+        "donchian_breakout_20_10": {"kind":"breakout","lookback":20,"exit_lookback":10,"stop":0.04,"target":0.08},
+        "bollinger_rsi_reversal": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":35,"stop":0.04,"target":0.06}
     }
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "notice": "Historical research only; no live orders. Kraken public OHLC is limited to recent history. Signals use candle close and execute at next candle open; fees included.",
-        "candles_per_coin": {},
-        "results": {}
+        "notice": "Research only; no live orders. Kraken public OHLC limited to recent history. Signals use completed candle close and entries/exits at next candle open; fees included. OHLC stop/target assumptions are approximate.",
+        "candles_per_coin": {}, "results": {}
     }
     datasets = {}
     for coin, pair in PAIRS.items():
@@ -169,9 +173,7 @@ def main():
             output["candles_per_coin"][coin] = {"error": str(error)}
 
     for name, config in configs.items():
-        coin_results = {}
-        for coin, candles in datasets.items():
-            coin_results[coin] = simulate(candles, config)
+        coin_results = {coin: simulate(candles, config) for coin, candles in datasets.items()}
         output["results"][name] = coin_results
         output["results"][name]["TOTAL_EQUAL_ALLOCATION"] = {
             "starting_equity": round(START_CASH_PER_COIN * len(datasets), 2),
