@@ -78,9 +78,13 @@ def simulate(candles, config):
             target_price = position["entry"] * (1 + config["target"])
             # Conservative intrabar handling: if stop and target both touched, assume stop first.
             if candle["low"] <= stop_price:
-                exit_price, reason = min(next_open, stop_price), "Stop-Loss"
+                # A stop executes inside this candle; use its open for a gap below the stop.
+                exit_price = candle["open"] if candle["open"] <= stop_price else stop_price
+                reason = "Stop-Loss"
             elif candle["high"] >= target_price:
-                exit_price, reason = max(next_open, target_price), "Take-Profit"
+                # A target limit fills at the target, or better if the candle gaps above it.
+                exit_price = candle["open"] if candle["open"] >= target_price else target_price
+                reason = "Take-Profit"
             elif config["exit_confirm"] and not bullish and not previous_bullish:
                 exit_price, reason = next_open, "EMA exit"
             else:
