@@ -1,87 +1,617 @@
 {
-  "generated_at": "2026-11-19T08:43:11.256826+00:00",
+  "generated_at": "2026-11-19T08:44:19.106993+00:00",
   "notice": "Research only; no live orders. Kraken public OHLC limited to recent history. Signals use completed candle close and entries/exits at next candle open; fees included. OHLC stop/target assumptions are approximate.",
   "candles_per_coin": {
-    "BTC": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "ETH": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "SOL": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "XRP": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "ADA": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "DOGE": {
-      "error": "URL can't contain control characters. \"/0/public/OHLC?pair=['DOGEUSD', 'XDGUSD']&interval=60\" (found at least ' ')"
-    },
-    "LINK": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "AVAX": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "LTC": {
-      "error": "['EQuery:Unknown asset pair']"
-    },
-    "DOT": {
-      "error": "['EQuery:Unknown asset pair']"
-    }
+    "BTC": 720,
+    "ETH": 720,
+    "SOL": 720,
+    "XRP": 720,
+    "ADA": 720,
+    "DOGE": 720,
+    "LINK": 720,
+    "AVAX": 720,
+    "LTC": 720,
+    "DOT": 720
   },
   "results": {
     "current_v4_2": {
-      "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 0.0,
-        "ending_equity": 0,
-        "net_profit": 0,
-        "closed_trades": 0,
+      "BTC": {
+        "ending_equity": 240.73,
+        "net_profit": -9.27,
+        "closed_trades": 13,
+        "wins": 2,
+        "losses": 11,
+        "win_rate_percent": 15.4,
+        "profit_factor": 0.023,
+        "gross_profit": 0.22,
+        "gross_loss": 9.49
+      },
+      "ETH": {
+        "ending_equity": 244.72,
+        "net_profit": -5.28,
+        "closed_trades": 14,
+        "wins": 1,
+        "losses": 13,
+        "win_rate_percent": 7.1,
+        "profit_factor": 0.351,
+        "gross_profit": 2.85,
+        "gross_loss": 8.13
+      },
+      "SOL": {
+        "ending_equity": 242.08,
+        "net_profit": -7.92,
+        "closed_trades": 12,
+        "wins": 3,
+        "losses": 9,
+        "win_rate_percent": 25.0,
+        "profit_factor": 0.164,
+        "gross_profit": 1.55,
+        "gross_loss": 9.47
+      },
+      "XRP": {
+        "ending_equity": 243.75,
+        "net_profit": -6.25,
+        "closed_trades": 14,
+        "wins": 2,
+        "losses": 12,
+        "win_rate_percent": 14.3,
+        "profit_factor": 0.102,
+        "gross_profit": 0.71,
+        "gross_loss": 6.96
+      },
+      "ADA": {
+        "ending_equity": 234.1,
+        "net_profit": -15.9,
+        "closed_trades": 16,
         "wins": 0,
-        "losses": 0
+        "losses": 16,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 15.9
+      },
+      "DOGE": {
+        "ending_equity": 238.04,
+        "net_profit": -11.96,
+        "closed_trades": 16,
+        "wins": 1,
+        "losses": 15,
+        "win_rate_percent": 6.2,
+        "profit_factor": 0.006,
+        "gross_profit": 0.07,
+        "gross_loss": 12.03
+      },
+      "LINK": {
+        "ending_equity": 240.04,
+        "net_profit": -9.96,
+        "closed_trades": 14,
+        "wins": 1,
+        "losses": 13,
+        "win_rate_percent": 7.1,
+        "profit_factor": 0.223,
+        "gross_profit": 2.86,
+        "gross_loss": 12.82
+      },
+      "AVAX": {
+        "ending_equity": 237.28,
+        "net_profit": -12.72,
+        "closed_trades": 18,
+        "wins": 2,
+        "losses": 16,
+        "win_rate_percent": 11.1,
+        "profit_factor": 0.188,
+        "gross_profit": 2.95,
+        "gross_loss": 15.68
+      },
+      "LTC": {
+        "ending_equity": 237.83,
+        "net_profit": -12.17,
+        "closed_trades": 15,
+        "wins": 2,
+        "losses": 13,
+        "win_rate_percent": 13.3,
+        "profit_factor": 0.037,
+        "gross_profit": 0.46,
+        "gross_loss": 12.64
+      },
+      "DOT": {
+        "ending_equity": 241.69,
+        "net_profit": -8.31,
+        "closed_trades": 13,
+        "wins": 1,
+        "losses": 12,
+        "win_rate_percent": 7.7,
+        "profit_factor": 0.258,
+        "gross_profit": 2.89,
+        "gross_loss": 11.2
+      },
+      "TOTAL_EQUAL_ALLOCATION": {
+        "starting_equity": 2500.0,
+        "ending_equity": 2400.26,
+        "net_profit": -99.74,
+        "closed_trades": 145,
+        "wins": 15,
+        "losses": 130
       }
     },
     "ema_trend_20_50": {
-      "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 0.0,
-        "ending_equity": 0,
-        "net_profit": 0,
-        "closed_trades": 0,
+      "BTC": {
+        "ending_equity": 245.68,
+        "net_profit": -4.32,
+        "closed_trades": 4,
         "wins": 0,
-        "losses": 0
+        "losses": 4,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 4.32
+      },
+      "ETH": {
+        "ending_equity": 250.27,
+        "net_profit": 0.27,
+        "closed_trades": 4,
+        "wins": 1,
+        "losses": 3,
+        "win_rate_percent": 25.0,
+        "profit_factor": 1.104,
+        "gross_profit": 2.88,
+        "gross_loss": 2.61
+      },
+      "SOL": {
+        "ending_equity": 249.28,
+        "net_profit": -0.72,
+        "closed_trades": 3,
+        "wins": 1,
+        "losses": 2,
+        "win_rate_percent": 33.3,
+        "profit_factor": 0.688,
+        "gross_profit": 1.58,
+        "gross_loss": 2.3
+      },
+      "XRP": {
+        "ending_equity": 247.63,
+        "net_profit": -2.37,
+        "closed_trades": 5,
+        "wins": 0,
+        "losses": 5,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 2.37
+      },
+      "ADA": {
+        "ending_equity": 245.87,
+        "net_profit": -4.13,
+        "closed_trades": 3,
+        "wins": 0,
+        "losses": 3,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 4.13
+      },
+      "DOGE": {
+        "ending_equity": 244.3,
+        "net_profit": -5.7,
+        "closed_trades": 5,
+        "wins": 1,
+        "losses": 4,
+        "win_rate_percent": 20.0,
+        "profit_factor": 0.033,
+        "gross_profit": 0.2,
+        "gross_loss": 5.9
+      },
+      "LINK": {
+        "ending_equity": 245.4,
+        "net_profit": -4.6,
+        "closed_trades": 5,
+        "wins": 0,
+        "losses": 5,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 4.6
+      },
+      "AVAX": {
+        "ending_equity": 243.08,
+        "net_profit": -6.92,
+        "closed_trades": 5,
+        "wins": 0,
+        "losses": 5,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 6.92
+      },
+      "LTC": {
+        "ending_equity": 245.82,
+        "net_profit": -4.18,
+        "closed_trades": 3,
+        "wins": 0,
+        "losses": 3,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 4.18
+      },
+      "DOT": {
+        "ending_equity": 246.82,
+        "net_profit": -3.18,
+        "closed_trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 3.18
+      },
+      "TOTAL_EQUAL_ALLOCATION": {
+        "starting_equity": 2500.0,
+        "ending_equity": 2464.15,
+        "net_profit": -35.85,
+        "closed_trades": 39,
+        "wins": 3,
+        "losses": 36
       }
     },
     "ema_12_26_crossover": {
-      "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 0.0,
-        "ending_equity": 0,
-        "net_profit": 0,
-        "closed_trades": 0,
+      "BTC": {
+        "ending_equity": 242.17,
+        "net_profit": -7.83,
+        "closed_trades": 12,
+        "wins": 1,
+        "losses": 11,
+        "win_rate_percent": 8.3,
+        "profit_factor": 0.001,
+        "gross_profit": 0.01,
+        "gross_loss": 7.84
+      },
+      "ETH": {
+        "ending_equity": 245.06,
+        "net_profit": -4.94,
+        "closed_trades": 6,
         "wins": 0,
-        "losses": 0
+        "losses": 6,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 4.94
+      },
+      "SOL": {
+        "ending_equity": 246.33,
+        "net_profit": -3.67,
+        "closed_trades": 7,
+        "wins": 2,
+        "losses": 5,
+        "win_rate_percent": 28.6,
+        "profit_factor": 0.202,
+        "gross_profit": 0.93,
+        "gross_loss": 4.6
+      },
+      "XRP": {
+        "ending_equity": 249.11,
+        "net_profit": -0.89,
+        "closed_trades": 10,
+        "wins": 2,
+        "losses": 8,
+        "win_rate_percent": 20.0,
+        "profit_factor": 0.777,
+        "gross_profit": 3.11,
+        "gross_loss": 4.0
+      },
+      "ADA": {
+        "ending_equity": 235.71,
+        "net_profit": -14.29,
+        "closed_trades": 13,
+        "wins": 0,
+        "losses": 13,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 14.29
+      },
+      "DOGE": {
+        "ending_equity": 238.9,
+        "net_profit": -11.1,
+        "closed_trades": 15,
+        "wins": 0,
+        "losses": 15,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 11.1
+      },
+      "LINK": {
+        "ending_equity": 240.3,
+        "net_profit": -9.7,
+        "closed_trades": 10,
+        "wins": 1,
+        "losses": 9,
+        "win_rate_percent": 10.0,
+        "profit_factor": 0.041,
+        "gross_profit": 0.42,
+        "gross_loss": 10.12
+      },
+      "AVAX": {
+        "ending_equity": 239.43,
+        "net_profit": -10.57,
+        "closed_trades": 14,
+        "wins": 1,
+        "losses": 13,
+        "win_rate_percent": 7.1,
+        "profit_factor": 0.21,
+        "gross_profit": 2.82,
+        "gross_loss": 13.38
+      },
+      "LTC": {
+        "ending_equity": 237.33,
+        "net_profit": -12.67,
+        "closed_trades": 16,
+        "wins": 1,
+        "losses": 15,
+        "win_rate_percent": 6.2,
+        "profit_factor": 0.015,
+        "gross_profit": 0.19,
+        "gross_loss": 12.86
+      },
+      "DOT": {
+        "ending_equity": 241.26,
+        "net_profit": -8.74,
+        "closed_trades": 12,
+        "wins": 1,
+        "losses": 11,
+        "win_rate_percent": 8.3,
+        "profit_factor": 0.249,
+        "gross_profit": 2.89,
+        "gross_loss": 11.63
+      },
+      "TOTAL_EQUAL_ALLOCATION": {
+        "starting_equity": 2500.0,
+        "ending_equity": 2415.6,
+        "net_profit": -84.4,
+        "closed_trades": 115,
+        "wins": 9,
+        "losses": 106
       }
     },
     "donchian_breakout_20_10": {
+      "BTC": {
+        "ending_equity": 245.61,
+        "net_profit": -4.39,
+        "closed_trades": 12,
+        "wins": 3,
+        "losses": 9,
+        "win_rate_percent": 25.0,
+        "profit_factor": 0.258,
+        "gross_profit": 1.53,
+        "gross_loss": 5.92
+      },
+      "ETH": {
+        "ending_equity": 249.35,
+        "net_profit": -0.65,
+        "closed_trades": 10,
+        "wins": 3,
+        "losses": 7,
+        "win_rate_percent": 30.0,
+        "profit_factor": 0.792,
+        "gross_profit": 2.48,
+        "gross_loss": 3.13
+      },
+      "SOL": {
+        "ending_equity": 245.05,
+        "net_profit": -4.95,
+        "closed_trades": 11,
+        "wins": 2,
+        "losses": 9,
+        "win_rate_percent": 18.2,
+        "profit_factor": 0.045,
+        "gross_profit": 0.23,
+        "gross_loss": 5.19
+      },
+      "XRP": {
+        "ending_equity": 247.18,
+        "net_profit": -2.82,
+        "closed_trades": 12,
+        "wins": 4,
+        "losses": 8,
+        "win_rate_percent": 33.3,
+        "profit_factor": 0.391,
+        "gross_profit": 1.81,
+        "gross_loss": 4.64
+      },
+      "ADA": {
+        "ending_equity": 237.7,
+        "net_profit": -12.3,
+        "closed_trades": 15,
+        "wins": 1,
+        "losses": 14,
+        "win_rate_percent": 6.7,
+        "profit_factor": 0.063,
+        "gross_profit": 0.83,
+        "gross_loss": 13.13
+      },
+      "DOGE": {
+        "ending_equity": 242.48,
+        "net_profit": -7.52,
+        "closed_trades": 13,
+        "wins": 1,
+        "losses": 12,
+        "win_rate_percent": 7.7,
+        "profit_factor": 0.097,
+        "gross_profit": 0.8,
+        "gross_loss": 8.32
+      },
+      "LINK": {
+        "ending_equity": 242.09,
+        "net_profit": -7.91,
+        "closed_trades": 13,
+        "wins": 3,
+        "losses": 10,
+        "win_rate_percent": 23.1,
+        "profit_factor": 0.276,
+        "gross_profit": 3.01,
+        "gross_loss": 10.91
+      },
+      "AVAX": {
+        "ending_equity": 238.42,
+        "net_profit": -11.58,
+        "closed_trades": 15,
+        "wins": 3,
+        "losses": 12,
+        "win_rate_percent": 20.0,
+        "profit_factor": 0.064,
+        "gross_profit": 0.79,
+        "gross_loss": 12.37
+      },
+      "LTC": {
+        "ending_equity": 240.83,
+        "net_profit": -9.17,
+        "closed_trades": 14,
+        "wins": 2,
+        "losses": 12,
+        "win_rate_percent": 14.3,
+        "profit_factor": 0.037,
+        "gross_profit": 0.35,
+        "gross_loss": 9.52
+      },
+      "DOT": {
+        "ending_equity": 239.88,
+        "net_profit": -10.12,
+        "closed_trades": 14,
+        "wins": 2,
+        "losses": 12,
+        "win_rate_percent": 14.3,
+        "profit_factor": 0.278,
+        "gross_profit": 3.89,
+        "gross_loss": 14.02
+      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 0.0,
-        "ending_equity": 0,
-        "net_profit": 0,
-        "closed_trades": 0,
-        "wins": 0,
-        "losses": 0
+        "starting_equity": 2500.0,
+        "ending_equity": 2428.59,
+        "net_profit": -71.41,
+        "closed_trades": 129,
+        "wins": 24,
+        "losses": 105
       }
     },
     "bollinger_rsi_reversal": {
+      "BTC": {
+        "ending_equity": 242.89,
+        "net_profit": -7.11,
+        "closed_trades": 12,
+        "wins": 5,
+        "losses": 7,
+        "win_rate_percent": 41.7,
+        "profit_factor": 0.23,
+        "gross_profit": 2.13,
+        "gross_loss": 9.24
+      },
+      "ETH": {
+        "ending_equity": 242.04,
+        "net_profit": -7.96,
+        "closed_trades": 12,
+        "wins": 6,
+        "losses": 6,
+        "win_rate_percent": 50.0,
+        "profit_factor": 0.254,
+        "gross_profit": 2.71,
+        "gross_loss": 10.67
+      },
+      "SOL": {
+        "ending_equity": 242.3,
+        "net_profit": -7.7,
+        "closed_trades": 13,
+        "wins": 5,
+        "losses": 8,
+        "win_rate_percent": 38.5,
+        "profit_factor": 0.31,
+        "gross_profit": 3.45,
+        "gross_loss": 11.15
+      },
+      "XRP": {
+        "ending_equity": 250.4,
+        "net_profit": 0.4,
+        "closed_trades": 11,
+        "wins": 6,
+        "losses": 5,
+        "win_rate_percent": 54.5,
+        "profit_factor": 1.083,
+        "gross_profit": 5.22,
+        "gross_loss": 4.82
+      },
+      "ADA": {
+        "ending_equity": 254.02,
+        "net_profit": 4.02,
+        "closed_trades": 12,
+        "wins": 9,
+        "losses": 3,
+        "win_rate_percent": 75.0,
+        "profit_factor": 1.865,
+        "gross_profit": 8.67,
+        "gross_loss": 4.65
+      },
+      "DOGE": {
+        "ending_equity": 247.18,
+        "net_profit": -2.82,
+        "closed_trades": 15,
+        "wins": 9,
+        "losses": 6,
+        "win_rate_percent": 60.0,
+        "profit_factor": 0.702,
+        "gross_profit": 6.65,
+        "gross_loss": 9.48
+      },
+      "LINK": {
+        "ending_equity": 245.75,
+        "net_profit": -4.25,
+        "closed_trades": 7,
+        "wins": 2,
+        "losses": 5,
+        "win_rate_percent": 28.6,
+        "profit_factor": 0.297,
+        "gross_profit": 1.8,
+        "gross_loss": 6.05
+      },
+      "AVAX": {
+        "ending_equity": 244.4,
+        "net_profit": -5.6,
+        "closed_trades": 11,
+        "wins": 5,
+        "losses": 6,
+        "win_rate_percent": 45.5,
+        "profit_factor": 0.401,
+        "gross_profit": 3.75,
+        "gross_loss": 9.35
+      },
+      "LTC": {
+        "ending_equity": 244.6,
+        "net_profit": -5.4,
+        "closed_trades": 11,
+        "wins": 5,
+        "losses": 6,
+        "win_rate_percent": 45.5,
+        "profit_factor": 0.368,
+        "gross_profit": 3.14,
+        "gross_loss": 8.55
+      },
+      "DOT": {
+        "ending_equity": 249.54,
+        "net_profit": -0.46,
+        "closed_trades": 12,
+        "wins": 8,
+        "losses": 4,
+        "win_rate_percent": 66.7,
+        "profit_factor": 0.934,
+        "gross_profit": 6.59,
+        "gross_loss": 7.06
+      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 0.0,
-        "ending_equity": 0,
-        "net_profit": 0,
-        "closed_trades": 0,
-        "wins": 0,
-        "losses": 0
+        "starting_equity": 2500.0,
+        "ending_equity": 2463.12,
+        "net_profit": -36.88,
+        "closed_trades": 116,
+        "wins": 60,
+        "losses": 56
       }
     }
   }
