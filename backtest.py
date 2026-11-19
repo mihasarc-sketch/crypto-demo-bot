@@ -142,8 +142,7 @@ def simulate(candles, config):
             else:
                 continue
             exit_price *= (1 - SLIPPAGE)
-            exit_price *= (1 - SLIPPAGE)
-        proceeds = position["quantity"] * exit_price * (1 - FEE)
+            proceeds = position["quantity"] * exit_price * (1 - FEE)
             profit = proceeds - position["cost"]
             cash += proceeds
             trades.append({"profit": round(profit, 6), "reason": reason})
@@ -161,7 +160,7 @@ def simulate(candles, config):
         position = {"entry": entry_price, "quantity": quantity, "cost": budget}
 
     if position:
-        exit_price = candles[-1]["close"]
+        exit_price = candles[-1]["close"] * (1 - SLIPPAGE)
         proceeds = position["quantity"] * exit_price * (1 - FEE)
         profit = proceeds - position["cost"]
         cash += proceeds
