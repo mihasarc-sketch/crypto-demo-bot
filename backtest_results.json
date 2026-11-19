@@ -1,281 +1,87 @@
 {
-  "generated_at": "2026-11-19T08:40:06.547011+00:00",
+  "generated_at": "2026-11-19T08:43:11.256826+00:00",
   "notice": "Research only; no live orders. Kraken public OHLC limited to recent history. Signals use completed candle close and entries/exits at next candle open; fees included. OHLC stop/target assumptions are approximate.",
   "candles_per_coin": {
-    "BTC": 720,
-    "ETH": 720,
-    "SOL": 720,
-    "XRP": 720
+    "BTC": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "ETH": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "SOL": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "XRP": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "ADA": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "DOGE": {
+      "error": "URL can't contain control characters. \"/0/public/OHLC?pair=['DOGEUSD', 'XDGUSD']&interval=60\" (found at least ' ')"
+    },
+    "LINK": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "AVAX": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "LTC": {
+      "error": "['EQuery:Unknown asset pair']"
+    },
+    "DOT": {
+      "error": "['EQuery:Unknown asset pair']"
+    }
   },
   "results": {
     "current_v4_2": {
-      "BTC": {
-        "ending_equity": 240.73,
-        "net_profit": -9.27,
-        "closed_trades": 13,
-        "wins": 2,
-        "losses": 11,
-        "win_rate_percent": 15.4,
-        "profit_factor": 0.023,
-        "gross_profit": 0.22,
-        "gross_loss": 9.49
-      },
-      "ETH": {
-        "ending_equity": 244.72,
-        "net_profit": -5.28,
-        "closed_trades": 14,
-        "wins": 1,
-        "losses": 13,
-        "win_rate_percent": 7.1,
-        "profit_factor": 0.351,
-        "gross_profit": 2.85,
-        "gross_loss": 8.13
-      },
-      "SOL": {
-        "ending_equity": 242.08,
-        "net_profit": -7.92,
-        "closed_trades": 12,
-        "wins": 3,
-        "losses": 9,
-        "win_rate_percent": 25.0,
-        "profit_factor": 0.164,
-        "gross_profit": 1.55,
-        "gross_loss": 9.47
-      },
-      "XRP": {
-        "ending_equity": 243.75,
-        "net_profit": -6.25,
-        "closed_trades": 14,
-        "wins": 2,
-        "losses": 12,
-        "win_rate_percent": 14.3,
-        "profit_factor": 0.102,
-        "gross_profit": 0.71,
-        "gross_loss": 6.96
-      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 1000.0,
-        "ending_equity": 971.28,
-        "net_profit": -28.72,
-        "closed_trades": 53,
-        "wins": 8,
-        "losses": 45
+        "starting_equity": 0.0,
+        "ending_equity": 0,
+        "net_profit": 0,
+        "closed_trades": 0,
+        "wins": 0,
+        "losses": 0
       }
     },
     "ema_trend_20_50": {
-      "BTC": {
-        "ending_equity": 245.68,
-        "net_profit": -4.32,
-        "closed_trades": 4,
-        "wins": 0,
-        "losses": 4,
-        "win_rate_percent": 0.0,
-        "profit_factor": 0.0,
-        "gross_profit": 0,
-        "gross_loss": 4.32
-      },
-      "ETH": {
-        "ending_equity": 250.27,
-        "net_profit": 0.27,
-        "closed_trades": 4,
-        "wins": 1,
-        "losses": 3,
-        "win_rate_percent": 25.0,
-        "profit_factor": 1.104,
-        "gross_profit": 2.88,
-        "gross_loss": 2.61
-      },
-      "SOL": {
-        "ending_equity": 249.28,
-        "net_profit": -0.72,
-        "closed_trades": 3,
-        "wins": 1,
-        "losses": 2,
-        "win_rate_percent": 33.3,
-        "profit_factor": 0.688,
-        "gross_profit": 1.58,
-        "gross_loss": 2.3
-      },
-      "XRP": {
-        "ending_equity": 247.63,
-        "net_profit": -2.37,
-        "closed_trades": 5,
-        "wins": 0,
-        "losses": 5,
-        "win_rate_percent": 0.0,
-        "profit_factor": 0.0,
-        "gross_profit": 0,
-        "gross_loss": 2.37
-      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 1000.0,
-        "ending_equity": 992.86,
-        "net_profit": -7.14,
-        "closed_trades": 16,
-        "wins": 2,
-        "losses": 14
+        "starting_equity": 0.0,
+        "ending_equity": 0,
+        "net_profit": 0,
+        "closed_trades": 0,
+        "wins": 0,
+        "losses": 0
       }
     },
     "ema_12_26_crossover": {
-      "BTC": {
-        "ending_equity": 242.17,
-        "net_profit": -7.83,
-        "closed_trades": 12,
-        "wins": 1,
-        "losses": 11,
-        "win_rate_percent": 8.3,
-        "profit_factor": 0.001,
-        "gross_profit": 0.01,
-        "gross_loss": 7.84
-      },
-      "ETH": {
-        "ending_equity": 245.06,
-        "net_profit": -4.94,
-        "closed_trades": 6,
-        "wins": 0,
-        "losses": 6,
-        "win_rate_percent": 0.0,
-        "profit_factor": 0.0,
-        "gross_profit": 0,
-        "gross_loss": 4.94
-      },
-      "SOL": {
-        "ending_equity": 246.33,
-        "net_profit": -3.67,
-        "closed_trades": 7,
-        "wins": 2,
-        "losses": 5,
-        "win_rate_percent": 28.6,
-        "profit_factor": 0.202,
-        "gross_profit": 0.93,
-        "gross_loss": 4.6
-      },
-      "XRP": {
-        "ending_equity": 249.11,
-        "net_profit": -0.89,
-        "closed_trades": 10,
-        "wins": 2,
-        "losses": 8,
-        "win_rate_percent": 20.0,
-        "profit_factor": 0.777,
-        "gross_profit": 3.11,
-        "gross_loss": 4.0
-      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 1000.0,
-        "ending_equity": 982.67,
-        "net_profit": -17.33,
-        "closed_trades": 35,
-        "wins": 5,
-        "losses": 30
+        "starting_equity": 0.0,
+        "ending_equity": 0,
+        "net_profit": 0,
+        "closed_trades": 0,
+        "wins": 0,
+        "losses": 0
       }
     },
     "donchian_breakout_20_10": {
-      "BTC": {
-        "ending_equity": 245.61,
-        "net_profit": -4.39,
-        "closed_trades": 12,
-        "wins": 3,
-        "losses": 9,
-        "win_rate_percent": 25.0,
-        "profit_factor": 0.258,
-        "gross_profit": 1.53,
-        "gross_loss": 5.92
-      },
-      "ETH": {
-        "ending_equity": 249.35,
-        "net_profit": -0.65,
-        "closed_trades": 10,
-        "wins": 3,
-        "losses": 7,
-        "win_rate_percent": 30.0,
-        "profit_factor": 0.792,
-        "gross_profit": 2.48,
-        "gross_loss": 3.13
-      },
-      "SOL": {
-        "ending_equity": 245.05,
-        "net_profit": -4.95,
-        "closed_trades": 11,
-        "wins": 2,
-        "losses": 9,
-        "win_rate_percent": 18.2,
-        "profit_factor": 0.045,
-        "gross_profit": 0.23,
-        "gross_loss": 5.19
-      },
-      "XRP": {
-        "ending_equity": 247.18,
-        "net_profit": -2.82,
-        "closed_trades": 12,
-        "wins": 4,
-        "losses": 8,
-        "win_rate_percent": 33.3,
-        "profit_factor": 0.391,
-        "gross_profit": 1.81,
-        "gross_loss": 4.64
-      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 1000.0,
-        "ending_equity": 987.19,
-        "net_profit": -12.81,
-        "closed_trades": 45,
-        "wins": 12,
-        "losses": 33
+        "starting_equity": 0.0,
+        "ending_equity": 0,
+        "net_profit": 0,
+        "closed_trades": 0,
+        "wins": 0,
+        "losses": 0
       }
     },
     "bollinger_rsi_reversal": {
-      "BTC": {
-        "ending_equity": 242.89,
-        "net_profit": -7.11,
-        "closed_trades": 12,
-        "wins": 5,
-        "losses": 7,
-        "win_rate_percent": 41.7,
-        "profit_factor": 0.23,
-        "gross_profit": 2.13,
-        "gross_loss": 9.24
-      },
-      "ETH": {
-        "ending_equity": 242.04,
-        "net_profit": -7.96,
-        "closed_trades": 12,
-        "wins": 6,
-        "losses": 6,
-        "win_rate_percent": 50.0,
-        "profit_factor": 0.254,
-        "gross_profit": 2.71,
-        "gross_loss": 10.67
-      },
-      "SOL": {
-        "ending_equity": 242.3,
-        "net_profit": -7.7,
-        "closed_trades": 13,
-        "wins": 5,
-        "losses": 8,
-        "win_rate_percent": 38.5,
-        "profit_factor": 0.31,
-        "gross_profit": 3.45,
-        "gross_loss": 11.15
-      },
-      "XRP": {
-        "ending_equity": 250.4,
-        "net_profit": 0.4,
-        "closed_trades": 11,
-        "wins": 6,
-        "losses": 5,
-        "win_rate_percent": 54.5,
-        "profit_factor": 1.083,
-        "gross_profit": 5.22,
-        "gross_loss": 4.82
-      },
       "TOTAL_EQUAL_ALLOCATION": {
-        "starting_equity": 1000.0,
-        "ending_equity": 977.63,
-        "net_profit": -22.37,
-        "closed_trades": 48,
-        "wins": 22,
-        "losses": 26
+        "starting_equity": 0.0,
+        "ending_equity": 0,
+        "net_profit": 0,
+        "closed_trades": 0,
+        "wins": 0,
+        "losses": 0
       }
     }
   }
