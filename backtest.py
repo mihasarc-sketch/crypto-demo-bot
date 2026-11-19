@@ -17,13 +17,13 @@ MAX_BUY = 100.0
 CANDLE_LIMIT = 720
 
 
-def fetch_ohlc(pair_options):
+def fetch_ohlc(pair_options, interval=60):
     if isinstance(pair_options, str):
         pair_options = [pair_options]
     errors = []
     for pair in pair_options:
         try:
-            url = f"{BASE}OHLC?pair={pair}&interval=60"
+            url = f"{BASE}OHLC?pair={pair}&interval={interval}"
             request = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBacktest/2.0"})
             with urllib.request.urlopen(request, timeout=30) as response:
                 payload = json.loads(response.read().decode())
@@ -102,6 +102,16 @@ def signals_at(closes, index, config):
     raise ValueError(f"Unknown strategy: {kind}")
 
 
+def warmup_bars(config):
+    if config["kind"] in ("ema", "ema_cross"):
+        return max(105, config["slow"] * 4 + 2)
+    if config["kind"] == "bollinger":
+        return max(105, config["period"] + 2)
+    if config["kind"] == "breakout":
+        return max(105, config["lookback"] + 2, config["exit_lookback"] + 2)
+    return 105
+
+
 def simulate(candles, config):
     cash = START_CASH_PER_COIN
     position = None
@@ -175,8 +185,8 @@ def main():
     }
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "notice": "Research only; no live orders. Kraken public OHLC limited to recent history. Signals use completed candle close and entries/exits at next candle open; fees included. OHLC stop/target assumptions are approximate.",
-        "candles_per_coin": {}, "results": {}
+        "notice": "Research only; no live orders. Kraken OHLC is limited to 720 recent candles per interval. Hourly broad comparison and daily ADA/XRP parameter research are separate. Daily research uses a chronological 70/30 train/test split; the test segment includes prior candles only for indicator warm-up. Fees included; OHLC stop/target assumptions are approximate.",
+        "candles_per_coin": {}, "results": {}, "focused_daily_ada_xrp": {}
     }
     datasets = {}
     for coin, pair in PAIRS.items():
@@ -197,6 +207,45 @@ def main():
             "wins": sum(item["wins"] for item in coin_results.values()),
             "losses": sum(item["losses"] for item in coin_results.values())
         }
+
+    # Focused, longer-history research for ADA and XRP on daily candles.
+    # Parameter variants are compared on the first 70%; the final 30% is held out.
+    daily_configs = {
+        "bollinger_rsi30_sl4_tp6": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":30,"stop":0.04,"target":0.06},
+        "bollinger_rsi35_sl4_tp6": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":35,"stop":0.04,"target":0.06},
+        "bollinger_rsi40_sl4_tp6": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":40,"stop":0.04,"target":0.06},
+        "bollinger_rsi35_sl5_tp8": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":35,"stop":0.05,"target":0.08},
+        "bollinger_rsi40_sl5_tp8": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":40,"stop":0.05,"target":0.08},
+        "ema20_50_rsi45_sl3_tp6": {"kind":"ema","fast":20,"slow":50,"rsi_min":45,"rsi_max":70,"stop":0.03,"target":0.06},
+        "ema20_50_rsi50_sl3_tp6": {"kind":"ema","fast":20,"slow":50,"rsi_min":50,"rsi_max":70,"stop":0.03,"target":0.06},
+        "ema20_50_rsi45_sl4_tp8": {"kind":"ema","fast":20,"slow":50,"rsi_min":45,"rsi_max":70,"stop":0.04,"target":0.08},
+        "ema20_50_rsi50_sl4_tp8": {"kind":"ema","fast":20,"slow":50,"rsi_min":50,"rsi_max":70,"stop":0.04,"target":0.08}
+    }
+    for coin in ("ADA", "XRP"):
+        try:
+            daily = fetch_ohlc(PAIRS[coin], interval=1440)
+            split = int(len(daily) * 0.70)
+            coin_output = {
+                "candles": len(daily),
+                "approx_history_days": len(daily),
+                "train_candles": split,
+                "test_candles": len(daily) - split,
+                "split": "chronological 70% train / 30% holdout",
+                "strategies": {}
+            }
+            for name, config in daily_configs.items():
+                warmup = warmup_bars(config)
+                train_data = daily[:split]
+                test_data = daily[max(0, split - warmup):]
+                train_result = simulate(train_data, config)
+                test_result = simulate(test_data, config)
+                coin_output["strategies"][name] = {
+                    "train": train_result,
+                    "holdout": test_result
+                }
+            output["focused_daily_ada_xrp"][coin] = coin_output
+        except Exception as error:
+            output["focused_daily_ada_xrp"][coin] = {"error": str(error)}
 
     with open("backtest_results.json", "w") as file:
         json.dump(output, file, indent=2)
