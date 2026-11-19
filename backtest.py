@@ -60,7 +60,7 @@ def signals_at(closes, index, config):
         prev_slow = ema(prev_closes[-max(100, slow_period * 4):], slow_period)
         bull = fast > slow
         prev_bull = prev_fast > prev_slow
-        if kind == "macd":
+        if kind == "ema_cross":
             return (bull and not prev_bull and strength >= config["rsi_min"],
                     (not bull and prev_bull), strength)
         return (bull and prev_bull and config["rsi_min"] <= strength <= config["rsi_max"],
@@ -155,7 +155,7 @@ def main():
     configs = {
         "current_v4_2": {"kind":"ema","fast":9,"slow":21,"rsi_min":52,"rsi_max":65,"stop":0.03,"target":0.06},
         "ema_trend_20_50": {"kind":"ema","fast":20,"slow":50,"rsi_min":50,"rsi_max":68,"stop":0.03,"target":0.06},
-        "macd_12_26_crossover": {"kind":"macd","fast":12,"slow":26,"rsi_min":50,"rsi_max":100,"stop":0.03,"target":0.06},
+        "ema_12_26_crossover": {"kind":"ema_cross","fast":12,"slow":26,"rsi_min":50,"rsi_max":100,"stop":0.03,"target":0.06},
         "donchian_breakout_20_10": {"kind":"breakout","lookback":20,"exit_lookback":10,"stop":0.04,"target":0.08},
         "bollinger_rsi_reversal": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":35,"stop":0.04,"target":0.06}
     }
