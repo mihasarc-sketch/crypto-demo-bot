@@ -1,0 +1,276 @@
+import json
+import os
+import urllib.request
+import urllib.parse
+from pathlib import Path
+from datetime import datetime, timezone
+
+# CRYPTO DEMO BOT 4.2 - PAPER TRADING ONLY - NO REAL ORDERS
+COINS = ["BTC", "ETH", "SOL", "XRP"]
+START_CASH = 1000.0
+MAX_BUY = 100.0
+FEE = 0.001
+STOP_LOSS = 0.03
+TAKE_PROFIT = 0.06
+STATE = Path("state.json")
+TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
+CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
+
+
+def api(url):
+    req = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBot/4.2"})
+    with urllib.request.urlopen(req, timeout=20) as response:
+        return json.loads(response.read().decode())
+
+
+def telegram(message):
+    if not TOKEN or not CHAT_ID:
+        print("Telegram nicht konfiguriert.")
+        return
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    data = urllib.parse.urlencode({"chat_id": CHAT_ID, "text": message}).encode()
+    req = urllib.request.Request(url, data=data)
+    with urllib.request.urlopen(req, timeout=20) as response:
+        result = json.loads(response.read().decode())
+        if not result.get("ok"):
+            raise RuntimeError("Telegram-Nachricht fehlgeschlagen")
+
+
+def load_state():
+    if STATE.exists():
+        try:
+            data = json.loads(STATE.read_text())
+            data.setdefault("cash", START_CASH)
+            data.setdefault("positions", {})
+            data.setdefault("trades", [])
+            data.setdefault("realized", 0.0)
+            return data
+        except Exception as error:
+            raise RuntimeError(f"State-Datei fehlerhaft; sicherer Abbruch statt Kontoreset: {error}") from error
+        if not isinstance(data, dict):
+            raise RuntimeError("State-Datei hat ein ungültiges Format; sicherer Abbruch.")
+    return {"cash": START_CASH, "positions": {}, "trades": [], "realized": 0.0}
+
+
+def save_state(state):
+    STATE.write_text(json.dumps(state, indent=2))
+
+
+def ema(values, period):
+    result = values[0]
+    multiplier = 2 / (period + 1)
+    for value in values[1:]:
+        result = value * multiplier + result * (1 - multiplier)
+    return result
+
+
+def rsi(values, period=14):
+    changes = [values[i] - values[i - 1] for i in range(1, len(values))]
+    recent = changes[-period:]
+    gains = [max(x, 0) for x in recent]
+    losses = [max(-x, 0) for x in recent]
+    avg_gain = sum(gains) / period
+    avg_loss = sum(losses) / period
+    if avg_loss == 0:
+        return 100.0
+    return 100 - (100 / (1 + avg_gain / avg_loss))
+
+
+def market(coin):
+    pairs = {"BTC": "XBTUSD", "ETH": "ETHUSD", "SOL": "SOLUSD", "XRP": "XRPUSD"}
+    url = "https://api.kraken.com/0/public/OHLC" + f"?pair={pairs[coin]}&interval=60"
+    data = api(url)
+    if data.get("error"):
+        raise RuntimeError(str(data["error"]))
+    result = data["result"]
+    key = next(k for k in result if k != "last")
+    candles = result[key]
+    # Only completed hourly candles are used.
+    closed_candles = candles[:-1]
+    closes = [float(row[4]) for row in closed_candles]
+    candle_time = str(int(float(closed_candles[-1][0])))
+    if len(closes) < 50:
+        raise RuntimeError("Zu wenige Marktdaten für EMA-Auswertung")
+    price = closes[-1]
+    ema_prices = closes[-50:]
+    fast = ema(ema_prices, 9)
+    slow = ema(ema_prices, 21)
+    strength = rsi(closes)
+    return price, fast, slow, strength, candle_time
+
+
+def buy(state, coin, price):
+    budget = min(MAX_BUY, state["cash"] * 0.20)
+    if budget < 10:
+        return None
+    quantity = budget * (1 - FEE) / price
+    state["cash"] -= budget
+    state["positions"][coin] = {"entry": price, "quantity": quantity, "cost": budget}
+    state["trades"].append({
+        "coin": coin, "action": "BUY", "price": price, "cost": budget,
+        "time": datetime.now(timezone.utc).isoformat()
+    })
+    return f"🟢 DEMO-KAUF {coin}: {price:.4f} USD"
+
+
+def sell(state, coin, price, reason):
+    position = state["positions"].pop(coin)
+    gross = position["quantity"] * price
+    proceeds = gross * (1 - FEE)
+    profit = proceeds - position["cost"]
+    state["cash"] += proceeds
+    state["realized"] += profit
+    state["trades"].append({
+        "coin": coin, "action": "SELL", "price": price, "profit": profit,
+        "reason": reason, "time": datetime.now(timezone.utc).isoformat()
+    })
+    return (f"🔴 DEMO-VERKAUF {coin}: {price:.4f} USD\n"
+            f"Grund: {reason}\nErgebnis: {profit:+.2f} USD")
+
+
+def main():
+    state = load_state()
+    state.setdefault("last_candle", {})
+    state.setdefault("signal_streaks", {})
+    messages, market_lines, decision_lines, errors = [], [], [], []
+    signals = {}
+    print("CRYPTO DEMO BOT 4.2")
+    print("PAPER TRADING - KEIN ECHTHANDEL")
+
+    for coin in COINS:
+        try:
+            price, fast, slow, strength, candle_time = market(coin)
+            previous_candle = state["last_candle"].get(coin)
+            new_candle = candle_time != previous_candle
+            streak = state["signal_streaks"].setdefault(coin, {"bullish": 0, "bearish": 0})
+            if new_candle:
+                state["last_candle"][coin] = candle_time
+                if fast > slow:
+                    streak["bullish"] += 1
+                    streak["bearish"] = 0
+                else:
+                    streak["bearish"] += 1
+                    streak["bullish"] = 0
+            market_lines.append(
+                f"{coin}: {price:.4f} USD | RSI: {strength:.1f} | "
+                f"EMA9: {fast:.4f} | EMA21: {slow:.4f}"
+            )
+            position = state["positions"].get(coin)
+            signals[coin] = {"price": round(price, 8), "rsi": round(strength, 2), "ema9": round(fast, 8), "ema21": round(slow, 8), "ema_bullish": fast > slow, "bullish_candles": streak["bullish"], "bearish_candles": streak["bearish"], "candle_time": candle_time, "updated": datetime.now(timezone.utc).isoformat()}
+
+            if position:
+                change = price / position["entry"] - 1
+                if not new_candle:
+                    decision_lines.append(f"{coin}: WARTEN - diese Stundenkerze wurde bereits geprüft")
+                    signals[coin]["decision"] = "WAIT"
+                    signals[coin]["reason"] = "Keine neue abgeschlossene Stundenkerze"
+                elif change <= -STOP_LOSS:
+                    messages.append(sell(state, coin, price, "Stop-Loss"))
+                    decision_lines.append(f"{coin}: VERKAUF - Stop-Loss erreicht")
+                elif change >= TAKE_PROFIT:
+                    messages.append(sell(state, coin, price, "Take-Profit"))
+                    decision_lines.append(f"{coin}: VERKAUF - Take-Profit erreicht")
+                elif streak["bearish"] >= 2:
+                    messages.append(sell(state, coin, price, "EMA-Signal bestätigt (2 Kerzen)"))
+                    decision_lines.append(f"{coin}: VERKAUF - EMA-Signal zwei Stunden bestätigt")
+                    streak["bullish"] = 0
+                    streak["bearish"] = 0
+                else:
+                    decision_lines.append(f"{coin}: HALTEN - Position offen, kein Verkaufssignal")
+                    signals[coin]["decision"] = "HOLD"
+                    signals[coin]["reason"] = "Position offen; kein Verkaufssignal"
+            else:
+                reasons = []
+                if not new_candle:
+                    reasons.append("keine neue abgeschlossene Stundenkerze")
+                if streak["bullish"] < 2:
+                    reasons.append("Aufwärtstrend noch nicht zwei Stunden bestätigt")
+                if strength < 52:
+                    reasons.append("RSI unter 52")
+                elif strength > 65:
+                    reasons.append("RSI über 65")
+                if state["cash"] < 10:
+                    reasons.append("zu wenig virtuelles Guthaben")
+
+                if reasons:
+                    decision_lines.append(f"{coin}: KEIN KAUF - " + "; ".join(reasons))
+                    signals[coin]["decision"] = "WAIT"
+                    signals[coin]["reason"] = "; ".join(reasons)
+                else:
+                    result = buy(state, coin, price)
+                    if result:
+                        messages.append(result)
+                        decision_lines.append(f"{coin}: KAUFSIGNAL JA - DEMO-KAUF ausgeführt")
+                        signals[coin]["decision"] = "BUY"
+                        signals[coin]["reason"] = "RSI und EMA-Bedingungen erfüllt"
+                    else:
+                        decision_lines.append(f"{coin}: KEIN KAUF - Budget zu klein")
+        except Exception as error:
+            msg = f"{coin}: {str(error)[:120]}"
+            errors.append(msg)
+            decision_lines.append(f"{coin}: NICHT AUSWERTBAR - {str(error)[:100]}")
+            signals[coin] = {"decision": "ERROR", "reason": str(error)[:160], "updated": datetime.now(timezone.utc).isoformat()}
+            print(f"Fehler {coin}: {error}")
+
+    invested = sum(p["cost"] for p in state["positions"].values())
+    market_value = 0.0
+    for coin, position in state["positions"].items():
+        try:
+            price, _, _, _, _ = market(coin)
+            market_value += position["quantity"] * price
+        except Exception:
+            market_value += position["cost"]
+
+    total = state["cash"] + market_value
+    unrealized = total - START_CASH - state["realized"]
+    closed_trades = [
+        trade for trade in state["trades"]
+        if trade.get("action") == "SELL" and "profit" in trade
+    ]
+    winning_trades = [trade for trade in closed_trades if trade["profit"] > 0]
+    losing_trades = [trade for trade in closed_trades if trade["profit"] < 0]
+    gross_profit = sum(trade["profit"] for trade in winning_trades)
+    gross_loss = abs(sum(trade["profit"] for trade in losing_trades))
+    win_rate = (len(winning_trades) / len(closed_trades) * 100) if closed_trades else 0
+    profit_factor = (gross_profit / gross_loss) if gross_loss else None
+
+    report = [
+        "🤖 CRYPTO DEMO BOT 4.2",
+        "PAPER TRADING - KEIN ECHTHANDEL",
+        "━━━━━━━━━━━━━━━━",
+        "MARKTDATEN:",
+        *market_lines,
+        "━━━━━━━━━━━━━━━━",
+        "KAUF-/VERKAUFS-CHECK:",
+        *decision_lines,
+        "━━━━━━━━━━━━━━━━",
+        f"Cash: {state['cash']:.2f} USD",
+        f"Investiert (Einstand): {invested:.2f} USD",
+        f"Positionswert: {market_value:.2f} USD",
+        f"Gesamtwert: {total:.2f} USD",
+        f"Realisierter Gewinn: {state['realized']:+.2f} USD",
+        f"Offener Gewinn: {unrealized:+.2f} USD",
+        f"Offene Positionen: {len(state['positions'])}",
+        f"Trades insgesamt: {len(state['trades'])}",
+        f"Geschlossene Trades: {len(closed_trades)}",
+        f"Gewinner / Verlierer: {len(winning_trades)} / {len(losing_trades)}",
+        f"Trefferquote: {win_rate:.1f} %",
+        f"Profit-Faktor: {profit_factor:.2f}" if profit_factor is not None else "Profit-Faktor: noch nicht berechenbar",
+        "━━━━━━━━━━━━━━━━",
+        "PAPER TRADING - KEIN ECHTHANDEL"
+    ]
+    if messages:
+        report.extend(["", "AUSGEFÜHRTE DEMO-TRADES:", *messages])
+    if errors:
+        report.extend(["", "DATENFEHLER:", *errors])
+
+    report_text = "\n".join(report)
+    print(report_text)
+    state["signals"] = signals
+    state["updated"] = datetime.now(timezone.utc).isoformat()
+    save_state(state)
+    telegram(report_text)
+
+
+if __name__ == "__main__":
+    main()
