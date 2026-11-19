@@ -44,3 +44,9 @@ Der manuelle Workflow Crypto Demo Backtest vergleicht zusätzlich:
 
 Der Backtest umfasst zehn Coins: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, AVAX, LTC und DOT. Diese Erweiterung betrifft ausschließlich die historische Auswertung. Der laufende Demo-Bot handelt weiterhin nur seine bisher konfigurierten Coins.
 Diese Varianten sind reine Forschungs-Backtests und werden nicht automatisch vom laufenden Demo-Bot gehandelt.
+
+Vertiefte ADA-/XRP-Forschung
+- Zusätzlich werden ADA und XRP mit täglichen Kraken-Kerzen (bis zu 720 Tage) untersucht.
+- Neun Varianten aus Bollinger/RSI und EMA 20/50 werden verglichen.
+- Chronologischer Split: 70 % Trainingsdaten und 30 % unangetasteter Holdout-Test.
+- Die zusätzlichen Tests dienen nur der Forschung. Sie ändern weder Coins noch Strategie des laufenden Paper-Trading-Bots.
