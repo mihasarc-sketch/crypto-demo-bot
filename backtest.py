@@ -12,6 +12,7 @@ PAIRS = {
     "AVAX": ["AVAXUSD"], "LTC": ["LTCUSD"], "DOT": ["DOTUSD"]
 }
 FEE = 0.001
+SLIPPAGE = 0.0005  # 0.05% adverse execution on each side
 START_CASH_PER_COIN = 250.0
 MAX_BUY = 100.0
 CANDLE_LIMIT = 720
@@ -140,7 +141,9 @@ def simulate(candles, config):
                 exit_price, reason = next_open, "Strategy exit"
             else:
                 continue
-            proceeds = position["quantity"] * exit_price * (1 - FEE)
+            exit_price *= (1 - SLIPPAGE)
+            exit_price *= (1 - SLIPPAGE)
+        proceeds = position["quantity"] * exit_price * (1 - FEE)
             profit = proceeds - position["cost"]
             cash += proceeds
             trades.append({"profit": round(profit, 6), "reason": reason})
@@ -152,9 +155,10 @@ def simulate(candles, config):
         budget = min(MAX_BUY, cash * 0.20)
         if budget < 10:
             continue
-        quantity = budget * (1 - FEE) / next_open
+        entry_price = next_open * (1 + SLIPPAGE)
+        quantity = budget * (1 - FEE) / entry_price
         cash -= budget
-        position = {"entry": next_open, "quantity": quantity, "cost": budget}
+        position = {"entry": entry_price, "quantity": quantity, "cost": budget}
 
     if position:
         exit_price = candles[-1]["close"]
@@ -186,8 +190,8 @@ def main():
     }
     output = {
         "generated_at": datetime.now(timezone.utc).isoformat(),
-        "notice": "Research only; no live orders. Kraken OHLC is limited to 720 recent candles per interval. Hourly broad comparison and daily ADA/XRP parameter research are separate. Daily research uses a chronological 70/30 train/test split; the test segment includes prior candles only for indicator warm-up. Fees included; OHLC stop/target assumptions are approximate.",
-        "candles_per_coin": {}, "results": {}, "focused_daily_ada_xrp": {}
+        "notice": "Research only; no live orders. Kraken OHLC is limited to 720 recent candles per interval. Hourly broad comparison plus 4-hour and daily multi-coin Bollinger research. Chronological 70/30 train/holdout; warm-up candles are excluded from trading. Includes 0.10% fee and 0.05% adverse slippage on each side. OHLC stop/target execution remains approximate.",
+        "candles_per_coin": {}, "results": {}, "focused_daily_ada_xrp": {}, "multi_coin_bollinger": {}
     }
     datasets = {}
     for coin, pair in PAIRS.items():
@@ -247,6 +251,48 @@ def main():
             output["focused_daily_ada_xrp"][coin] = coin_output
         except Exception as error:
             output["focused_daily_ada_xrp"][coin] = {"error": str(error)}
+
+
+    # Robustness check: best Bollinger family across all supported coins and
+    # multiple timeframes, with conservative fees and adverse slippage.
+    robustness_configs = {
+        "rsi35_sl4_tp6": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":35,"stop":0.04,"target":0.06},
+        "rsi35_sl5_tp8": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":35,"stop":0.05,"target":0.08},
+        "rsi40_sl5_tp8": {"kind":"bollinger","period":20,"deviations":2.0,"rsi_max":40,"stop":0.05,"target":0.08}
+    }
+    for interval, label in ((240, "4h"), (1440, "1d")):
+        timeframe_output = {
+            "interval": label,
+            "fee_per_side_percent": FEE * 100,
+            "slippage_per_side_percent": SLIPPAGE * 100,
+            "coins": {},
+            "strategies": {}
+        }
+        timeframe_data = {}
+        for coin, pair in PAIRS.items():
+            try:
+                timeframe_data[coin] = fetch_ohlc(pair, interval=interval)
+                timeframe_output["coins"][coin] = {"candles": len(timeframe_data[coin])}
+            except Exception as error:
+                timeframe_output["coins"][coin] = {"error": str(error)}
+        for strategy_name, config in robustness_configs.items():
+            per_coin = {}
+            for coin, candles in timeframe_data.items():
+                split = int(len(candles) * 0.70)
+                warmup = warmup_bars(config)
+                train_result = simulate(candles[:split], config)
+                holdout_result = simulate(candles[max(0, split - warmup):], config)
+                per_coin[coin] = {"train": train_result, "holdout": holdout_result}
+            holdout_values = [v["holdout"] for v in per_coin.values()]
+            per_coin["TOTAL_HOLDOUT"] = {
+                "coins_tested": len(holdout_values),
+                "net_profit": round(sum(v["net_profit"] for v in holdout_values), 2),
+                "closed_trades": sum(v["closed_trades"] for v in holdout_values),
+                "wins": sum(v["wins"] for v in holdout_values),
+                "losses": sum(v["losses"] for v in holdout_values)
+            }
+            timeframe_output["strategies"][strategy_name] = per_coin
+        output["multi_coin_bollinger"][label] = timeframe_output
 
     with open("backtest_results.json", "w") as file:
         json.dump(output, file, indent=2)
