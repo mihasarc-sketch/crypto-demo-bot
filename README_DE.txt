@@ -50,3 +50,12 @@ Vertiefte ADA-/XRP-Forschung
 - Neun Varianten aus Bollinger/RSI und EMA 20/50 werden verglichen.
 - Chronologischer Split: 70 % Trainingsdaten und 30 % unangetasteter Holdout-Test.
 - Die zusätzlichen Tests dienen nur der Forschung. Sie ändern weder Coins noch Strategie des laufenden Paper-Trading-Bots.
+
+
+Erweiterter Bollinger-Robustheitstest
+- Die drei besten Bollinger/RSI-Kandidaten werden zusätzlich über alle zehn unterstützten Coins getestet.
+- Zeitrahmen: 4 Stunden und 1 Tag, jeweils bis zu 720 abgeschlossene Kerzen pro Markt.
+- Chronologischer Split: 70 % Training und 30 % Holdout-Test; Indikator-Warmup aus früheren Kerzen wird nicht gehandelt.
+- Kostenmodell: 0,1 % simulierte Gebühr je Seite plus 0,05 % konservativer Slippage je Seite.
+- Stop-/Take-Profit-Ausführung bleibt eine Näherung auf Basis von OHLC-Kerzen. Ergebnisse sind keine Garantie für zukünftige Renditen.
+- Ausschließlich historische Forschung; der laufende Bot bleibt unverändert und handelt weiterhin nur virtuell.
