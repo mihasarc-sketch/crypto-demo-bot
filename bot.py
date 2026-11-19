@@ -18,7 +18,7 @@ CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 
 def api(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBot/4.1"})
+    req = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBot/4.2"})
     with urllib.request.urlopen(req, timeout=20) as response:
         return json.loads(response.read().decode())
 
@@ -221,6 +221,17 @@ def main():
 
     total = state["cash"] + market_value
     unrealized = total - START_CASH - state["realized"]
+    closed_trades = [
+        trade for trade in state["trades"]
+        if trade.get("action") == "SELL" and "profit" in trade
+    ]
+    winning_trades = [trade for trade in closed_trades if trade["profit"] > 0]
+    losing_trades = [trade for trade in closed_trades if trade["profit"] < 0]
+    gross_profit = sum(trade["profit"] for trade in winning_trades)
+    gross_loss = abs(sum(trade["profit"] for trade in losing_trades))
+    win_rate = (len(winning_trades) / len(closed_trades) * 100) if closed_trades else 0
+    profit_factor = (gross_profit / gross_loss) if gross_loss else None
+
     report = [
         "🤖 CRYPTO DEMO BOT 4.2",
         "PAPER TRADING - KEIN ECHTHANDEL",
@@ -239,6 +250,10 @@ def main():
         f"Offener Gewinn: {unrealized:+.2f} USD",
         f"Offene Positionen: {len(state['positions'])}",
         f"Trades insgesamt: {len(state['trades'])}",
+        f"Geschlossene Trades: {len(closed_trades)}",
+        f"Gewinner / Verlierer: {len(winning_trades)} / {len(losing_trades)}",
+        f"Trefferquote: {win_rate:.1f} %",
+        f"Profit-Faktor: {profit_factor:.2f}" if profit_factor is not None else "Profit-Faktor: noch nicht berechenbar",
         "━━━━━━━━━━━━━━━━",
         "PAPER TRADING - KEIN ECHTHANDEL"
     ]
