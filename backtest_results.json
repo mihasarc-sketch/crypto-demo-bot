@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-11-19T08:44:19.106993+00:00",
-  "notice": "Research only; no live orders. Kraken public OHLC limited to recent history. Signals use completed candle close and entries/exits at next candle open; fees included. OHLC stop/target assumptions are approximate.",
+  "generated_at": "2026-11-19T08:47:48.710236+00:00",
+  "notice": "Research only; no live orders. Kraken OHLC is limited to 720 recent candles per interval. Hourly broad comparison and daily ADA/XRP parameter research are separate. Daily research uses a chronological 70/30 train/test split; the test segment includes prior candles only for indicator warm-up. Fees included; OHLC stop/target assumptions are approximate.",
   "candles_per_coin": {
     "BTC": 720,
     "ETH": 720,
@@ -136,81 +136,81 @@
     },
     "ema_trend_20_50": {
       "BTC": {
-        "ending_equity": 245.68,
-        "net_profit": -4.32,
+        "ending_equity": 245.49,
+        "net_profit": -4.51,
         "closed_trades": 4,
         "wins": 0,
         "losses": 4,
         "win_rate_percent": 0.0,
         "profit_factor": 0.0,
         "gross_profit": 0,
-        "gross_loss": 4.32
+        "gross_loss": 4.51
       },
       "ETH": {
-        "ending_equity": 250.27,
-        "net_profit": 0.27,
+        "ending_equity": 250.07,
+        "net_profit": 0.07,
         "closed_trades": 4,
         "wins": 1,
         "losses": 3,
         "win_rate_percent": 25.0,
-        "profit_factor": 1.104,
+        "profit_factor": 1.026,
         "gross_profit": 2.88,
-        "gross_loss": 2.61
+        "gross_loss": 2.81
       },
       "SOL": {
-        "ending_equity": 249.28,
-        "net_profit": -0.72,
+        "ending_equity": 248.98,
+        "net_profit": -1.02,
         "closed_trades": 3,
         "wins": 1,
         "losses": 2,
         "win_rate_percent": 33.3,
-        "profit_factor": 0.688,
+        "profit_factor": 0.607,
         "gross_profit": 1.58,
-        "gross_loss": 2.3
+        "gross_loss": 2.6
       },
       "XRP": {
-        "ending_equity": 247.63,
-        "net_profit": -2.37,
+        "ending_equity": 246.14,
+        "net_profit": -3.86,
         "closed_trades": 5,
         "wins": 0,
         "losses": 5,
         "win_rate_percent": 0.0,
         "profit_factor": 0.0,
         "gross_profit": 0,
-        "gross_loss": 2.37
+        "gross_loss": 3.86
       },
       "ADA": {
-        "ending_equity": 245.87,
-        "net_profit": -4.13,
-        "closed_trades": 3,
+        "ending_equity": 246.82,
+        "net_profit": -3.18,
+        "closed_trades": 2,
         "wins": 0,
-        "losses": 3,
+        "losses": 2,
         "win_rate_percent": 0.0,
         "profit_factor": 0.0,
         "gross_profit": 0,
-        "gross_loss": 4.13
+        "gross_loss": 3.18
       },
       "DOGE": {
-        "ending_equity": 244.3,
-        "net_profit": -5.7,
-        "closed_trades": 5,
-        "wins": 1,
-        "losses": 4,
-        "win_rate_percent": 20.0,
-        "profit_factor": 0.033,
-        "gross_profit": 0.2,
-        "gross_loss": 5.9
-      },
-      "LINK": {
-        "ending_equity": 245.4,
-        "net_profit": -4.6,
+        "ending_equity": 242.55,
+        "net_profit": -7.45,
         "closed_trades": 5,
         "wins": 0,
         "losses": 5,
         "win_rate_percent": 0.0,
         "profit_factor": 0.0,
         "gross_profit": 0,
-        "gross_loss": 4.6
+        "gross_loss": 7.45
+      },
+      "LINK": {
+        "ending_equity": 244.47,
+        "net_profit": -5.53,
+        "closed_trades": 5,
+        "wins": 0,
+        "losses": 5,
+        "win_rate_percent": 0.0,
+        "profit_factor": 0.0,
+        "gross_profit": 0,
+        "gross_loss": 5.53
       },
       "AVAX": {
         "ending_equity": 243.08,
@@ -247,10 +247,10 @@
       },
       "TOTAL_EQUAL_ALLOCATION": {
         "starting_equity": 2500.0,
-        "ending_equity": 2464.15,
-        "net_profit": -35.85,
-        "closed_trades": 39,
-        "wins": 3,
+        "ending_equity": 2460.24,
+        "net_profit": -39.76,
+        "closed_trades": 38,
+        "wins": 2,
         "losses": 36
       }
     },
@@ -612,6 +612,458 @@
         "closed_trades": 116,
         "wins": 60,
         "losses": 56
+      }
+    }
+  },
+  "focused_daily_ada_xrp": {
+    "ADA": {
+      "candles": 720,
+      "approx_history_days": 720,
+      "train_candles": 503,
+      "test_candles": 217,
+      "split": "chronological 70% train / 30% holdout",
+      "strategies": {
+        "bollinger_rsi30_sl4_tp6": {
+          "train": {
+            "ending_equity": 243.22,
+            "net_profit": -6.78,
+            "closed_trades": 8,
+            "wins": 2,
+            "losses": 6,
+            "win_rate_percent": 25.0,
+            "profit_factor": 0.456,
+            "gross_profit": 5.68,
+            "gross_loss": 12.46
+          },
+          "holdout": {
+            "ending_equity": 253.68,
+            "net_profit": 3.68,
+            "closed_trades": 3,
+            "wins": 2,
+            "losses": 1,
+            "win_rate_percent": 66.7,
+            "profit_factor": 2.754,
+            "gross_profit": 5.77,
+            "gross_loss": 2.1
+          }
+        },
+        "bollinger_rsi35_sl4_tp6": {
+          "train": {
+            "ending_equity": 239.9,
+            "net_profit": -10.1,
+            "closed_trades": 12,
+            "wins": 3,
+            "losses": 9,
+            "win_rate_percent": 25.0,
+            "profit_factor": 0.457,
+            "gross_profit": 8.49,
+            "gross_loss": 18.59
+          },
+          "holdout": {
+            "ending_equity": 253.68,
+            "net_profit": 3.68,
+            "closed_trades": 3,
+            "wins": 2,
+            "losses": 1,
+            "win_rate_percent": 66.7,
+            "profit_factor": 2.754,
+            "gross_profit": 5.77,
+            "gross_loss": 2.1
+          }
+        },
+        "bollinger_rsi40_sl4_tp6": {
+          "train": {
+            "ending_equity": 235.89,
+            "net_profit": -14.11,
+            "closed_trades": 14,
+            "wins": 3,
+            "losses": 11,
+            "win_rate_percent": 21.4,
+            "profit_factor": 0.372,
+            "gross_profit": 8.35,
+            "gross_loss": 22.46
+          },
+          "holdout": {
+            "ending_equity": 253.68,
+            "net_profit": 3.68,
+            "closed_trades": 3,
+            "wins": 2,
+            "losses": 1,
+            "win_rate_percent": 66.7,
+            "profit_factor": 2.754,
+            "gross_profit": 5.77,
+            "gross_loss": 2.1
+          }
+        },
+        "bollinger_rsi35_sl5_tp8": {
+          "train": {
+            "ending_equity": 234.73,
+            "net_profit": -15.27,
+            "closed_trades": 11,
+            "wins": 2,
+            "losses": 9,
+            "win_rate_percent": 18.2,
+            "profit_factor": 0.336,
+            "gross_profit": 7.72,
+            "gross_loss": 22.99
+          },
+          "holdout": {
+            "ending_equity": 252.39,
+            "net_profit": 2.39,
+            "closed_trades": 3,
+            "wins": 2,
+            "losses": 1,
+            "win_rate_percent": 66.7,
+            "profit_factor": 1.922,
+            "gross_profit": 4.99,
+            "gross_loss": 2.59
+          }
+        },
+        "bollinger_rsi40_sl5_tp8": {
+          "train": {
+            "ending_equity": 226.36,
+            "net_profit": -23.64,
+            "closed_trades": 12,
+            "wins": 1,
+            "losses": 11,
+            "win_rate_percent": 8.3,
+            "profit_factor": 0.136,
+            "gross_profit": 3.73,
+            "gross_loss": 27.37
+          },
+          "holdout": {
+            "ending_equity": 252.39,
+            "net_profit": 2.39,
+            "closed_trades": 3,
+            "wins": 2,
+            "losses": 1,
+            "win_rate_percent": 66.7,
+            "profit_factor": 1.922,
+            "gross_profit": 4.99,
+            "gross_loss": 2.59
+          }
+        },
+        "ema20_50_rsi45_sl3_tp6": {
+          "train": {
+            "ending_equity": 246.79,
+            "net_profit": -3.21,
+            "closed_trades": 16,
+            "wins": 5,
+            "losses": 11,
+            "win_rate_percent": 31.2,
+            "profit_factor": 0.817,
+            "gross_profit": 14.4,
+            "gross_loss": 17.61
+          },
+          "holdout": {
+            "ending_equity": 241.18,
+            "net_profit": -8.82,
+            "closed_trades": 23,
+            "wins": 6,
+            "losses": 17,
+            "win_rate_percent": 26.1,
+            "profit_factor": 0.656,
+            "gross_profit": 16.81,
+            "gross_loss": 25.63
+          }
+        },
+        "ema20_50_rsi50_sl3_tp6": {
+          "train": {
+            "ending_equity": 247.11,
+            "net_profit": -2.89,
+            "closed_trades": 13,
+            "wins": 4,
+            "losses": 9,
+            "win_rate_percent": 30.8,
+            "profit_factor": 0.799,
+            "gross_profit": 11.46,
+            "gross_loss": 14.35
+          },
+          "holdout": {
+            "ending_equity": 240.27,
+            "net_profit": -9.73,
+            "closed_trades": 18,
+            "wins": 4,
+            "losses": 14,
+            "win_rate_percent": 22.2,
+            "profit_factor": 0.531,
+            "gross_profit": 11.0,
+            "gross_loss": 20.73
+          }
+        },
+        "ema20_50_rsi45_sl4_tp8": {
+          "train": {
+            "ending_equity": 246.53,
+            "net_profit": -3.47,
+            "closed_trades": 13,
+            "wins": 4,
+            "losses": 9,
+            "win_rate_percent": 30.8,
+            "profit_factor": 0.818,
+            "gross_profit": 15.6,
+            "gross_loss": 19.07
+          },
+          "holdout": {
+            "ending_equity": 235.17,
+            "net_profit": -14.83,
+            "closed_trades": 19,
+            "wins": 4,
+            "losses": 15,
+            "win_rate_percent": 21.1,
+            "profit_factor": 0.503,
+            "gross_profit": 14.98,
+            "gross_loss": 29.8
+          }
+        },
+        "ema20_50_rsi50_sl4_tp8": {
+          "train": {
+            "ending_equity": 248.96,
+            "net_profit": -1.04,
+            "closed_trades": 9,
+            "wins": 3,
+            "losses": 6,
+            "win_rate_percent": 33.3,
+            "profit_factor": 0.918,
+            "gross_profit": 11.69,
+            "gross_loss": 12.73
+          },
+          "holdout": {
+            "ending_equity": 237.49,
+            "net_profit": -12.51,
+            "closed_trades": 15,
+            "wins": 3,
+            "losses": 12,
+            "win_rate_percent": 20.0,
+            "profit_factor": 0.469,
+            "gross_profit": 11.03,
+            "gross_loss": 23.54
+          }
+        }
+      }
+    },
+    "XRP": {
+      "candles": 720,
+      "approx_history_days": 720,
+      "train_candles": 503,
+      "test_candles": 217,
+      "split": "chronological 70% train / 30% holdout",
+      "strategies": {
+        "bollinger_rsi30_sl4_tp6": {
+          "train": {
+            "ending_equity": 250.21,
+            "net_profit": 0.21,
+            "closed_trades": 7,
+            "wins": 3,
+            "losses": 4,
+            "win_rate_percent": 42.9,
+            "profit_factor": 1.025,
+            "gross_profit": 8.73,
+            "gross_loss": 8.52
+          },
+          "holdout": {
+            "ending_equity": 248.67,
+            "net_profit": -1.33,
+            "closed_trades": 3,
+            "wins": 1,
+            "losses": 2,
+            "win_rate_percent": 33.3,
+            "profit_factor": 0.682,
+            "gross_profit": 2.85,
+            "gross_loss": 4.17
+          }
+        },
+        "bollinger_rsi35_sl4_tp6": {
+          "train": {
+            "ending_equity": 253.89,
+            "net_profit": 3.89,
+            "closed_trades": 10,
+            "wins": 5,
+            "losses": 5,
+            "win_rate_percent": 50.0,
+            "profit_factor": 1.36,
+            "gross_profit": 14.71,
+            "gross_loss": 10.82
+          },
+          "holdout": {
+            "ending_equity": 252.33,
+            "net_profit": 2.33,
+            "closed_trades": 6,
+            "wins": 3,
+            "losses": 3,
+            "win_rate_percent": 50.0,
+            "profit_factor": 1.369,
+            "gross_profit": 8.64,
+            "gross_loss": 6.31
+          }
+        },
+        "bollinger_rsi40_sl4_tp6": {
+          "train": {
+            "ending_equity": 244.73,
+            "net_profit": -5.27,
+            "closed_trades": 12,
+            "wins": 4,
+            "losses": 8,
+            "win_rate_percent": 33.3,
+            "profit_factor": 0.687,
+            "gross_profit": 11.58,
+            "gross_loss": 16.85
+          },
+          "holdout": {
+            "ending_equity": 253.11,
+            "net_profit": 3.11,
+            "closed_trades": 8,
+            "wins": 4,
+            "losses": 4,
+            "win_rate_percent": 50.0,
+            "profit_factor": 1.37,
+            "gross_profit": 11.51,
+            "gross_loss": 8.4
+          }
+        },
+        "bollinger_rsi35_sl5_tp8": {
+          "train": {
+            "ending_equity": 257.69,
+            "net_profit": 7.69,
+            "closed_trades": 9,
+            "wins": 5,
+            "losses": 4,
+            "win_rate_percent": 55.6,
+            "profit_factor": 1.716,
+            "gross_profit": 18.44,
+            "gross_loss": 10.75
+          },
+          "holdout": {
+            "ending_equity": 253.79,
+            "net_profit": 3.79,
+            "closed_trades": 6,
+            "wins": 3,
+            "losses": 3,
+            "win_rate_percent": 50.0,
+            "profit_factor": 1.484,
+            "gross_profit": 11.61,
+            "gross_loss": 7.82
+          }
+        },
+        "bollinger_rsi40_sl5_tp8": {
+          "train": {
+            "ending_equity": 252.37,
+            "net_profit": 2.37,
+            "closed_trades": 11,
+            "wins": 5,
+            "losses": 6,
+            "win_rate_percent": 45.5,
+            "profit_factor": 1.148,
+            "gross_profit": 18.44,
+            "gross_loss": 16.07
+          },
+          "holdout": {
+            "ending_equity": 255.06,
+            "net_profit": 5.06,
+            "closed_trades": 8,
+            "wins": 4,
+            "losses": 4,
+            "win_rate_percent": 50.0,
+            "profit_factor": 1.486,
+            "gross_profit": 15.48,
+            "gross_loss": 10.42
+          }
+        },
+        "ema20_50_rsi45_sl3_tp6": {
+          "train": {
+            "ending_equity": 236.32,
+            "net_profit": -13.68,
+            "closed_trades": 12,
+            "wins": 1,
+            "losses": 11,
+            "win_rate_percent": 8.3,
+            "profit_factor": 0.168,
+            "gross_profit": 2.77,
+            "gross_loss": 16.45
+          },
+          "holdout": {
+            "ending_equity": 253.19,
+            "net_profit": 3.19,
+            "closed_trades": 12,
+            "wins": 5,
+            "losses": 7,
+            "win_rate_percent": 41.7,
+            "profit_factor": 1.281,
+            "gross_profit": 14.56,
+            "gross_loss": 11.37
+          }
+        },
+        "ema20_50_rsi50_sl3_tp6": {
+          "train": {
+            "ending_equity": 235.11,
+            "net_profit": -14.89,
+            "closed_trades": 10,
+            "wins": 0,
+            "losses": 10,
+            "win_rate_percent": 0.0,
+            "profit_factor": 0.0,
+            "gross_profit": 0,
+            "gross_loss": 14.89
+          },
+          "holdout": {
+            "ending_equity": 250.62,
+            "net_profit": 0.62,
+            "closed_trades": 8,
+            "wins": 3,
+            "losses": 5,
+            "win_rate_percent": 37.5,
+            "profit_factor": 1.077,
+            "gross_profit": 8.71,
+            "gross_loss": 8.09
+          }
+        },
+        "ema20_50_rsi45_sl4_tp8": {
+          "train": {
+            "ending_equity": 236.48,
+            "net_profit": -13.52,
+            "closed_trades": 10,
+            "wins": 1,
+            "losses": 9,
+            "win_rate_percent": 10.0,
+            "profit_factor": 0.216,
+            "gross_profit": 3.73,
+            "gross_loss": 17.26
+          },
+          "holdout": {
+            "ending_equity": 254.0,
+            "net_profit": 4.0,
+            "closed_trades": 10,
+            "wins": 4,
+            "losses": 6,
+            "win_rate_percent": 40.0,
+            "profit_factor": 1.344,
+            "gross_profit": 15.64,
+            "gross_loss": 11.64
+          }
+        },
+        "ema20_50_rsi50_sl4_tp8": {
+          "train": {
+            "ending_equity": 234.82,
+            "net_profit": -15.18,
+            "closed_trades": 8,
+            "wins": 0,
+            "losses": 8,
+            "win_rate_percent": 0.0,
+            "profit_factor": 0.0,
+            "gross_profit": 0,
+            "gross_loss": 15.18
+          },
+          "holdout": {
+            "ending_equity": 241.39,
+            "net_profit": -8.61,
+            "closed_trades": 7,
+            "wins": 1,
+            "losses": 6,
+            "win_rate_percent": 14.3,
+            "profit_factor": 0.309,
+            "gross_profit": 3.86,
+            "gross_loss": 12.47
+          }
+        }
       }
     }
   }
