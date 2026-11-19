@@ -17,22 +17,31 @@ MAX_BUY = 100.0
 CANDLE_LIMIT = 720
 
 
-def fetch_ohlc(pair):
-    url = f"{BASE}OHLC?pair={pair}&interval=60"
-    request = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBacktest/2.0"})
-    with urllib.request.urlopen(request, timeout=30) as response:
-        payload = json.loads(response.read().decode())
-    if payload.get("error"):
-        raise RuntimeError(str(payload["error"]))
-    result = payload["result"]
-    key = next(key for key in result if key != "last")
-    rows = result[key][:-1]
-    if len(rows) < 100:
-        raise RuntimeError(f"Only {len(rows)} completed candles returned")
-    return [{"time": int(float(row[0])), "open": float(row[1]), "high": float(row[2]),
-             "low": float(row[3]), "close": float(row[4])}
-            for row in rows[-CANDLE_LIMIT:]]
-
+def fetch_ohlc(pair_options):
+    if isinstance(pair_options, str):
+        pair_options = [pair_options]
+    errors = []
+    for pair in pair_options:
+        try:
+            url = f"{BASE}OHLC?pair={pair}&interval=60"
+            request = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBacktest/2.0"})
+            with urllib.request.urlopen(request, timeout=30) as response:
+                payload = json.loads(response.read().decode())
+            if payload.get("error"):
+                errors.append(f"{pair}: {payload['error']}")
+                continue
+            result = payload["result"]
+            key = next(key for key in result if key != "last")
+            rows = result[key][:-1]
+            if len(rows) < 100:
+                errors.append(f"{pair}: only {len(rows)} completed candles returned")
+                continue
+            return [{"time": int(float(row[0])), "open": float(row[1]), "high": float(row[2]),
+                     "low": float(row[3]), "close": float(row[4])}
+                    for row in rows[-CANDLE_LIMIT:]]
+        except Exception as error:
+            errors.append(f"{pair}: {error}")
+    raise RuntimeError("; ".join(errors))
 
 def ema(values, period):
     alpha = 2.0 / (period + 1)
