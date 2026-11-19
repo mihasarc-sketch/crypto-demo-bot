@@ -50,7 +50,7 @@ def rsi(values, period=14):
 def signals_at(closes, index, config):
     kind = config["kind"]
     strength = rsi(closes)
-    if kind in ("ema", "macd"):
+    if kind in ("ema", "ema_cross"):
         fast_period = config["fast"]
         slow_period = config["slow"]
         fast = ema(closes[-max(100, slow_period * 4):], fast_period)
