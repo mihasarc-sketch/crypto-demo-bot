@@ -35,3 +35,10 @@ Wichtige Einschränkungen
 - Erst Backtests und längere Paper-Trading-Beobachtung durchführen. Kein Echtgeldbetrieb.
 
 Version 4.2 - Paper Trading only.
+
+Weitere historische Strategietests
+Der manuelle Workflow Crypto Demo Backtest vergleicht zusätzlich:
+- EMA 12/26 Crossover
+- Donchian-Ausbruch 20/10
+- Bollinger-Band-Umkehr mit RSI unter/gleich 35
+Diese Varianten sind reine Forschungs-Backtests und werden nicht automatisch vom laufenden Demo-Bot gehandelt.
