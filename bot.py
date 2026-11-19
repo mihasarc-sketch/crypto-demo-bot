@@ -45,8 +45,10 @@ def load_state():
             data.setdefault("trades", [])
             data.setdefault("realized", 0.0)
             return data
-        except Exception:
-            print("State-Datei fehlerhaft. Neuer Start.")
+        except Exception as error:
+            raise RuntimeError(f"State-Datei fehlerhaft; sicherer Abbruch statt Kontoreset: {error}") from error
+        if not isinstance(data, dict):
+            raise RuntimeError("State-Datei hat ein ungültiges Format; sicherer Abbruch.")
     return {"cash": START_CASH, "positions": {}, "trades": [], "realized": 0.0}
 
 
