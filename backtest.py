@@ -5,7 +5,12 @@ from datetime import datetime, timezone
 
 # Historical strategy research only. This script NEVER submits exchange orders.
 BASE = "https://api.kraken.com/0/public/"
-PAIRS = {"BTC": "XBTUSD", "ETH": "ETHUSD", "SOL": "SOLUSD", "XRP": "XRPUSD"}
+# Kraken public USD markets. DOGE has an alternate Kraken market symbol fallback.
+PAIRS = {
+    "BTC": ["XBTUSD"], "ETH": ["ETHUSD"], "SOL": ["SOLUSD"], "XRP": ["XRPUSD"],
+    "ADA": ["ADAUSD"], "DOGE": ["DOGEUSD", "XDGUSD"], "LINK": ["LINKUSD"],
+    "AVAX": ["AVAXUSD"], "LTC": ["LTCUSD"], "DOT": ["DOTUSD"]
+}
 FEE = 0.001
 START_CASH_PER_COIN = 250.0
 MAX_BUY = 100.0
