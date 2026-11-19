@@ -104,7 +104,7 @@ def market(coin):
             strength = rsi(closes)
             last = rows[-1]
             return {
-                "price": float(last[4]), "high": float(last[2]), "low": float(last[3]),
+                "price": float(last[4]), "open": float(last[1]), "high": float(last[2]), "low": float(last[3]),
                 "middle": middle, "lower": lower, "previous_close": closes[-2],
                 "previous_lower": previous_lower, "rsi": strength,
                 "candle_time": str(int(float(last[0])))
@@ -185,12 +185,12 @@ def main():
                     stop_price = position["entry"] * (1 - STOP_LOSS)
                     target_price = position["entry"] * (1 + TAKE_PROFIT)
                     if data["low"] <= stop_price:
-                        exit_price = data["price"] if data["price"] <= stop_price else stop_price
+                        exit_price = data["open"] if data["open"] <= stop_price else stop_price
                         messages.append(sell(state, coin, exit_price, "Stop-Loss 5 %"))
                         decision_lines.append(f"{coin}: VERKAUF - Stop-Loss 5 %")
                         signal.update({"decision": "SELL", "reason": "Stop-Loss 5 %"})
                     elif data["high"] >= target_price:
-                        exit_price = data["price"] if data["price"] >= target_price else target_price
+                        exit_price = data["open"] if data["open"] >= target_price else target_price
                         messages.append(sell(state, coin, exit_price, "Take-Profit 8 %"))
                         decision_lines.append(f"{coin}: VERKAUF - Take-Profit 8 %")
                         signal.update({"decision": "SELL", "reason": "Take-Profit 8 %"})
