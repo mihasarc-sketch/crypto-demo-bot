@@ -1,25 +1,36 @@
 import json
+import math
 import os
 import urllib.request
 import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# CRYPTO DEMO BOT 4.2 - PAPER TRADING ONLY - NO REAL ORDERS
-COINS = ["BTC", "ETH", "SOL", "XRP"]
+# CRYPTO DEMO BOT 5.0 - PAPER TRADING ONLY - NO REAL ORDERS
+# Strategy: 4h Bollinger(20, 2.0) + RSI(14) <= 40; SL 5%, TP 8%.
+COINS = {
+    "BTC": ["XBTUSD"], "ETH": ["ETHUSD"], "SOL": ["SOLUSD"], "XRP": ["XRPUSD"],
+    "ADA": ["ADAUSD"], "DOGE": ["DOGEUSD", "XDGUSD"], "LINK": ["LINKUSD"],
+    "AVAX": ["AVAXUSD"], "LTC": ["LTCUSD"], "DOT": ["DOTUSD"]
+}
 START_CASH = 1000.0
 MAX_BUY = 100.0
 FEE = 0.001
-STOP_LOSS = 0.03
-TAKE_PROFIT = 0.06
+SLIPPAGE = 0.0005
+STOP_LOSS = 0.05
+TAKE_PROFIT = 0.08
+BB_PERIOD = 20
+BB_DEVIATIONS = 2.0
+RSI_PERIOD = 14
+CANDLE_INTERVAL = 240
 STATE = Path("state.json")
 TOKEN = os.getenv("TELEGRAM_BOT_TOKEN")
 CHAT_ID = os.getenv("TELEGRAM_CHAT_ID")
 
 
 def api(url):
-    req = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBot/4.2"})
-    with urllib.request.urlopen(req, timeout=20) as response:
+    req = urllib.request.Request(url, headers={"User-Agent": "CryptoDemoBot/5.0"})
+    with urllib.request.urlopen(req, timeout=25) as response:
         return json.loads(response.read().decode())
 
 
@@ -40,6 +51,8 @@ def load_state():
     if STATE.exists():
         try:
             data = json.loads(STATE.read_text())
+            if not isinstance(data, dict):
+                raise RuntimeError("State-Datei hat ein ungültiges Format.")
             data.setdefault("cash", START_CASH)
             data.setdefault("positions", {})
             data.setdefault("trades", [])
@@ -47,8 +60,6 @@ def load_state():
             return data
         except Exception as error:
             raise RuntimeError(f"State-Datei fehlerhaft; sicherer Abbruch statt Kontoreset: {error}") from error
-        if not isinstance(data, dict):
-            raise RuntimeError("State-Datei hat ein ungültiges Format; sicherer Abbruch.")
     return {"cash": START_CASH, "positions": {}, "trades": [], "realized": 0.0}
 
 
@@ -56,208 +67,212 @@ def save_state(state):
     STATE.write_text(json.dumps(state, indent=2))
 
 
-def ema(values, period):
-    result = values[0]
-    multiplier = 2 / (period + 1)
-    for value in values[1:]:
-        result = value * multiplier + result * (1 - multiplier)
-    return result
-
-
-def rsi(values, period=14):
+def rsi(values, period=RSI_PERIOD):
     changes = [values[i] - values[i - 1] for i in range(1, len(values))]
     recent = changes[-period:]
-    gains = [max(x, 0) for x in recent]
-    losses = [max(-x, 0) for x in recent]
-    avg_gain = sum(gains) / period
-    avg_loss = sum(losses) / period
-    if avg_loss == 0:
-        return 100.0
-    return 100 - (100 / (1 + avg_gain / avg_loss))
+    gains = sum(max(change, 0.0) for change in recent) / period
+    losses = sum(max(-change, 0.0) for change in recent) / period
+    if losses == 0:
+        return 100.0 if gains > 0 else 50.0
+    return 100.0 - 100.0 / (1.0 + gains / losses)
+
+
+def bands(values):
+    window = values[-BB_PERIOD:]
+    middle = sum(window) / BB_PERIOD
+    deviation = math.sqrt(sum((value - middle) ** 2 for value in window) / BB_PERIOD)
+    return middle, middle - BB_DEVIATIONS * deviation
 
 
 def market(coin):
-    pairs = {"BTC": "XBTUSD", "ETH": "ETHUSD", "SOL": "SOLUSD", "XRP": "XRPUSD"}
-    url = "https://api.kraken.com/0/public/OHLC" + f"?pair={pairs[coin]}&interval=60"
-    data = api(url)
-    if data.get("error"):
-        raise RuntimeError(str(data["error"]))
-    result = data["result"]
-    key = next(k for k in result if k != "last")
-    candles = result[key]
-    # Only completed hourly candles are used.
-    closed_candles = candles[:-1]
-    closes = [float(row[4]) for row in closed_candles]
-    candle_time = str(int(float(closed_candles[-1][0])))
-    if len(closes) < 50:
-        raise RuntimeError("Zu wenige Marktdaten für EMA-Auswertung")
-    price = closes[-1]
-    ema_prices = closes[-50:]
-    fast = ema(ema_prices, 9)
-    slow = ema(ema_prices, 21)
-    strength = rsi(closes)
-    return price, fast, slow, strength, candle_time
+    errors = []
+    for pair in COINS[coin]:
+        try:
+            url = f"https://api.kraken.com/0/public/OHLC?pair={pair}&interval={CANDLE_INTERVAL}"
+            data = api(url)
+            if data.get("error"):
+                errors.append(f"{pair}: {data['error']}")
+                continue
+            result = data["result"]
+            key = next(key for key in result if key != "last")
+            rows = result[key][:-1]  # letzte, noch offene 4h-Kerze auslassen
+            closes = [float(row[4]) for row in rows]
+            if len(closes) < BB_PERIOD + RSI_PERIOD + 2:
+                raise RuntimeError("Zu wenige abgeschlossene 4h-Kerzen")
+            middle, lower = bands(closes)
+            previous_lower = bands(closes[:-1])[1]
+            strength = rsi(closes)
+            last = rows[-1]
+            return {
+                "price": float(last[4]), "high": float(last[2]), "low": float(last[3]),
+                "middle": middle, "lower": lower, "previous_close": closes[-2],
+                "previous_lower": previous_lower, "rsi": strength,
+                "candle_time": str(int(float(last[0])))
+            }
+        except Exception as error:
+            errors.append(f"{pair}: {error}")
+    raise RuntimeError("; ".join(errors))
 
 
 def buy(state, coin, price):
     budget = min(MAX_BUY, state["cash"] * 0.20)
     if budget < 10:
         return None
-    quantity = budget * (1 - FEE) / price
+    execution_price = price * (1 + SLIPPAGE)
+    quantity = budget * (1 - FEE) / execution_price
     state["cash"] -= budget
-    state["positions"][coin] = {"entry": price, "quantity": quantity, "cost": budget}
+    state["positions"][coin] = {
+        "entry": execution_price, "quantity": quantity, "cost": budget,
+        "strategy": "bollinger_rsi40_4h", "opened_at": datetime.now(timezone.utc).isoformat()
+    }
     state["trades"].append({
-        "coin": coin, "action": "BUY", "price": price, "cost": budget,
-        "time": datetime.now(timezone.utc).isoformat()
+        "coin": coin, "action": "BUY", "price": execution_price, "cost": budget,
+        "strategy": "bollinger_rsi40_4h", "time": datetime.now(timezone.utc).isoformat()
     })
-    return f"🟢 DEMO-KAUF {coin}: {price:.4f} USD"
+    return f"🟢 DEMO-KAUF {coin}: ca. {execution_price:.6f} USD (virtuell)"
 
 
 def sell(state, coin, price, reason):
     position = state["positions"].pop(coin)
-    gross = position["quantity"] * price
+    execution_price = price * (1 - SLIPPAGE)
+    gross = position["quantity"] * execution_price
     proceeds = gross * (1 - FEE)
     profit = proceeds - position["cost"]
     state["cash"] += proceeds
     state["realized"] += profit
     state["trades"].append({
-        "coin": coin, "action": "SELL", "price": price, "profit": profit,
-        "reason": reason, "time": datetime.now(timezone.utc).isoformat()
+        "coin": coin, "action": "SELL", "price": execution_price, "profit": profit,
+        "reason": reason, "strategy": "bollinger_rsi40_4h",
+        "time": datetime.now(timezone.utc).isoformat()
     })
-    return (f"🔴 DEMO-VERKAUF {coin}: {price:.4f} USD\n"
+    return (f"🔴 DEMO-VERKAUF {coin}: ca. {execution_price:.6f} USD\n"
             f"Grund: {reason}\nErgebnis: {profit:+.2f} USD")
 
 
 def main():
     state = load_state()
-    state.setdefault("last_candle", {})
-    state.setdefault("signal_streaks", {})
+    state.setdefault("last_4h_candle", {})
     messages, market_lines, decision_lines, errors = [], [], [], []
-    signals = {}
-    print("CRYPTO DEMO BOT 4.2")
-    print("PAPER TRADING - KEIN ECHTHANDEL")
+    signals, prices = {}, {}
+    print("CRYPTO DEMO BOT 5.0 - BOLLINGER / RSI 40 / 4H")
+    print("PAPER TRADING - KEIN ECHTHANDEL - KEINE ECHTEN ORDERS")
 
     for coin in COINS:
         try:
-            price, fast, slow, strength, candle_time = market(coin)
-            previous_candle = state["last_candle"].get(coin)
-            new_candle = candle_time != previous_candle
-            streak = state["signal_streaks"].setdefault(coin, {"bullish": 0, "bearish": 0})
-            if new_candle:
-                state["last_candle"][coin] = candle_time
-                if fast > slow:
-                    streak["bullish"] += 1
-                    streak["bearish"] = 0
-                else:
-                    streak["bearish"] += 1
-                    streak["bullish"] = 0
+            data = market(coin)
+            price = data["price"]
+            prices[coin] = price
+            previous_candle = state["last_4h_candle"].get(coin)
+            new_candle = data["candle_time"] != previous_candle
             market_lines.append(
-                f"{coin}: {price:.4f} USD | RSI: {strength:.1f} | "
-                f"EMA9: {fast:.4f} | EMA21: {slow:.4f}"
+                f"{coin}: {price:.6f} USD | RSI: {data['rsi']:.1f} | "
+                f"BB-Mitte: {data['middle']:.6f} | BB-Unterband: {data['lower']:.6f}"
             )
             position = state["positions"].get(coin)
-            signals[coin] = {"price": round(price, 8), "rsi": round(strength, 2), "ema9": round(fast, 8), "ema21": round(slow, 8), "ema_bullish": fast > slow, "bullish_candles": streak["bullish"], "bearish_candles": streak["bearish"], "candle_time": candle_time, "updated": datetime.now(timezone.utc).isoformat()}
+            signal = {
+                "price": round(price, 8), "rsi": round(data["rsi"], 2),
+                "bb_middle": round(data["middle"], 8), "bb_lower": round(data["lower"], 8),
+                "candle_time": data["candle_time"],
+                "updated": datetime.now(timezone.utc).isoformat()
+            }
 
-            if position:
-                change = price / position["entry"] - 1
-                if not new_candle:
-                    decision_lines.append(f"{coin}: WARTEN - diese Stundenkerze wurde bereits geprüft")
-                    signals[coin]["decision"] = "WAIT"
-                    signals[coin]["reason"] = "Keine neue abgeschlossene Stundenkerze"
-                elif change <= -STOP_LOSS:
-                    messages.append(sell(state, coin, price, "Stop-Loss"))
-                    decision_lines.append(f"{coin}: VERKAUF - Stop-Loss erreicht")
-                elif change >= TAKE_PROFIT:
-                    messages.append(sell(state, coin, price, "Take-Profit"))
-                    decision_lines.append(f"{coin}: VERKAUF - Take-Profit erreicht")
-                elif streak["bearish"] >= 2:
-                    messages.append(sell(state, coin, price, "EMA-Signal bestätigt (2 Kerzen)"))
-                    decision_lines.append(f"{coin}: VERKAUF - EMA-Signal zwei Stunden bestätigt")
-                    streak["bullish"] = 0
-                    streak["bearish"] = 0
-                else:
-                    decision_lines.append(f"{coin}: HALTEN - Position offen, kein Verkaufssignal")
-                    signals[coin]["decision"] = "HOLD"
-                    signals[coin]["reason"] = "Position offen; kein Verkaufssignal"
+            if not new_candle:
+                decision_lines.append(f"{coin}: WARTEN - 4h-Kerze bereits geprüft")
+                signal.update({"decision": "WAIT", "reason": "Keine neue abgeschlossene 4h-Kerze"})
             else:
-                reasons = []
-                if not new_candle:
-                    reasons.append("keine neue abgeschlossene Stundenkerze")
-                if streak["bullish"] < 2:
-                    reasons.append("Aufwärtstrend noch nicht zwei Stunden bestätigt")
-                if strength < 52:
-                    reasons.append("RSI unter 52")
-                elif strength > 65:
-                    reasons.append("RSI über 65")
-                if state["cash"] < 10:
-                    reasons.append("zu wenig virtuelles Guthaben")
-
-                if reasons:
-                    decision_lines.append(f"{coin}: KEIN KAUF - " + "; ".join(reasons))
-                    signals[coin]["decision"] = "WAIT"
-                    signals[coin]["reason"] = "; ".join(reasons)
-                else:
-                    result = buy(state, coin, price)
-                    if result:
-                        messages.append(result)
-                        decision_lines.append(f"{coin}: KAUFSIGNAL JA - DEMO-KAUF ausgeführt")
-                        signals[coin]["decision"] = "BUY"
-                        signals[coin]["reason"] = "RSI und EMA-Bedingungen erfüllt"
+                state["last_4h_candle"][coin] = data["candle_time"]
+                if position:
+                    stop_price = position["entry"] * (1 - STOP_LOSS)
+                    target_price = position["entry"] * (1 + TAKE_PROFIT)
+                    if data["low"] <= stop_price:
+                        exit_price = data["price"] if data["price"] <= stop_price else stop_price
+                        messages.append(sell(state, coin, exit_price, "Stop-Loss 5 %"))
+                        decision_lines.append(f"{coin}: VERKAUF - Stop-Loss 5 %")
+                        signal.update({"decision": "SELL", "reason": "Stop-Loss 5 %"})
+                    elif data["high"] >= target_price:
+                        exit_price = data["price"] if data["price"] >= target_price else target_price
+                        messages.append(sell(state, coin, exit_price, "Take-Profit 8 %"))
+                        decision_lines.append(f"{coin}: VERKAUF - Take-Profit 8 %")
+                        signal.update({"decision": "SELL", "reason": "Take-Profit 8 %"})
+                    elif price >= data["middle"]:
+                        messages.append(sell(state, coin, price, "Bollinger-Mittelband erreicht"))
+                        decision_lines.append(f"{coin}: VERKAUF - Bollinger-Mittelband erreicht")
+                        signal.update({"decision": "SELL", "reason": "Bollinger-Mittelband erreicht"})
                     else:
-                        decision_lines.append(f"{coin}: KEIN KAUF - Budget zu klein")
+                        decision_lines.append(f"{coin}: HALTEN - Position offen")
+                        signal.update({"decision": "HOLD", "reason": "Kein Ausstiegssignal"})
+                else:
+                    entry_signal = (
+                        data["previous_close"] >= data["previous_lower"]
+                        and price < data["lower"]
+                        and data["rsi"] <= 40
+                    )
+                    if entry_signal:
+                        result = buy(state, coin, price)
+                        if result:
+                            messages.append(result)
+                            decision_lines.append(f"{coin}: KAUFSIGNAL - DEMO-KAUF")
+                            signal.update({"decision": "BUY", "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"})
+                        else:
+                            decision_lines.append(f"{coin}: KEIN KAUF - virtuelles Budget zu klein")
+                            signal.update({"decision": "WAIT", "reason": "Virtuelles Budget zu klein"})
+                    else:
+                        reasons = []
+                        if price >= data["lower"]:
+                            reasons.append("Kurs nicht unter dem unteren Bollinger-Band")
+                        if data["previous_close"] < data["previous_lower"]:
+                            reasons.append("kein frischer Rückkehr-/Durchbruch-Trigger")
+                        if data["rsi"] > 40:
+                            reasons.append("RSI über 40")
+                        reason = "; ".join(reasons) or "Einstiegsbedingungen nicht vollständig"
+                        decision_lines.append(f"{coin}: KEIN KAUF - {reason}")
+                        signal.update({"decision": "WAIT", "reason": reason})
+            signals[coin] = signal
         except Exception as error:
-            msg = f"{coin}: {str(error)[:120]}"
+            msg = f"{coin}: {str(error)[:140]}"
             errors.append(msg)
-            decision_lines.append(f"{coin}: NICHT AUSWERTBAR - {str(error)[:100]}")
-            signals[coin] = {"decision": "ERROR", "reason": str(error)[:160], "updated": datetime.now(timezone.utc).isoformat()}
+            decision_lines.append(f"{coin}: NICHT AUSWERTBAR - {str(error)[:110]}")
+            signals[coin] = {"decision": "ERROR", "reason": str(error)[:160],
+                             "updated": datetime.now(timezone.utc).isoformat()}
             print(f"Fehler {coin}: {error}")
 
-    invested = sum(p["cost"] for p in state["positions"].values())
-    market_value = 0.0
-    for coin, position in state["positions"].items():
-        try:
-            price, _, _, _, _ = market(coin)
-            market_value += position["quantity"] * price
-        except Exception:
-            market_value += position["cost"]
-
+    invested = sum(position["cost"] for position in state["positions"].values())
+    market_value = sum(
+        position["quantity"] * prices.get(coin, position["entry"])
+        for coin, position in state["positions"].items()
+    )
     total = state["cash"] + market_value
     unrealized = total - START_CASH - state["realized"]
-    closed_trades = [
-        trade for trade in state["trades"]
-        if trade.get("action") == "SELL" and "profit" in trade
-    ]
-    winning_trades = [trade for trade in closed_trades if trade["profit"] > 0]
-    losing_trades = [trade for trade in closed_trades if trade["profit"] < 0]
-    gross_profit = sum(trade["profit"] for trade in winning_trades)
-    gross_loss = abs(sum(trade["profit"] for trade in losing_trades))
-    win_rate = (len(winning_trades) / len(closed_trades) * 100) if closed_trades else 0
-    profit_factor = (gross_profit / gross_loss) if gross_loss else None
+    closed = [trade for trade in state["trades"] if trade.get("action") == "SELL" and "profit" in trade]
+    winners = [trade for trade in closed if trade["profit"] > 0]
+    losers = [trade for trade in closed if trade["profit"] < 0]
+    gross_profit = sum(trade["profit"] for trade in winners)
+    gross_loss = abs(sum(trade["profit"] for trade in losers))
+    win_rate = len(winners) / len(closed) * 100 if closed else 0
+    profit_factor = gross_profit / gross_loss if gross_loss else None
 
     report = [
-        "🤖 CRYPTO DEMO BOT 4.2",
+        "🤖 CRYPTO DEMO BOT 5.0",
+        "STRATEGIE: BOLLINGER(20, 2) + RSI <= 40 | 4H",
+        "Stop-Loss 5 % | Take-Profit 8 %",
         "PAPER TRADING - KEIN ECHTHANDEL",
+        "Gebühr 0,10 % + Slippage 0,05 % je Seite (simuliert)",
+        "━━━━━━━━━━━━━━━━", "MARKTDATEN:", *market_lines,
+        "━━━━━━━━━━━━━━━━", "KAUF-/VERKAUFS-CHECK:", *decision_lines,
         "━━━━━━━━━━━━━━━━",
-        "MARKTDATEN:",
-        *market_lines,
-        "━━━━━━━━━━━━━━━━",
-        "KAUF-/VERKAUFS-CHECK:",
-        *decision_lines,
-        "━━━━━━━━━━━━━━━━",
-        f"Cash: {state['cash']:.2f} USD",
+        f"Virtuelles Cash: {state['cash']:.2f} USD",
         f"Investiert (Einstand): {invested:.2f} USD",
         f"Positionswert: {market_value:.2f} USD",
         f"Gesamtwert: {total:.2f} USD",
-        f"Realisierter Gewinn: {state['realized']:+.2f} USD",
+        f"Realisierter Gewinn seit Start: {state['realized']:+.2f} USD",
         f"Offener Gewinn: {unrealized:+.2f} USD",
         f"Offene Positionen: {len(state['positions'])}",
         f"Trades insgesamt: {len(state['trades'])}",
-        f"Geschlossene Trades: {len(closed_trades)}",
-        f"Gewinner / Verlierer: {len(winning_trades)} / {len(losing_trades)}",
+        f"Geschlossene Trades: {len(closed)}",
+        f"Gewinner / Verlierer: {len(winners)} / {len(losers)}",
         f"Trefferquote: {win_rate:.1f} %",
         f"Profit-Faktor: {profit_factor:.2f}" if profit_factor is not None else "Profit-Faktor: noch nicht berechenbar",
-        "━━━━━━━━━━━━━━━━",
-        "PAPER TRADING - KEIN ECHTHANDEL"
+        "━━━━━━━━━━━━━━━━", "PAPER TRADING - KEINE ECHTEN BÖRSENORDERS"
     ]
     if messages:
         report.extend(["", "AUSGEFÜHRTE DEMO-TRADES:", *messages])
@@ -268,6 +283,7 @@ def main():
     print(report_text)
     state["signals"] = signals
     state["updated"] = datetime.now(timezone.utc).isoformat()
+    state["strategy_version"] = "5.0_bollinger_rsi40_4h"
     save_state(state)
     telegram(report_text)
 
