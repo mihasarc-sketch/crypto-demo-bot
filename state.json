@@ -236,59 +236,107 @@
   },
   "realized": -13.536209752351851,
   "invested": 0,
-  "updated": "2026-11-19T07:20:45.987504+00:00",
+  "updated": "2026-11-19T08:57:20.929682+00:00",
   "signals": {
     "BTC": {
-      "price": 63673.8,
-      "rsi": 60.92,
-      "ema9": 63181.79889216,
-      "ema21": 63282.78607701,
-      "ema_bullish": false,
-      "bullish_candles": 0,
-      "bearish_candles": 15,
-      "candle_time": "1795068000",
-      "updated": "2026-11-19T07:20:45.748683+00:00",
+      "price": 63670.1,
+      "rsi": 42.14,
+      "bb_middle": 64229.61,
+      "bb_lower": 62720.10601537,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.118762+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
     },
     "ETH": {
-      "price": 1805.61,
-      "rsi": 71.18,
-      "ema9": 1787.804911,
-      "ema21": 1784.54638233,
-      "ema_bullish": true,
-      "bullish_candles": 1,
-      "bearish_candles": 0,
-      "candle_time": "1795068000",
-      "updated": "2026-11-19T07:20:45.823214+00:00",
+      "price": 1802.3,
+      "rsi": 46.39,
+      "bb_middle": 1804.8055,
+      "bb_lower": 1761.7735563,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.160536+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt; RSI \u00fcber 65"
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
     },
     "SOL": {
-      "price": 75.06,
-      "rsi": 69.12,
-      "ema9": 74.10894943,
-      "ema21": 73.87491373,
-      "ema_bullish": true,
-      "bullish_candles": 2,
-      "bearish_candles": 0,
-      "candle_time": "1795068000",
-      "updated": "2026-11-19T07:20:45.895206+00:00",
+      "price": 74.85,
+      "rsi": 66.09,
+      "bb_middle": 73.052,
+      "bb_lower": 70.3767759,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.192981+00:00",
       "decision": "WAIT",
-      "reason": "RSI \u00fcber 65"
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
     },
     "XRP": {
-      "price": 0.98287,
-      "rsi": 58.7,
-      "ema9": 0.97205572,
-      "ema21": 0.9726674,
-      "ema_bullish": false,
-      "bullish_candles": 0,
-      "bearish_candles": 7,
-      "candle_time": "1795068000",
-      "updated": "2026-11-19T07:20:45.987455+00:00",
+      "price": 0.9821,
+      "rsi": 59.8,
+      "bb_middle": 0.968574,
+      "bb_lower": 0.94438706,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.316949+00:00",
       "decision": "WAIT",
-      "reason": "Aufw\u00e4rtstrend noch nicht zwei Stunden best\u00e4tigt"
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+    },
+    "ADA": {
+      "price": 0.153835,
+      "rsi": 52.16,
+      "bb_middle": 0.15309065,
+      "bb_lower": 0.15071246,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.440582+00:00",
+      "decision": "WAIT",
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+    },
+    "DOGE": {
+      "price": 0.0594992,
+      "rsi": 54.51,
+      "bb_middle": 0.05908294,
+      "bb_lower": 0.05826411,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.482252+00:00",
+      "decision": "WAIT",
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+    },
+    "LINK": {
+      "price": 9.16863,
+      "rsi": 51.52,
+      "bb_middle": 9.157663,
+      "bb_lower": 9.00972741,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.551167+00:00",
+      "decision": "WAIT",
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+    },
+    "AVAX": {
+      "price": 7.071,
+      "rsi": 48.0,
+      "bb_middle": 7.12715,
+      "bb_lower": 6.95914134,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.671134+00:00",
+      "decision": "WAIT",
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+    },
+    "LTC": {
+      "price": 44.64,
+      "rsi": 51.5,
+      "bb_middle": 44.56,
+      "bb_lower": 43.70562303,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.809534+00:00",
+      "decision": "WAIT",
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+    },
+    "DOT": {
+      "price": 0.7206,
+      "rsi": 43.21,
+      "bb_middle": 0.72795,
+      "bb_lower": 0.71292515,
+      "candle_time": "1795060800",
+      "updated": "2026-11-19T08:57:20.929590+00:00",
+      "decision": "WAIT",
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
     }
   },
   "last_candle": {
@@ -314,5 +362,18 @@
       "bullish": 0,
       "bearish": 7
     }
-  }
+  },
+  "last_4h_candle": {
+    "BTC": "1795060800",
+    "ETH": "1795060800",
+    "SOL": "1795060800",
+    "XRP": "1795060800",
+    "ADA": "1795060800",
+    "DOGE": "1795060800",
+    "LINK": "1795060800",
+    "AVAX": "1795060800",
+    "LTC": "1795060800",
+    "DOT": "1795060800"
+  },
+  "strategy_version": "5.0_bollinger_rsi40_4h"
 }
