@@ -7,6 +7,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 # CRYPTO DEMO BOT 5.1 - PAPER TRADING ONLY - NO REAL ORDERS
+# Added GOLD (PF_XAUUSD) and SILVER (PF_XAGUSD) public candle feeds; virtual-only.
 # Strategy: 4h Bollinger(20, 2.0) + RSI(14) <= 40; SL 5%, TP 8%.
 COINS = {
     "BTC": ["XBTUSD"], "ETH": ["ETHUSD"], "SOL": ["SOLUSD"], "XRP": ["XRPUSD"],
