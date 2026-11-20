@@ -397,7 +397,7 @@
   },
   "realized": -39.58097333516967,
   "invested": 0,
-  "updated": "2026-11-20T17:12:45.564348+00:00",
+  "updated": "2026-11-20T18:00:09.545271+00:00",
   "signals": {
     "BTC": {
       "price": 59399.9,
@@ -405,7 +405,7 @@
       "bb_middle": 63126.25,
       "bb_lower": 60487.64503184,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:44.679303+00:00",
+      "updated": "2026-11-20T18:00:08.063343+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -415,7 +415,7 @@
       "bb_middle": 1776.459,
       "bb_lower": 1702.14345683,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:44.805419+00:00",
+      "updated": "2026-11-20T18:00:08.223818+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -425,7 +425,7 @@
       "bb_middle": 73.3605,
       "bb_lower": 70.37926888,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:44.874036+00:00",
+      "updated": "2026-11-20T18:00:08.269955+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -435,7 +435,7 @@
       "bb_middle": 0.9685065,
       "bb_lower": 0.93273677,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:44.986262+00:00",
+      "updated": "2026-11-20T18:00:08.400745+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -445,7 +445,7 @@
       "bb_middle": 0.15155435,
       "bb_lower": 0.14492392,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.021900+00:00",
+      "updated": "2026-11-20T18:00:08.540803+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -455,7 +455,7 @@
       "bb_middle": 0.0584947,
       "bb_lower": 0.05581064,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.155742+00:00",
+      "updated": "2026-11-20T18:00:08.681520+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -465,7 +465,7 @@
       "bb_middle": 9.044288,
       "bb_lower": 8.61730903,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.189037+00:00",
+      "updated": "2026-11-20T18:00:08.804459+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -475,7 +475,7 @@
       "bb_middle": 7.0233,
       "bb_lower": 6.69139453,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.222071+00:00",
+      "updated": "2026-11-20T18:00:08.936356+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -485,7 +485,7 @@
       "bb_middle": 43.56,
       "bb_lower": 40.74408807,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.254004+00:00",
+      "updated": "2026-11-20T18:00:09.091347+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -495,7 +495,7 @@
       "bb_middle": 0.7163,
       "bb_lower": 0.68055764,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.286108+00:00",
+      "updated": "2026-11-20T18:00:09.233882+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -505,9 +505,9 @@
       "bb_middle": 3718.862,
       "bb_lower": 3514.62004304,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.430428+00:00",
+      "updated": "2026-11-20T18:00:09.396907+00:00",
       "decision": "WAIT",
-      "reason": "Kurs nicht unter dem unteren Bollinger-Band"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SILVER": {
       "price": 41.6705,
@@ -515,9 +515,9 @@
       "bb_middle": 44.932765,
       "bb_lower": 41.15272969,
       "candle_time": "1795176000",
-      "updated": "2026-11-20T17:12:45.564262+00:00",
+      "updated": "2026-11-20T18:00:09.545184+00:00",
       "decision": "WAIT",
-      "reason": "Kurs nicht unter dem unteren Bollinger-Band"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
   },
   "last_candle": {
