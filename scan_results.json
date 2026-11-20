@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 61803.4,
-    "volume_usd_24h": 282591669.81,
+    "price_usd": 61739.5,
+    "volume_usd_24h": 306707586.77,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1751.64,
-    "volume_usd_24h": 84965272.02,
-    "spread_percent": 0.017
+    "price_usd": 1746.96,
+    "volume_usd_24h": 85336118.34,
+    "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 837.54,
-    "volume_usd_24h": 40879660.42,
-    "spread_percent": 0.042
+    "price_usd": 820.5,
+    "volume_usd_24h": 42207657.33,
+    "spread_percent": 0.006
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.95968,
-    "volume_usd_24h": 38567057.39,
-    "spread_percent": 0.008
+    "price_usd": 0.95126,
+    "volume_usd_24h": 36546273.73,
+    "spread_percent": 0.013
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 72.17,
-    "volume_usd_24h": 23759134.27,
+    "price_usd": 71.69,
+    "volume_usd_24h": 23058797.44,
     "spread_percent": 0.028
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 65.21,
-    "volume_usd_24h": 19437366.36,
+    "price_usd": 63.88,
+    "volume_usd_24h": 18890262.08,
     "spread_percent": 0.031
   },
   {
     "coin": "USDG/USD",
-    "price_usd": 1.0,
-    "volume_usd_24h": 11373818.89,
+    "price_usd": 0.9999,
+    "volume_usd_24h": 11324324.34,
     "spread_percent": 0.01
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 477.3,
-    "volume_usd_24h": 10000850.28,
-    "spread_percent": 0.071
+    "price_usd": 461.85,
+    "volume_usd_24h": 9518603.97,
+    "spread_percent": 0.208
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.0058,
-    "volume_usd_24h": 6801415.73,
-    "spread_percent": 0.003
+    "price_usd": 2.9674,
+    "volume_usd_24h": 6697556.67,
+    "spread_percent": 0.044
   },
   {
     "coin": "ADA/USD",
-    "price_usd": 0.149311,
-    "volume_usd_24h": 4715049.73,
-    "spread_percent": 0.047
+    "price_usd": 0.146882,
+    "volume_usd_24h": 4741956.54,
+    "spread_percent": 0.033
   }
 ]
