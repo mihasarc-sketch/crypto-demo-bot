@@ -17,7 +17,7 @@ table{border-collapse:collapse;width:100%;min-width:580px;background:#111b2b}th,
 .pos{color:var(--green)}.neg{color:var(--red)}.wait{color:#c4d3e7}.notice{margin-top:20px;border:1px solid #715c2e;background:#302817;color:#f3d99c;border-radius:13px;padding:13px 15px;font-size:13px;line-height:1.5}
 .status{font-size:12px;color:var(--muted);margin-top:12px}.empty{padding:18px;color:var(--muted);font-size:13px}
 @media(max-width:720px){main{padding:18px 12px 36px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v{font-size:22px}.card{padding:14px}h1{font-size:22px}}
-</style></head>
+ .trader-note{margin:10px 0 12px;color:var(--muted);font-size:12px;line-height:1.5}.trader-link{color:var(--blue)}.trader-table{min-width:760px}</style></head>
 <body><main>
 <header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.1 · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
 <div class="grid">
@@ -26,7 +26,19 @@ table{border-collapse:collapse;width:100%;min-width:580px;background:#111b2b}th,
 <div class="card"><div class="k">Offene Positionen</div><div class="v" id="positions">—</div><div class="small">Virtuelle Käufe</div></div>
 <div class="card"><div class="k">Abgeschlossene Verkäufe</div><div class="v" id="closed">—</div><div class="small">Historische Trades</div></div>
 </div>
-<section><h2>Markt-Signale · 10 Coins</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Kurs (USD)</th><th>RSI</th><th>Signal</th><th>Begründung</th></tr></thead><tbody id="signals"><tr><td colspan="5">Lade Daten …</td></tr></tbody></table></div></section>
+<section><h2>Trader-Analyse · Top 5 externe Signale</h2>
+<div class="trader-note">Momentaufnahme vom 20.11.2026 · Rangfolge nach durchschnittlichem Risiko-Ertrags-Verhältnis (RR), nicht nach Gewinnquote. Die Ergebnisse sind vor Gebühren und ohne Hebel. Diese Tabelle ist ein externer Vergleich und wird nicht automatisch live aktualisiert. <a class="trader-link" href="https://x-trades.live/" target="_blank" rel="noopener">Quelle und aktuelle Rangliste ↗</a></div>
+<div class="tablewrap"><table class="trader-table"><thead><tr><th>Rang</th><th>Trader</th><th>Ø RR</th><th>Ø Ergebnis/Trade</th><th>Trefferquote</th><th>Gewonnen – verloren</th><th>Trades</th><th>Erste Einschätzung</th></tr></thead><tbody>
+<tr><td>1</td><td><b>MrTTrades</b></td><td class="pos">+1,92</td><td class="pos">+1,30 %</td><td>58 %</td><td>15 – 11</td><td>26</td><td>Interessant, aber Stichprobe noch begrenzt</td></tr>
+<tr><td>2</td><td><b>Bitcoin Bullets</b></td><td class="pos">+0,87</td><td class="pos">+0,76 %</td><td>64 %</td><td>7 – 4</td><td>11</td><td>Beste Trefferquote der ersten drei, wenig Trades</td></tr>
+<tr><td>3</td><td><b>BuerTrades</b></td><td class="pos">+0,40</td><td class="pos">+0,38 %</td><td>55 %</td><td>17 – 14</td><td>31</td><td>Größte Stichprobe der ersten drei</td></tr>
+<tr><td>4</td><td><b>Blasto</b></td><td class="pos">+0,39</td><td class="neg">−0,14 %</td><td>39 %</td><td>9 – 14</td><td>23</td><td>RR positiv, Ergebnis/Trade negativ</td></tr>
+<tr><td>5</td><td><b>OSHO</b></td><td class="pos">+0,25</td><td class="pos">+0,24 %</td><td>41 %</td><td>39 – 57</td><td>96</td><td>Mehr Trades, aber niedrige Trefferquote</td></tr>
+</tbody></table></div>
+<div class="trader-note"><b>So lesen wir die Daten:</b> Ø RR bewertet das Ergebnis im Verhältnis zum zuvor genannten Risiko. Eine hohe Trefferquote allein reicht nicht. Blasto ist ein gutes Beispiel: positives RR, aber durchschnittlich −0,14 % pro Trade. Alle Werte stammen aus der veröffentlichten 3-Monats-Auswertung und sind keine Garantie für künftige Ergebnisse. <a class="trader-link" href="https://x-trades.live/best-crypto-traders" target="_blank" rel="noopener">Details und Methodik ↗</a></div>
+<div class="notice"><b>Paper-Test:</b> Diese fünf Trader werden zunächst nur beobachtet. Es werden keine Signale automatisch übernommen und keine echten Orders ausgeführt. Der Vergleich mit Strategie 5.1 erfolgt erst, wenn ausreichend eigene Beobachtungsdaten vorliegen.</div>
+</section>
+<section><h2>Markt-Signale · 12 Märkte</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Kurs (USD)</th><th>RSI</th><th>Signal</th><th>Begründung</th></tr></thead><tbody id="signals"><tr><td colspan="5">Lade Daten …</td></tr></tbody></table></div></section>
 <section><h2>Offene Positionen</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Menge</th><th>Einstieg</th><th>Investiert</th></tr></thead><tbody id="open"><tr><td colspan="4">Lade Daten …</td></tr></tbody></table></div></section>
 <section><h2>Letzte Aktivitäten</h2><div class="tablewrap"><table><thead><tr><th>Zeit (UTC)</th><th>Coin</th><th>Aktion</th><th>Kurs</th><th>Ergebnis</th></tr></thead><tbody id="trades"></tbody></table></div></section>
 <div class="status" id="updated">Daten werden geladen …</div>
