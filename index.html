@@ -36,7 +36,65 @@ table{border-collapse:collapse;width:100%;min-width:580px;background:#111b2b}th,
 .chart-detail-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
 .chart-canvas-large{display:block;width:100%;height:260px}
 @media(max-width:520px){.coin-picker{grid-template-columns:repeat(3,minmax(0,1fr))}.chart-canvas-large{height:230px}}
-.signal-coin{background:transparent;border:0;color:var(--blue);padding:4px 2px;font-weight:750;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.signal-coin:active{opacity:.7}</style></head>
+.signal-coin{background:transparent;border:0;color:var(--blue);padding:4px 2px;font-weight:750;text-decoration:underline;text-underline-offset:3px;cursor:pointer}.signal-coin:active{opacity:.7}
+/* Premium dashboard refresh */
+:root{--bg:#070d19;--panel:#101b2d;--line:rgba(145,175,220,.16);--muted:#91a4c1;--text:#f3f7ff;--green:#42e3ad;--red:#ff718b;--blue:#7bc4ff;--violet:#9b8cff}
+body{background:radial-gradient(ellipse at 12% -10%,rgba(53,108,190,.28),transparent 38%),radial-gradient(ellipse at 92% 8%,rgba(105,75,190,.18),transparent 30%),#070d19;letter-spacing:.01em}
+main{max-width:1180px;padding-top:30px}
+.top{padding:20px 22px;border:1px solid var(--line);border-radius:20px;background:linear-gradient(120deg,rgba(21,39,66,.92),rgba(13,24,42,.82));box-shadow:0 16px 44px rgba(0,0,0,.22)}
+h1{font-size:clamp(23px,3vw,30px);letter-spacing:-.7px}
+.sub{font-size:13px;letter-spacing:.025em}
+.pill{box-shadow:0 0 22px rgba(57,214,160,.10);letter-spacing:.08em}
+button{cursor:pointer;transition:transform .18s ease,border-color .18s ease,background .18s ease,box-shadow .18s ease}
+button:hover{border-color:rgba(123,196,255,.7);background:#29496e;box-shadow:0 5px 18px rgba(0,0,0,.18)}
+button:active{transform:scale(.98)}
+button:focus-visible,a:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
+.grid{gap:14px}
+.card{position:relative;overflow:hidden;background:linear-gradient(145deg,rgba(25,43,69,.96),rgba(13,24,41,.98));border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 12px 28px rgba(0,0,0,.16);transition:transform .2s ease,border-color .2s ease}
+.card:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,var(--blue),var(--violet),transparent);opacity:.8}
+.card:hover{transform:translateY(-2px);border-color:rgba(123,196,255,.34)}
+.k{text-transform:uppercase;letter-spacing:.09em;font-size:10px;font-weight:750}
+.v{font-size:clamp(22px,2.5vw,29px);letter-spacing:-.8px;font-variant-numeric:tabular-nums}
+.small{font-size:11px}
+section{margin-top:27px;padding:18px;border:1px solid rgba(145,175,220,.11);border-radius:18px;background:linear-gradient(145deg,rgba(15,27,46,.72),rgba(10,19,33,.55))}
+h2{display:flex;align-items:center;gap:10px;font-size:16px;letter-spacing:.01em;margin:0 0 14px}
+h2:before{content:"";width:4px;height:18px;border-radius:8px;background:linear-gradient(180deg,var(--blue),var(--violet));box-shadow:0 0 12px rgba(123,196,255,.28)}
+.tablewrap{border:1px solid var(--line);border-radius:13px;background:rgba(8,16,29,.58)}
+table{background:transparent}
+th{background:#172943;color:#b7c9e4;text-transform:uppercase;letter-spacing:.065em;font-size:10px}
+td{color:#dce7f8}
+tbody tr{transition:background .15s ease}
+tbody tr:hover{background:rgba(105,153,220,.075)}
+tbody tr:last-child td{border-bottom:0}
+.trader-note{font-size:11px;color:#9eafc9}
+.trader-link{color:#8bcaff;text-decoration:none;border-bottom:1px solid rgba(139,202,255,.35)}
+.trader-link:hover{color:#c5e6ff}
+.notice{border-color:rgba(230,183,89,.25);background:linear-gradient(110deg,rgba(71,52,23,.72),rgba(42,34,22,.62));border-radius:14px}
+.coin-picker{gap:10px}
+.coin-choice{background:linear-gradient(145deg,#192d49,#101e33);border-color:rgba(145,175,220,.18);border-radius:13px;padding:14px 10px;min-height:68px}
+.coin-choice b{font-size:15px;letter-spacing:.04em}
+.coin-choice span{font-size:10px}
+.coin-choice:hover,.coin-choice.active{border-color:var(--blue);background:linear-gradient(145deg,#24466d,#182c49);box-shadow:0 0 0 1px rgba(123,196,255,.12),0 8px 22px rgba(0,0,0,.2)}
+.chart-detail{background:linear-gradient(145deg,#14243b,#0d192b);border-color:rgba(123,196,255,.25);border-radius:16px;padding:17px}
+.chart-canvas-large{border-radius:10px}
+.chart-status,.status{font-size:11px;letter-spacing:.015em}
+.signal-coin{font-size:13px;border-radius:7px;padding:6px 8px;text-decoration:none}
+.signal-coin:hover{background:rgba(123,196,255,.12)}
+#refresh{background:linear-gradient(135deg,#2b5d91,#344b80);border-color:rgba(150,190,255,.35)}
+@media(max-width:720px){
+ main{padding:12px 10px 30px}
+ .top{padding:15px;border-radius:16px;margin-bottom:15px}
+ .top>div:last-child{width:100%;justify-content:space-between}
+ .grid{gap:9px}.card{padding:14px;border-radius:14px}
+ section{margin-top:15px;padding:13px 10px;border-radius:15px}
+ h2{font-size:14px;margin-bottom:11px}
+ th,td{padding:10px 11px;font-size:12px}
+ .coin-picker{gap:7px}
+ .coin-choice{padding:12px 6px;min-height:64px}
+}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+
+</style></head>
 <body><main>
 <header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.1 · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
 <div class="grid">
