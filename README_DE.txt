@@ -1,4 +1,4 @@
-CRYPTO DEMO BOT 5.0
+CRYPTO DEMO BOT 5.1
 
 Zweck
 Automatischer Paper-Trading-Test mit virtuellem Kontostand. Es werden KEINE echten Börsenorders gesendet und es werden keine privaten Börsenschlüssel benötigt.
@@ -9,7 +9,7 @@ Aktive Demo-Strategie
 - Einstieg: Kurs fällt frisch unter das untere Bollinger-Band und RSI(14) liegt bei höchstens 40.
 - Ausstieg: Stop-Loss 5 %, Take-Profit 8 % oder Rückkehr zum Bollinger-Mittelband.
 - Stop-Loss wird bei einer Kerze, die Stop und Ziel zugleich berührt, konservativ zuerst angenommen.
-- Unterstützte Coins: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, AVAX, LTC und DOT.
+- Unterstützte Märkte: BTC, ETH, SOL, XRP, ADA, DOGE, LINK, AVAX, LTC, DOT sowie GOLD (XAU) und SILVER (XAG).
 
 Virtuelles Risikomanagement und Ausführung
 - Virtuelles Startkapital: 1.000 USD. Der bestehende Paper-Trading-Kontostand und die Trade-Historie werden bei der Umstellung beibehalten.
@@ -18,6 +18,12 @@ Virtuelles Risikomanagement und Ausführung
 - Simulierte adverse Slippage: 0,05 % je Seite.
 - Ein Coin wird pro neu abgeschlossener 4h-Kerze höchstens einmal ausgewertet; der Workflow kann weiterhin stündlich laufen, handelt aber nicht mehrfach dieselbe 4h-Kerze.
 - Kraken OHLC-Daten sind öffentliche Marktdaten. Alle Käufe und Verkäufe sind ausschließlich Einträge im lokalen virtuellen Paper-Trading-Konto.
+
+Gold und Silber
+- Gold und Silber werden zusätzlich über öffentliche Kraken-Futures-Chartdaten (PF_XAUUSD und PF_XAGUSD) als Preisreferenz ausgewertet.
+- Es werden keine Futures-Orders, keine Hebelpositionen und keine echten Orders eröffnet. Gold und Silber werden ausschließlich als ungehebelte virtuelle Paper-Trades im bestehenden Demo-Konto simuliert.
+- Die gleiche Bollinger-/RSI-Strategie, 4h-Kerzen, Stop-Loss-/Take-Profit-Regeln, Gebühren- und Slippage-Annahmen werden angewendet.
+- Die Strategie wurde für Gold und Silber noch nicht separat backgetestet; Ergebnisse sind experimentell.
 
 Coin-Scanner
 scanner.py liefert weiterhin eine separate Marktübersicht. Scanner-Kandidaten steuern keine Käufe.
@@ -31,4 +37,4 @@ Sicherheit und Einschränkungen
 - Gebühren und Slippage werden modelliert. OHLC-basierte Stop-/Take-Profit-Ausführung ist eine Näherung und kann reale Ausführung nicht exakt abbilden.
 - Die bisherige Bot-Version 4.2 bleibt als bot_v4_2_backup.py erhalten.
 
-Version 5.0 - Paper Trading only.
+Version 5.1 - Paper Trading only.
