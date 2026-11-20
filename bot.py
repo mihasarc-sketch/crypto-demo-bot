@@ -6,13 +6,15 @@ import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# CRYPTO DEMO BOT 5.0 - PAPER TRADING ONLY - NO REAL ORDERS
+# CRYPTO DEMO BOT 5.1 - PAPER TRADING ONLY - NO REAL ORDERS
 # Strategy: 4h Bollinger(20, 2.0) + RSI(14) <= 40; SL 5%, TP 8%.
 COINS = {
     "BTC": ["XBTUSD"], "ETH": ["ETHUSD"], "SOL": ["SOLUSD"], "XRP": ["XRPUSD"],
     "ADA": ["ADAUSD"], "DOGE": ["DOGEUSD", "XDGUSD"], "LINK": ["LINKUSD"],
-    "AVAX": ["AVAXUSD"], "LTC": ["LTCUSD"], "DOT": ["DOTUSD"]
+    "AVAX": ["AVAXUSD"], "LTC": ["LTCUSD"], "DOT": ["DOTUSD"], "GOLD": [], "SILVER": []
 }
+METALS = {"GOLD": "PF_XAUUSD", "SILVER": "PF_XAGUSD"}
+FUTURES_CHARTS = "https://futures.kraken.com/api/charts/v1"
 START_CASH = 1000.0
 MAX_BUY = 100.0
 FEE = 0.001
@@ -85,6 +87,37 @@ def bands(values):
 
 
 def market(coin):
+    # Public Kraken Futures candles are used for metal price references only.
+    # All positions remain virtual; this bot never sends orders.
+    if coin in METALS:
+        symbol = METALS[coin]
+        now = int(datetime.now(timezone.utc).timestamp())
+        start = now - 120 * 86400
+        url = f"{FUTURES_CHARTS}/trade/{symbol}/4h?from={start}&to={now}"
+        payload = api(url)
+        rows = []
+        for candle in payload.get("candles", []):
+            candle_time = int(candle["time"]) // 1000
+            if candle_time + CANDLE_INTERVAL * 60 <= now:
+                rows.append({
+                    "time": candle_time, "open": float(candle["open"]),
+                    "high": float(candle["high"]), "low": float(candle["low"]),
+                    "close": float(candle["close"])
+                })
+        rows.sort(key=lambda row: row["time"])
+        closes = [row["close"] for row in rows]
+        if len(closes) < BB_PERIOD + RSI_PERIOD + 2:
+            raise RuntimeError(f"{symbol}: zu wenige abgeschlossene 4h-Kerzen")
+        middle, lower = bands(closes)
+        previous_lower = bands(closes[:-1])[1]
+        last = rows[-1]
+        return {
+            "price": last["close"], "open": last["open"], "high": last["high"], "low": last["low"],
+            "middle": middle, "lower": lower, "previous_close": closes[-2],
+            "previous_lower": previous_lower, "rsi": rsi(closes),
+            "candle_time": str(last["time"])
+        }
+
     errors = []
     for pair in COINS[coin]:
         try:
@@ -95,18 +128,17 @@ def market(coin):
                 continue
             result = data["result"]
             key = next(key for key in result if key != "last")
-            rows = result[key][:-1]  # letzte, noch offene 4h-Kerze auslassen
+            rows = result[key][:-1]
             closes = [float(row[4]) for row in rows]
             if len(closes) < BB_PERIOD + RSI_PERIOD + 2:
                 raise RuntimeError("Zu wenige abgeschlossene 4h-Kerzen")
             middle, lower = bands(closes)
             previous_lower = bands(closes[:-1])[1]
-            strength = rsi(closes)
             last = rows[-1]
             return {
                 "price": float(last[4]), "open": float(last[1]), "high": float(last[2]), "low": float(last[3]),
                 "middle": middle, "lower": lower, "previous_close": closes[-2],
-                "previous_lower": previous_lower, "rsi": strength,
+                "previous_lower": previous_lower, "rsi": rsi(closes),
                 "candle_time": str(int(float(last[0])))
             }
         except Exception as error:
@@ -154,7 +186,7 @@ def main():
     state.setdefault("last_4h_candle", {})
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals, prices = {}, {}
-    print("CRYPTO DEMO BOT 5.0 - BOLLINGER / RSI 40 / 4H")
+    print("CRYPTO DEMO BOT 5.1 - BOLLINGER / RSI 40 / 4H")
     print("PAPER TRADING - KEIN ECHTHANDEL - KEINE ECHTEN ORDERS")
 
     for coin in COINS:
@@ -252,7 +284,7 @@ def main():
     profit_factor = gross_profit / gross_loss if gross_loss else None
 
     report = [
-        "🤖 CRYPTO DEMO BOT 5.0",
+        "🤖 CRYPTO DEMO BOT 5.1",
         "STRATEGIE: BOLLINGER(20, 2) + RSI <= 40 | 4H",
         "Stop-Loss 5 % | Take-Profit 8 %",
         "PAPER TRADING - KEIN ECHTHANDEL",
@@ -283,7 +315,7 @@ def main():
     print(report_text)
     state["signals"] = signals
     state["updated"] = datetime.now(timezone.utc).isoformat()
-    state["strategy_version"] = "5.0_bollinger_rsi40_4h"
+    state["strategy_version"] = "5.1_bollinger_rsi40_4h_crypto_gold_silver_paper"
     save_state(state)
     telegram(report_text)
 
