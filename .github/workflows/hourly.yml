@@ -1,6 +1,10 @@
 name: Crypto Demo Bot
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - "bot.py"
   schedule:
     - cron: "7 * * * *"
   workflow_dispatch:
