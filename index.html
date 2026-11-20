@@ -17,7 +17,17 @@ table{border-collapse:collapse;width:100%;min-width:580px;background:#111b2b}th,
 .pos{color:var(--green)}.neg{color:var(--red)}.wait{color:#c4d3e7}.notice{margin-top:20px;border:1px solid #715c2e;background:#302817;color:#f3d99c;border-radius:13px;padding:13px 15px;font-size:13px;line-height:1.5}
 .status{font-size:12px;color:var(--muted);margin-top:12px}.empty{padding:18px;color:var(--muted);font-size:13px}
 @media(max-width:720px){main{padding:18px 12px 36px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.v{font-size:22px}.card{padding:14px}h1{font-size:22px}}
- .trader-note{margin:10px 0 12px;color:var(--muted);font-size:12px;line-height:1.5}.trader-link{color:var(--blue)}.trader-table{min-width:760px}</style></head>
+ .trader-note{margin:10px 0 12px;color:var(--muted);font-size:12px;line-height:1.5}.trader-link{color:var(--blue)}.trader-table{min-width:760px}
+.chart-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.chart-card{background:linear-gradient(145deg,#17253a,#111b2c);border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px}
+.chart-name{font-weight:700;font-size:14px}.chart-price{font-size:12px;color:var(--muted);text-align:right}
+.chart-canvas{display:block;width:100%;height:150px}
+.chart-foot{font-size:11px;color:var(--muted);margin-top:6px}
+.chart-status{font-size:12px;color:var(--muted);margin-bottom:10px}
+@media(max-width:760px){.chart-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.chart-grid{grid-template-columns:1fr}.chart-canvas{height:170px}}
+</style></head>
 <body><main>
 <header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.1 · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
 <div class="grid">
@@ -39,6 +49,23 @@ table{border-collapse:collapse;width:100%;min-width:580px;background:#111b2b}th,
 <div class="notice"><b>Paper-Test:</b> Diese fünf Trader werden zunächst nur beobachtet. Es werden keine Signale automatisch übernommen und keine echten Orders ausgeführt. Der Vergleich mit Strategie 5.1 erfolgt erst, wenn ausreichend eigene Beobachtungsdaten vorliegen.</div>
 </section>
 <section><h2>Markt-Signale · 12 Märkte</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Kurs (USD)</th><th>RSI</th><th>Signal</th><th>Begründung</th></tr></thead><tbody id="signals"><tr><td colspan="5">Lade Daten …</td></tr></tbody></table></div></section>
+<section><h2>15-Minuten-Charts · alle 12 Märkte</h2>
+<div class="chart-status" id="chartStatus">Lade öffentliche Kraken-Kursdaten …</div>
+<div class="chart-grid" id="chartGrid">
+<div class="chart-card"><div class="chart-head"><div class="chart-name">BTC</div><div class="chart-price" id="price-BTC">—</div></div><canvas class="chart-canvas" id="chart-BTC" aria-label="BTC 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-BTC">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">ETH</div><div class="chart-price" id="price-ETH">—</div></div><canvas class="chart-canvas" id="chart-ETH" aria-label="ETH 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-ETH">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">SOL</div><div class="chart-price" id="price-SOL">—</div></div><canvas class="chart-canvas" id="chart-SOL" aria-label="SOL 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-SOL">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">XRP</div><div class="chart-price" id="price-XRP">—</div></div><canvas class="chart-canvas" id="chart-XRP" aria-label="XRP 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-XRP">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">ADA</div><div class="chart-price" id="price-ADA">—</div></div><canvas class="chart-canvas" id="chart-ADA" aria-label="ADA 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-ADA">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">DOGE</div><div class="chart-price" id="price-DOGE">—</div></div><canvas class="chart-canvas" id="chart-DOGE" aria-label="DOGE 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-DOGE">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">LINK</div><div class="chart-price" id="price-LINK">—</div></div><canvas class="chart-canvas" id="chart-LINK" aria-label="LINK 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-LINK">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">AVAX</div><div class="chart-price" id="price-AVAX">—</div></div><canvas class="chart-canvas" id="chart-AVAX" aria-label="AVAX 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-AVAX">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">LTC</div><div class="chart-price" id="price-LTC">—</div></div><canvas class="chart-canvas" id="chart-LTC" aria-label="LTC 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-LTC">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">DOT</div><div class="chart-price" id="price-DOT">—</div></div><canvas class="chart-canvas" id="chart-DOT" aria-label="DOT 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-DOT">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">GOLD</div><div class="chart-price" id="price-GOLD">—</div></div><canvas class="chart-canvas" id="chart-GOLD" aria-label="GOLD 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-GOLD">Warte auf Kursdaten …</div></div>
+<div class="chart-card"><div class="chart-head"><div class="chart-name">SILVER</div><div class="chart-price" id="price-SILVER">—</div></div><canvas class="chart-canvas" id="chart-SILVER" aria-label="SILVER 15-Minuten-Kurschart"></canvas><div class="chart-foot" id="foot-SILVER">Warte auf Kursdaten …</div></div>
+</div>
+</section>
 <section><h2>Offene Positionen</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Menge</th><th>Einstieg</th><th>Investiert</th></tr></thead><tbody id="open"><tr><td colspan="4">Lade Daten …</td></tr></tbody></table></div></section>
 <section><h2>Letzte Aktivitäten</h2><div class="tablewrap"><table><thead><tr><th>Zeit (UTC)</th><th>Coin</th><th>Aktion</th><th>Kurs</th><th>Ergebnis</th></tr></thead><tbody id="trades"></tbody></table></div></section>
 <div class="status" id="updated">Daten werden geladen …</div>
@@ -61,4 +88,57 @@ function render(s){
 }
 async function load(){const b=document.getElementById('refresh');b.disabled=true;try{const r=await fetch(DATA+'?t='+Date.now());if(!r.ok)throw Error('HTTP '+r.status);render(await r.json())}catch(e){document.getElementById('updated').textContent='Daten konnten nicht geladen werden. Bitte später erneut versuchen.'}finally{b.disabled=false}}
 document.getElementById('refresh').addEventListener('click',load);load();setInterval(load,60000);
+
+const CHARTS={
+ BTC:{pair:'XBTUSD'},ETH:{pair:'ETHUSD'},SOL:{pair:'SOLUSD'},XRP:{pair:'XRPUSD'},
+ ADA:{pair:'ADAUSD'},DOGE:{pair:'DOGEUSD'},LINK:{pair:'LINKUSD'},AVAX:{pair:'AVAXUSD'},
+ LTC:{pair:'LTCUSD'},DOT:{pair:'DOTUSD'},GOLD:{future:'PF_XAUUSD'},SILVER:{future:'PF_XAGUSD'}
+};
+function drawCandles(id,rows){
+ const canvas=document.getElementById('chart-'+id);if(!canvas)return;
+ const w=canvas.clientWidth||300,h=canvas.clientHeight||150,dpr=window.devicePixelRatio||1;
+ canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ const ctx=canvas.getContext('2d');ctx.scale(dpr,dpr);ctx.clearRect(0,0,w,h);
+ if(!rows||rows.length<2){ctx.fillStyle='#9aabc2';ctx.font='12px system-ui';ctx.fillText('Keine Chartdaten',10,22);return}
+ const lo=Math.min(...rows.map(x=>x.low)),hi=Math.max(...rows.map(x=>x.high)),pad=(hi-lo)*.08||1;
+ const min=lo-pad,max=hi+pad,plotH=h-22,plotW=w-12,step=plotW/rows.length;
+ const y=v=>8+(max-v)/(max-min)*plotH;
+ ctx.strokeStyle='#26354d';ctx.lineWidth=1;
+ for(let i=0;i<4;i++){const yy=8+i*plotH/3;ctx.beginPath();ctx.moveTo(0,yy);ctx.lineTo(w,yy);ctx.stroke()}
+ rows.forEach((r,i)=>{const x=6+i*step+step/2,up=r.close>=r.open;ctx.strokeStyle=up?'#39d6a0':'#ff7885';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=1;
+ ctx.beginPath();ctx.moveTo(x,y(r.high));ctx.lineTo(x,y(r.low));ctx.stroke();
+ const top=Math.min(y(r.open),y(r.close)),bh=Math.max(1,Math.abs(y(r.open)-y(r.close)));
+ ctx.fillRect(x-Math.max(1,step*.28),top,Math.max(2,step*.56),bh);
+ });
+ ctx.fillStyle='#9aabc2';ctx.font='10px system-ui';ctx.fillText(num(max,4),4,h-4);ctx.textAlign='right';ctx.fillText(num(min,4),w-4,h-4);
+}
+async function loadOneChart(coin,cfg){
+ const now=Math.floor(Date.now()/1000);let rows=[];
+ if(cfg.future){
+  const from=now-36*3600,url='https://futures.kraken.com/api/charts/v1/trade/'+cfg.future+'/15m?from='+from+'&to='+now;
+  const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();
+  rows=(j.candles||[]).map(x=>({time:Number(x.time),open:+x.open,high:+x.high,low:+x.low,close:+x.close})).filter(x=>Number.isFinite(x.close)).slice(-48);
+  if(rows.length&&rows[rows.length-1].time>1e12)rows=rows.map(x=>({...x,time:x.time/1000}));
+  rows=rows.filter(x=>x.time+900<=now);
+ }else{
+  const r=await fetch('https://api.kraken.com/0/public/OHLC?pair='+cfg.pair+'&interval=15');
+  if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();if(j.error?.length)throw Error(j.error.join(', '));
+  const key=Object.keys(j.result||{}).find(x=>x!=='last');if(!key)throw Error('Kein Handelspaar gefunden');
+  rows=(j.result[key]||[]).slice(0,-1).slice(-48).map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4]}));
+ }
+ if(!rows.length)throw Error('Keine abgeschlossenen 15-Minuten-Kerzen');
+ drawCandles(coin,rows);
+ const last=rows[rows.length-1];document.getElementById('price-'+coin).textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?4:6)+' USD';
+ document.getElementById('foot-'+coin).textContent='Letzte abgeschlossene Kerze: '+new Date(last.time*1000).toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'})+' · 15 Min.';
+ return true;
+}
+async function loadCharts(){
+ const status=document.getElementById('chartStatus');status.textContent='Aktualisiere 15-Minuten-Charts …';
+ const results=await Promise.allSettled(Object.entries(CHARTS).map(([coin,cfg])=>loadOneChart(coin,cfg)));
+ const ok=results.filter(x=>x.status==='fulfilled').length;
+ results.forEach((x,i)=>{if(x.status==='rejected'){const coin=Object.keys(CHARTS)[i];document.getElementById('foot-'+coin).textContent='Daten momentan nicht verfügbar';}});
+ status.textContent=ok+' von 12 Charts geladen · öffentliche Kraken-Daten · Aktualisierung alle 5 Minuten.';
+}
+loadCharts();setInterval(loadCharts,300000);
+window.addEventListener('resize',()=>{clearTimeout(window.__chartResize);window.__chartResize=setTimeout(loadCharts,500)});
 </script></body></html>
