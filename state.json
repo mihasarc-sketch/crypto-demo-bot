@@ -312,7 +312,7 @@
   },
   "realized": -13.536209752351851,
   "invested": 0,
-  "updated": "2026-11-20T05:04:43.542527+00:00",
+  "updated": "2026-11-20T06:10:59.037742+00:00",
   "signals": {
     "BTC": {
       "price": 62089.6,
@@ -320,9 +320,9 @@
       "bb_middle": 63703.23,
       "bb_lower": 61738.06369141,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:41.912317+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal"
+      "updated": "2026-11-20T06:10:58.001332+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ETH": {
       "price": 1744.07,
@@ -330,9 +330,9 @@
       "bb_middle": 1792.968,
       "bb_lower": 1741.33439559,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:42.089140+00:00",
+      "updated": "2026-11-20T06:10:58.026273+00:00",
       "decision": "WAIT",
-      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SOL": {
       "price": 72.84,
@@ -340,9 +340,9 @@
       "bb_middle": 73.5885,
       "bb_lower": 71.663753,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:42.269134+00:00",
+      "updated": "2026-11-20T06:10:58.134252+00:00",
       "decision": "WAIT",
-      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "XRP": {
       "price": 0.96226,
@@ -350,9 +350,9 @@
       "bb_middle": 0.9714005,
       "bb_lower": 0.94855391,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:42.427780+00:00",
+      "updated": "2026-11-20T06:10:58.249557+00:00",
       "decision": "WAIT",
-      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ADA": {
       "price": 0.149388,
@@ -360,9 +360,9 @@
       "bb_middle": 0.1527816,
       "bb_lower": 0.14993368,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:42.613953+00:00",
+      "updated": "2026-11-20T06:10:58.357907+00:00",
       "decision": "WAIT",
-      "reason": "RSI \u00fcber 40"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOGE": {
       "price": 0.0574152,
@@ -370,9 +370,9 @@
       "bb_middle": 0.05895206,
       "bb_lower": 0.0577705,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:42.818927+00:00",
-      "decision": "BUY",
-      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
+      "updated": "2026-11-20T06:10:58.474510+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LINK": {
       "price": 8.88027,
@@ -380,9 +380,9 @@
       "bb_middle": 9.1209735,
       "bb_lower": 8.91064614,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:42.987917+00:00",
-      "decision": "BUY",
-      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
+      "updated": "2026-11-20T06:10:58.574612+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "AVAX": {
       "price": 6.903,
@@ -390,9 +390,9 @@
       "bb_middle": 7.0852,
       "bb_lower": 6.88496254,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:43.173679+00:00",
+      "updated": "2026-11-20T06:10:58.798066+00:00",
       "decision": "WAIT",
-      "reason": "Kurs nicht unter dem unteren Bollinger-Band; RSI \u00fcber 40"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LTC": {
       "price": 41.8,
@@ -400,9 +400,9 @@
       "bb_middle": 44.116,
       "bb_lower": 42.31222174,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:43.356237+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal"
+      "updated": "2026-11-20T06:10:58.910405+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOT": {
       "price": 0.699,
@@ -410,9 +410,9 @@
       "bb_middle": 0.723895,
       "bb_lower": 0.70231617,
       "candle_time": "1795132800",
-      "updated": "2026-11-20T05:04:43.542440+00:00",
-      "decision": "BUY",
-      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
+      "updated": "2026-11-20T06:10:59.037671+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
   },
   "last_candle": {
