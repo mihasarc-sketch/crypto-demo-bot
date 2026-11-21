@@ -20,8 +20,11 @@ START_CASH = 1000.0
 MAX_BUY = 100.0
 FEE = 0.001
 SLIPPAGE = 0.0005
-STOP_LOSS = 0.05
-TAKE_PROFIT = 0.08
+STOP_LOSS = 0.05  # legacy positions only
+TAKE_PROFIT = 0.08  # legacy positions only
+NEW_STOP_LOSS = 0.04
+NEW_TAKE_PROFIT = 0.06
+MAX_OPEN_POSITIONS = 4
 BB_PERIOD = 20
 BB_DEVIATIONS = 2.0
 RSI_PERIOD = 14
@@ -87,6 +90,16 @@ def bands(values):
     return middle, middle - BB_DEVIATIONS * deviation
 
 
+def ema(values, period=50):
+    if len(values) < period:
+        raise RuntimeError(f"Zu wenige Kerzen für EMA{period}")
+    multiplier = 2.0 / (period + 1)
+    current = sum(values[:period]) / period
+    for value in values[period:]:
+        current = (value - current) * multiplier + current
+    return current
+
+
 def market(coin):
     # Public Kraken Futures candles are used for metal price references only.
     # All positions remain virtual; this bot never sends orders.
@@ -111,11 +124,14 @@ def market(coin):
             raise RuntimeError(f"{symbol}: zu wenige abgeschlossene 4h-Kerzen")
         middle, lower = bands(closes)
         previous_lower = bands(closes[:-1])[1]
+        ema50 = ema(closes, 50)
+        ema50_previous = ema(closes[:-1], 50)
         last = rows[-1]
         return {
             "price": last["close"], "open": last["open"], "high": last["high"], "low": last["low"],
             "middle": middle, "lower": lower, "previous_close": closes[-2],
             "previous_lower": previous_lower, "rsi": rsi(closes),
+            "ema50": ema50, "ema50_previous": ema50_previous,
             "candle_time": str(last["time"])
         }
 
@@ -135,11 +151,14 @@ def market(coin):
                 raise RuntimeError("Zu wenige abgeschlossene 4h-Kerzen")
             middle, lower = bands(closes)
             previous_lower = bands(closes[:-1])[1]
+            ema50 = ema(closes, 50)
+            ema50_previous = ema(closes[:-1], 50)
             last = rows[-1]
             return {
                 "price": float(last[4]), "open": float(last[1]), "high": float(last[2]), "low": float(last[3]),
                 "middle": middle, "lower": lower, "previous_close": closes[-2],
                 "previous_lower": previous_lower, "rsi": rsi(closes),
+                "ema50": ema50, "ema50_previous": ema50_previous,
                 "candle_time": str(int(float(last[0])))
             }
         except Exception as error:
@@ -156,11 +175,15 @@ def buy(state, coin, price):
     state["cash"] -= budget
     state["positions"][coin] = {
         "entry": execution_price, "quantity": quantity, "cost": budget,
-        "strategy": "bollinger_rsi40_4h", "opened_at": datetime.now(timezone.utc).isoformat()
+        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v2",
+        "stop_loss_pct": NEW_STOP_LOSS, "take_profit_pct": NEW_TAKE_PROFIT,
+        "opened_at": datetime.now(timezone.utc).isoformat()
     }
     state["trades"].append({
         "coin": coin, "action": "BUY", "price": execution_price, "cost": budget,
-        "strategy": "bollinger_rsi40_4h", "time": datetime.now(timezone.utc).isoformat()
+        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v2",
+        "stop_loss_pct": NEW_STOP_LOSS, "take_profit_pct": NEW_TAKE_PROFIT,
+        "time": datetime.now(timezone.utc).isoformat()
     })
     return f"🟢 DEMO-KAUF {coin}: ca. {execution_price:.6f} USD (virtuell)"
 
@@ -198,13 +221,15 @@ def main():
             previous_candle = state["last_4h_candle"].get(coin)
             new_candle = data["candle_time"] != previous_candle
             market_lines.append(
-                f"{coin}: {price:.6f} USD | RSI: {data['rsi']:.1f} | "
+                f"{coin}: {price:.6f} USD | RSI: {data['rsi']:.1f} | EMA50: {data['ema50']:.6f} | "
                 f"BB-Mitte: {data['middle']:.6f} | BB-Unterband: {data['lower']:.6f}"
             )
             position = state["positions"].get(coin)
             signal = {
                 "price": round(price, 8), "rsi": round(data["rsi"], 2),
                 "bb_middle": round(data["middle"], 8), "bb_lower": round(data["lower"], 8),
+                "ema50": round(data["ema50"], 8),
+                "trend_up": bool(price > data["ema50"] and data["ema50"] > data["ema50_previous"]),
                 "candle_time": data["candle_time"],
                 "updated": datetime.now(timezone.utc).isoformat()
             }
@@ -215,8 +240,10 @@ def main():
             else:
                 state["last_4h_candle"][coin] = data["candle_time"]
                 if position:
-                    stop_price = position["entry"] * (1 - STOP_LOSS)
-                    target_price = position["entry"] * (1 + TAKE_PROFIT)
+                    stop_pct = float(position.get("stop_loss_pct", STOP_LOSS))
+                    target_pct = float(position.get("take_profit_pct", TAKE_PROFIT))
+                    stop_price = position["entry"] * (1 - stop_pct)
+                    target_price = position["entry"] * (1 + target_pct)
                     if data["low"] <= stop_price:
                         exit_price = data["open"] if data["open"] <= stop_price else stop_price
                         messages.append(sell(state, coin, exit_price, "Stop-Loss 5 %"))
@@ -236,11 +263,16 @@ def main():
                         signal.update({"decision": "HOLD", "reason": "Kein Ausstiegssignal"})
                 else:
                     entry_signal = (
-                        data["previous_close"] >= data["previous_lower"]
-                        and price < data["lower"]
+                        data["previous_close"] < data["previous_lower"]
+                        and price > data["lower"]
                         and data["rsi"] <= 40
+                        and price > data["ema50"]
+                        and data["ema50"] > data["ema50_previous"]
                     )
-                    if entry_signal:
+                    if len(state["positions"]) >= MAX_OPEN_POSITIONS:
+                        decision_lines.append(f"{coin}: WARTEN - maximal {MAX_OPEN_POSITIONS} Positionen gleichzeitig")
+                        signal.update({"decision": "WAIT", "reason": "Maximale Anzahl offener Positionen erreicht"})
+                    elif entry_signal:
                         result = buy(state, coin, price)
                         if result:
                             messages.append(result)
@@ -251,12 +283,12 @@ def main():
                             signal.update({"decision": "WAIT", "reason": "Virtuelles Budget zu klein"})
                     else:
                         reasons = []
-                        if price >= data["lower"]:
-                            reasons.append("Kurs nicht unter dem unteren Bollinger-Band")
-                        if data["previous_close"] < data["previous_lower"]:
-                            reasons.append("kein frischer Rückkehr-/Durchbruch-Trigger")
+                        if not (data["previous_close"] < data["previous_lower"] and price > data["lower"]):
+                            reasons.append("kein bestätigter Rücklauf über das untere Bollinger-Band")
                         if data["rsi"] > 40:
                             reasons.append("RSI über 40")
+                        if not (price > data["ema50"] and data["ema50"] > data["ema50_previous"]):
+                            reasons.append("Trendfilter EMA50 nicht aufwärts")
                         reason = "; ".join(reasons) or "Einstiegsbedingungen nicht vollständig"
                         decision_lines.append(f"{coin}: KEIN KAUF - {reason}")
                         signal.update({"decision": "WAIT", "reason": reason})
@@ -286,8 +318,9 @@ def main():
 
     report = [
         "🤖 CRYPTO DEMO BOT 5.1",
-        "STRATEGIE: BOLLINGER(20, 2) + RSI <= 40 | 4H",
-        "Stop-Loss 5 % | Take-Profit 8 %",
+        "STRATEGIE V2: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
+        "Neue Trades: Stop-Loss 4 % | Take-Profit 6 % | max. 4 Positionen",
+        "Bestehende Positionen behalten ihre gespeicherten Stop-/Zielwerte.",
         "PAPER TRADING - KEIN ECHTHANDEL",
         "Gebühr 0,10 % + Slippage 0,05 % je Seite (simuliert)",
         "━━━━━━━━━━━━━━━━", "MARKTDATEN:", *market_lines,
@@ -316,7 +349,7 @@ def main():
     print(report_text)
     state["signals"] = signals
     state["updated"] = datetime.now(timezone.utc).isoformat()
-    state["strategy_version"] = "5.1_bollinger_rsi40_4h_crypto_gold_silver_paper"
+    state["strategy_version"] = "5.2_bollinger_reclaim_ema50_rsi40_4h_crypto_gold_silver_paper"
     save_state(state)
     telegram(report_text)
 
