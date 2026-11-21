@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 55698.8,
-    "volume_usd_24h": 558334109.51,
+    "price_usd": 58234.3,
+    "volume_usd_24h": 619410701.84,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1557.99,
-    "volume_usd_24h": 141976469.88,
-    "spread_percent": 0.001
+    "price_usd": 1633.43,
+    "volume_usd_24h": 154885117.16,
+    "spread_percent": 0.016
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.87053,
-    "volume_usd_24h": 70602909.92,
-    "spread_percent": 0.001
+    "price_usd": 0.89808,
+    "volume_usd_24h": 78489443.89,
+    "spread_percent": 0.013
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 690.79,
-    "volume_usd_24h": 65900470.9,
-    "spread_percent": 0.058
+    "price_usd": 733.45,
+    "volume_usd_24h": 72874526.87,
+    "spread_percent": 0.063
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 65.32,
-    "volume_usd_24h": 49642290.51,
-    "spread_percent": 0.031
+    "price_usd": 67.84,
+    "volume_usd_24h": 54162893.83,
+    "spread_percent": 0.029
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 56.37,
-    "volume_usd_24h": 20645817.15,
-    "spread_percent": 0.053
-  },
-  {
-    "coin": "NEAR/USD",
-    "price_usd": 2.5808,
-    "volume_usd_24h": 13319081.14,
-    "spread_percent": 0.07
+    "price_usd": 58.61,
+    "volume_usd_24h": 24907902.81,
+    "spread_percent": 0.017
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.5953,
-    "volume_usd_24h": 13031906.8,
-    "spread_percent": 0.034
+    "price_usd": 0.6236,
+    "volume_usd_24h": 14709662.87,
+    "spread_percent": 0.032
+  },
+  {
+    "coin": "NEAR/USD",
+    "price_usd": 2.6973,
+    "volume_usd_24h": 14195486.45,
+    "spread_percent": 0.07
   },
   {
     "coin": "USDG/USD",
-    "price_usd": 0.9999,
-    "volume_usd_24h": 9014141.22,
+    "price_usd": 1.0,
+    "volume_usd_24h": 9413775.46,
     "spread_percent": 0.01
   },
   {
-    "coin": "ADA/USD",
-    "price_usd": 0.134517,
-    "volume_usd_24h": 8074045.65,
-    "spread_percent": 0.053
+    "coin": "TAO/USD",
+    "price_usd": 176.2468,
+    "volume_usd_24h": 8668994.65,
+    "spread_percent": 0.086
   }
 ]

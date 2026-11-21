@@ -463,7 +463,7 @@
   },
   "realized": -53.93276583832622,
   "invested": 0,
-  "updated": "2026-11-21T05:58:33.544757+00:00",
+  "updated": "2026-11-21T07:12:05.734999+00:00",
   "signals": {
     "BTC": {
       "price": 56642.1,
@@ -471,7 +471,7 @@
       "bb_middle": 62190.44,
       "bb_lower": 57826.88629166,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.283103+00:00",
+      "updated": "2026-11-21T07:12:04.426528+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -481,7 +481,7 @@
       "bb_middle": 1746.4705,
       "bb_lower": 1601.92929017,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.405374+00:00",
+      "updated": "2026-11-21T07:12:04.533645+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -491,7 +491,7 @@
       "bb_middle": 72.581,
       "bb_lower": 67.45689657,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.506387+00:00",
+      "updated": "2026-11-21T07:12:04.643291+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -501,7 +501,7 @@
       "bb_middle": 0.957897,
       "bb_lower": 0.89302377,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.551144+00:00",
+      "updated": "2026-11-21T07:12:04.750703+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -511,7 +511,7 @@
       "bb_middle": 0.1495271,
       "bb_lower": 0.13870207,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.708323+00:00",
+      "updated": "2026-11-21T07:12:04.865282+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -521,7 +521,7 @@
       "bb_middle": 0.05763311,
       "bb_lower": 0.05296498,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.776167+00:00",
+      "updated": "2026-11-21T07:12:04.996423+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -531,7 +531,7 @@
       "bb_middle": 8.925372,
       "bb_lower": 8.28250158,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.942965+00:00",
+      "updated": "2026-11-21T07:12:05.132523+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -541,7 +541,7 @@
       "bb_middle": 6.9115,
       "bb_lower": 6.3649532,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:32.983755+00:00",
+      "updated": "2026-11-21T07:12:05.253503+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -551,7 +551,7 @@
       "bb_middle": 42.825,
       "bb_lower": 39.04771261,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:33.112385+00:00",
+      "updated": "2026-11-21T07:12:05.375369+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -561,7 +561,7 @@
       "bb_middle": 0.70441,
       "bb_lower": 0.64724536,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:33.230334+00:00",
+      "updated": "2026-11-21T07:12:05.498405+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -571,7 +571,7 @@
       "bb_middle": 3668.714,
       "bb_lower": 3467.51979975,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:33.393729+00:00",
+      "updated": "2026-11-21T07:12:05.621621+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -581,7 +581,7 @@
       "bb_middle": 43.96605,
       "bb_lower": 40.07868006,
       "candle_time": "1795219200",
-      "updated": "2026-11-21T05:58:33.544677+00:00",
+      "updated": "2026-11-21T07:12:05.734914+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
