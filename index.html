@@ -137,7 +137,11 @@ tbody tr:last-child td{border-bottom:0}
  <div class="chart-foot" id="activeFoot">—</div>
 </div>
 </section>
-<section><h2>Offene Positionen</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Menge</th><th>Einstieg</th><th>Investiert</th></tr></thead><tbody id="open"><tr><td colspan="4">Lade Daten …</td></tr></tbody></table></div></section>
+<section id="positionsSection"><h2>Offene Positionen · Gewinnsicherung 5.3</h2>
+<div class="trader-note">Aktueller Positionswert basiert auf dem letzten verfügbaren Bot-Kurs. Gewinn/Verlust ist eine Schätzung nach simulierten Gebühren und Slippage, kein realisierter Gewinn.</div>
+<div class="tablewrap"><table><thead><tr><th>Coin</th><th>Aktueller Kurs</th><th>Einstieg</th><th>Offener Gewinn/Verlust</th><th>Gewinnsicherung</th><th>Trailing-Stop / Aktivierung</th></tr></thead><tbody id="open"><tr><td colspan="6">Lade Daten …</td></tr></tbody></table></div>
+<div class="notice"><b>So funktioniert 5.3:</b> Die Gewinnsicherung wird nach einer abgeschlossenen 4-Stunden-Kerze ab +3 % Kursgewinn aktiviert. Danach liegt der Stop mindestens 1 % über dem Einstieg (brutto) und folgt dem höchsten abgeschlossenen Kerzenhoch mit 2,5 % Abstand. Gebühren und Slippage können den tatsächlichen Nettoerlös verringern. Bei älteren Positionen werden gespeicherte Stop-/Zielwerte beibehalten.</div>
+</section>
 <section><h2>Letzte Aktivitäten</h2><div class="tablewrap"><table><thead><tr><th>Zeit (UTC)</th><th>Coin</th><th>Aktion</th><th>Kurs</th><th>Ergebnis</th></tr></thead><tbody id="trades"></tbody></table></div></section>
 <div class="status" id="updated">Daten werden geladen …</div>
 <div class="notice"><b>Wichtig:</b> Dieses Dashboard zeigt ausschließlich simulierte Käufe und Verkäufe. Es werden keine echten Börsenorders ausgeführt und kein Echtgeld eingesetzt. Marktdaten stammen aus öffentlichen Kraken-Daten. Die bisherige Trade-Historie enthält auch Trades aus der früheren Bot-Version 4.2.</div>
@@ -153,7 +157,19 @@ function render(s){
  const positions=s.positions||{};document.getElementById('positions').textContent=Object.keys(positions).length;
  const trades=s.trades||[], sells=trades.filter(t=>t.action==='SELL');document.getElementById('closed').textContent=sells.length;
  const sig=s.signals||{};document.getElementById('signals').innerHTML=Object.entries(sig).map(([coin,x])=>'<tr><td><button type="button" class="signal-coin" data-open-chart="'+esc(coin)+'">'+esc(coin)+' ↗</button></td><td>'+num(x.price,6)+'</td><td>'+num(x.rsi,2)+'</td><td class="wait">'+esc(x.decision||'—')+'</td><td>'+esc(x.reason||'—')+'</td></tr>').join('')||'<tr><td colspan="5">Keine Signale vorhanden.</td></tr>';
- const open=Object.entries(positions);document.getElementById('open').innerHTML=open.map(([coin,x])=>'<tr><td>'+esc(coin)+'</td><td>'+num(x.amount??x.quantity,8)+'</td><td>'+num(x.entry_price??x.entry,6)+'</td><td>'+money(x.cost??x.invested)+'</td></tr>').join('')||'<tr><td colspan="4" class="empty">Derzeit keine offenen Positionen.</td></tr>';
+ const open=Object.entries(positions), signals=s.signals||{};document.getElementById('open').innerHTML=open.map(([coin,x])=>{
+  const entry=Number(x.entry_price??x.entry??0), qty=Number(x.amount??x.quantity??0), cost=Number(x.cost??x.invested??0);
+  const market=Number(signals[coin]?.price??0), hasMarket=market>0, active=Boolean(x.profit_lock_active);
+  const peak=Number(x.peak_price??entry), floor=entry*1.01, trail=Math.max(floor,peak*0.975);
+  const activation=entry*1.03;
+  const estimated=hasMarket?qty*market*0.9985-cost:null;
+  const pct=cost>0&&estimated!==null?estimated/cost*100:0;
+  const result=estimated===null?'—':(estimated>=0?'+':'')+money(estimated)+' ('+(pct>=0?'+':'')+num(pct,2)+' %)';
+  const resultClass=estimated===null?'wait':estimated>=0?'pos':'neg';
+  const lock=active?'<span class="pos"><b>AKTIV</b></span>':'<span class="wait">Noch nicht aktiv</span>';
+  const stop=active?num(trail,6)+' USD':'Aktivierung ab '+num(activation,6)+' USD';
+  return '<tr><td><b>'+esc(coin)+'</b></td><td>'+ (hasMarket?num(market,6)+' USD':'—')+'</td><td>'+num(entry,6)+' USD</td><td class="'+resultClass+'">'+result+'</td><td>'+lock+'</td><td>'+stop+'</td></tr>';
+ }).join('')||'<tr><td colspan="6" class="empty">Derzeit keine offenen Positionen.</td></tr>';
  document.getElementById('trades').innerHTML=trades.slice().reverse().slice(0,15).map(t=>'<tr><td>'+esc((t.time||'').replace('T',' ').replace('+00:00',''))+'</td><td>'+esc(t.coin)+'</td><td>'+esc(t.action)+'</td><td>'+num(t.price,6)+'</td><td class="'+(Number(t.profit||0)>=0?'pos':'neg')+'">'+(t.profit==null?'—':(t.profit>=0?'+':'')+money(t.profit))+'</td></tr>').join('')||'<tr><td colspan="5" class="empty">Noch keine Aktivitäten.</td></tr>';
  document.getElementById('updated').textContent='Letzter Bot-Lauf: '+(s.updated?new Date(s.updated).toLocaleString('de-AT'):'unbekannt')+' · Dashboard lädt automatisch jede Minute neu.';
 }
