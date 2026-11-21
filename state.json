@@ -467,7 +467,7 @@
   },
   "realized": -59.80280878685241,
   "invested": 0,
-  "updated": "2026-11-21T21:44:47.468128+00:00",
+  "updated": "2026-11-21T22:09:45.460537+00:00",
   "signals": {
     "BTC": {
       "price": 60238.2,
@@ -477,7 +477,7 @@
       "ema50": 63875.89772597,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.227474+00:00",
+      "updated": "2026-11-21T22:09:42.904064+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -489,7 +489,7 @@
       "ema50": 1798.0089603,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.352289+00:00",
+      "updated": "2026-11-21T22:09:43.479088+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -501,7 +501,7 @@
       "ema50": 73.7343939,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.461006+00:00",
+      "updated": "2026-11-21T22:09:43.515466+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -513,7 +513,7 @@
       "ema50": 0.97063769,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.497135+00:00",
+      "updated": "2026-11-21T22:09:43.710240+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -525,7 +525,7 @@
       "ema50": 0.15328089,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.603815+00:00",
+      "updated": "2026-11-21T22:09:43.976481+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -537,7 +537,7 @@
       "ema50": 0.05900879,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.762896+00:00",
+      "updated": "2026-11-21T22:09:44.194524+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -549,7 +549,7 @@
       "ema50": 9.12375529,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.866752+00:00",
+      "updated": "2026-11-21T22:09:44.377316+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -561,7 +561,7 @@
       "ema50": 7.1311543,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:46.977003+00:00",
+      "updated": "2026-11-21T22:09:44.556102+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -573,7 +573,7 @@
       "ema50": 43.94516783,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:47.096461+00:00",
+      "updated": "2026-11-21T22:09:44.739348+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -585,7 +585,7 @@
       "ema50": 0.7251634,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:47.215498+00:00",
+      "updated": "2026-11-21T22:09:44.942704+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -597,7 +597,7 @@
       "ema50": 3734.03098229,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:47.350627+00:00",
+      "updated": "2026-11-21T22:09:45.158033+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -609,7 +609,7 @@
       "ema50": 45.36958717,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T21:44:47.468056+00:00",
+      "updated": "2026-11-21T22:09:45.460467+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
@@ -652,5 +652,5 @@
     "GOLD": "1795276800",
     "SILVER": "1795276800"
   },
-  "strategy_version": "5.2_bollinger_reclaim_ema50_rsi40_4h_crypto_gold_silver_paper"
+  "strategy_version": "5.3_bollinger_reclaim_ema50_rsi40_profit_lock_4h_paper"
 }
