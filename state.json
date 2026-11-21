@@ -467,7 +467,7 @@
   },
   "realized": -59.80280878685241,
   "invested": 0,
-  "updated": "2026-11-21T20:46:18.704330+00:00",
+  "updated": "2026-11-21T21:44:47.468128+00:00",
   "signals": {
     "BTC": {
       "price": 60238.2,
@@ -477,9 +477,9 @@
       "ema50": 63875.89772597,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:17.514466+00:00",
+      "updated": "2026-11-21T21:44:46.227474+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ETH": {
       "price": 1683.6,
@@ -489,9 +489,9 @@
       "ema50": 1798.0089603,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:17.611391+00:00",
+      "updated": "2026-11-21T21:44:46.352289+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SOL": {
       "price": 70.46,
@@ -501,9 +501,9 @@
       "ema50": 73.7343939,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:17.714798+00:00",
+      "updated": "2026-11-21T21:44:46.461006+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "XRP": {
       "price": 0.93549,
@@ -513,9 +513,9 @@
       "ema50": 0.97063769,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:17.872938+00:00",
+      "updated": "2026-11-21T21:44:46.497135+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ADA": {
       "price": 0.14505,
@@ -525,9 +525,9 @@
       "ema50": 0.15328089,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:17.990048+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal"
+      "updated": "2026-11-21T21:44:46.603815+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOGE": {
       "price": 0.0551471,
@@ -537,9 +537,9 @@
       "ema50": 0.05900879,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.103372+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal"
+      "updated": "2026-11-21T21:44:46.762896+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LINK": {
       "price": 8.63475,
@@ -549,9 +549,9 @@
       "ema50": 9.12375529,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.131899+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal"
+      "updated": "2026-11-21T21:44:46.866752+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "AVAX": {
       "price": 6.629,
@@ -561,9 +561,9 @@
       "ema50": 7.1311543,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.234900+00:00",
+      "updated": "2026-11-21T21:44:46.977003+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LTC": {
       "price": 40.09,
@@ -573,9 +573,9 @@
       "ema50": 43.94516783,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.347260+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal"
+      "updated": "2026-11-21T21:44:47.096461+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOT": {
       "price": 0.6521,
@@ -585,9 +585,9 @@
       "ema50": 0.7251634,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.452831+00:00",
+      "updated": "2026-11-21T21:44:47.215498+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "GOLD": {
       "price": 3567.17,
@@ -597,9 +597,9 @@
       "ema50": 3734.03098229,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.585430+00:00",
+      "updated": "2026-11-21T21:44:47.350627+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SILVER": {
       "price": 41.7266,
@@ -609,9 +609,9 @@
       "ema50": 45.36958717,
       "trend_up": false,
       "candle_time": "1795276800",
-      "updated": "2026-11-21T20:46:18.704238+00:00",
+      "updated": "2026-11-21T21:44:47.468056+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
   },
   "last_candle": {
