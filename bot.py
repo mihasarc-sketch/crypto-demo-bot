@@ -6,9 +6,8 @@ import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# CRYPTO DEMO BOT 5.1 - PAPER TRADING ONLY - NO REAL ORDERS
-# Added GOLD (PF_XAUUSD) and SILVER (PF_XAGUSD) public candle feeds; virtual-only.
-# Strategy: 4h Bollinger(20, 2.0) + RSI(14) <= 40; SL 5%, TP 8%.
+# CRYPTO DEMO BOT 5.3 - PAPER TRADING ONLY - NO REAL ORDERS
+# Strategy 5.2 plus a profit-lock trailing stop; virtual-only.
 COINS = {
     "BTC": ["XBTUSD"], "ETH": ["ETHUSD"], "SOL": ["SOLUSD"], "XRP": ["XRPUSD"],
     "ADA": ["ADAUSD"], "DOGE": ["DOGEUSD", "XDGUSD"], "LINK": ["LINKUSD"],
@@ -24,6 +23,9 @@ STOP_LOSS = 0.05  # legacy positions only
 TAKE_PROFIT = 0.08  # legacy positions only
 NEW_STOP_LOSS = 0.04
 NEW_TAKE_PROFIT = 0.06
+PROFIT_LOCK_ACTIVATION = 0.03  # activate after a completed candle closes +3% above entry
+PROFIT_LOCK_FLOOR = 0.01       # protect at least +1% gross above entry
+PROFIT_TRAIL_GIVEBACK = 0.025  # trail 2.5% below the best completed-candle high
 MAX_OPEN_POSITIONS = 4
 BB_PERIOD = 20
 BB_DEVIATIONS = 2.0
@@ -175,13 +177,14 @@ def buy(state, coin, price):
     state["cash"] -= budget
     state["positions"][coin] = {
         "entry": execution_price, "quantity": quantity, "cost": budget,
-        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v2",
+        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock",
         "stop_loss_pct": NEW_STOP_LOSS, "take_profit_pct": NEW_TAKE_PROFIT,
+        "peak_price": execution_price, "profit_lock_active": False,
         "opened_at": datetime.now(timezone.utc).isoformat()
     }
     state["trades"].append({
         "coin": coin, "action": "BUY", "price": execution_price, "cost": budget,
-        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v2",
+        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock",
         "stop_loss_pct": NEW_STOP_LOSS, "take_profit_pct": NEW_TAKE_PROFIT,
         "time": datetime.now(timezone.utc).isoformat()
     })
@@ -210,7 +213,7 @@ def main():
     state.setdefault("last_4h_candle", {})
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals, prices = {}, {}
-    print("CRYPTO DEMO BOT 5.1 - BOLLINGER / RSI 40 / 4H")
+    print("CRYPTO DEMO BOT 5.3 - BOLLINGER / EMA50 / PROFIT LOCK / 4H")
     print("PAPER TRADING - KEIN ECHTHANDEL - KEINE ECHTEN ORDERS")
 
     for coin in COINS:
@@ -242,25 +245,44 @@ def main():
                 if position:
                     stop_pct = float(position.get("stop_loss_pct", STOP_LOSS))
                     target_pct = float(position.get("take_profit_pct", TAKE_PROFIT))
-                    stop_price = position["entry"] * (1 - stop_pct)
-                    target_price = position["entry"] * (1 + target_pct)
+                    entry_price = float(position["entry"])
+                    stop_price = entry_price * (1 - stop_pct)
+                    target_price = entry_price * (1 + target_pct)
+                    # Use only highs/closes from completed candles. A newly activated
+                    # profit lock becomes effective on the following completed candle.
+                    previous_peak = float(position.get("peak_price", entry_price))
+                    lock_was_active = bool(position.get("profit_lock_active", False))
+                    trailing_stop = max(
+                        entry_price * (1 + PROFIT_LOCK_FLOOR),
+                        previous_peak * (1 - PROFIT_TRAIL_GIVEBACK)
+                    )
                     if data["low"] <= stop_price:
                         exit_price = data["open"] if data["open"] <= stop_price else stop_price
-                        messages.append(sell(state, coin, exit_price, "Stop-Loss 5 %"))
-                        decision_lines.append(f"{coin}: VERKAUF - Stop-Loss 5 %")
-                        signal.update({"decision": "SELL", "reason": "Stop-Loss 5 %"})
+                        messages.append(sell(state, coin, exit_price, f"Stop-Loss {stop_pct:.0%}"))
+                        decision_lines.append(f"{coin}: VERKAUF - Stop-Loss {stop_pct:.0%}")
+                        signal.update({"decision": "SELL", "reason": f"Stop-Loss {stop_pct:.0%}"})
+                    elif lock_was_active and data["low"] <= trailing_stop:
+                        exit_price = data["open"] if data["open"] <= trailing_stop else trailing_stop
+                        reason = f"Gewinnsicherung / Trailing-Stop (mind. +{PROFIT_LOCK_FLOOR:.0%} brutto)"
+                        messages.append(sell(state, coin, exit_price, reason))
+                        decision_lines.append(f"{coin}: VERKAUF - Gewinnsicherung")
+                        signal.update({"decision": "SELL", "reason": reason})
                     elif data["high"] >= target_price:
                         exit_price = data["open"] if data["open"] >= target_price else target_price
-                        messages.append(sell(state, coin, exit_price, "Take-Profit 8 %"))
-                        decision_lines.append(f"{coin}: VERKAUF - Take-Profit 8 %")
-                        signal.update({"decision": "SELL", "reason": "Take-Profit 8 %"})
+                        messages.append(sell(state, coin, exit_price, f"Take-Profit {target_pct:.0%}"))
+                        decision_lines.append(f"{coin}: VERKAUF - Take-Profit {target_pct:.0%}")
+                        signal.update({"decision": "SELL", "reason": f"Take-Profit {target_pct:.0%}"})
                     elif price >= data["middle"]:
                         messages.append(sell(state, coin, price, "Bollinger-Mittelband erreicht"))
                         decision_lines.append(f"{coin}: VERKAUF - Bollinger-Mittelband erreicht")
                         signal.update({"decision": "SELL", "reason": "Bollinger-Mittelband erreicht"})
                     else:
+                        position["peak_price"] = max(previous_peak, float(data["high"]))
+                        if lock_was_active or price >= entry_price * (1 + PROFIT_LOCK_ACTIVATION):
+                            position["profit_lock_active"] = True
                         decision_lines.append(f"{coin}: HALTEN - Position offen")
-                        signal.update({"decision": "HOLD", "reason": "Kein Ausstiegssignal"})
+                        lock_text = "Gewinnsicherung aktiv" if position.get("profit_lock_active") else f"Gewinnsicherung ab +{PROFIT_LOCK_ACTIVATION:.0%}"
+                        signal.update({"decision": "HOLD", "reason": f"Kein Ausstiegssignal · {lock_text}"})
                 else:
                     entry_signal = (
                         data["previous_close"] < data["previous_lower"]
@@ -317,9 +339,9 @@ def main():
     profit_factor = gross_profit / gross_loss if gross_loss else None
 
     report = [
-        "🤖 CRYPTO DEMO BOT 5.1",
-        "STRATEGIE V2: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
-        "Neue Trades: Stop-Loss 4 % | Take-Profit 6 % | max. 4 Positionen",
+        "🤖 CRYPTO DEMO BOT 5.3",
+        "Strategie: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
+        "Neue Trades: Stop-Loss 4 % | Take-Profit 6 % | Gewinnsicherung ab +3 %, mindestens +1 % brutto, Trailing 2,5 % | max. 4 Positionen",
         "Bestehende Positionen behalten ihre gespeicherten Stop-/Zielwerte.",
         "PAPER TRADING - KEIN ECHTHANDEL",
         "Gebühr 0,10 % + Slippage 0,05 % je Seite (simuliert)",
@@ -349,7 +371,7 @@ def main():
     print(report_text)
     state["signals"] = signals
     state["updated"] = datetime.now(timezone.utc).isoformat()
-    state["strategy_version"] = "5.2_bollinger_reclaim_ema50_rsi40_4h_crypto_gold_silver_paper"
+    state["strategy_version"] = "5.3_bollinger_reclaim_ema50_rsi40_profit_lock_4h_paper"
     save_state(state)
     telegram(report_text)
 
