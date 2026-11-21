@@ -1,13 +1,6 @@
 {
-  "cash": 669.0706162952187,
+  "cash": 433.9859768886156,
   "positions": {
-    "ETH": {
-      "entry": 1654.3567649999998,
-      "quantity": 0.04700096972927366,
-      "cost": 77.8342064396237,
-      "strategy": "bollinger_rsi40_4h",
-      "opened_at": "2026-11-20T17:02:04.458663+00:00"
-    },
     "SOL": {
       "entry": 68.33415,
       "quantity": 0.9103076249071257,
@@ -22,12 +15,33 @@
       "strategy": "bollinger_rsi40_4h",
       "opened_at": "2026-11-20T17:02:04.851084+00:00"
     },
-    "AVAX": {
-      "entry": 6.4822394999999995,
-      "quantity": 14.825037083683851,
-      "cost": 96.19563660942968,
+    "ADA": {
+      "entry": 0.136220076,
+      "quantity": 733.3720765212317,
+      "cost": 100.0,
       "strategy": "bollinger_rsi40_4h",
-      "opened_at": "2026-11-20T17:02:05.670547+00:00"
+      "opened_at": "2026-11-21T04:59:10.017791+00:00"
+    },
+    "DOGE": {
+      "entry": 0.05207492445,
+      "quantity": 1918.389725095415,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "opened_at": "2026-11-21T04:59:10.234880+00:00"
+    },
+    "LINK": {
+      "entry": 8.17814703,
+      "quantity": 12.215481041553248,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "opened_at": "2026-11-21T04:59:10.410537+00:00"
+    },
+    "LTC": {
+      "entry": 38.69934,
+      "quantity": 2.5814393733846623,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "opened_at": "2026-11-21T04:59:10.784397+00:00"
     }
   },
   "trades": [
@@ -389,6 +403,56 @@
       "reason": "Stop-Loss 5 %",
       "strategy": "bollinger_rsi40_4h",
       "time": "2026-11-20T20:03:54.213647+00:00"
+    },
+    {
+      "coin": "ETH",
+      "action": "SELL",
+      "price": 1570.8531072866247,
+      "profit": -4.076418714254302,
+      "reason": "Stop-Loss 5 %",
+      "strategy": "bollinger_rsi40_4h",
+      "time": "2026-11-21T04:59:09.439896+00:00"
+    },
+    {
+      "coin": "ADA",
+      "action": "BUY",
+      "price": 0.136220076,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "time": "2026-11-21T04:59:10.017794+00:00"
+    },
+    {
+      "coin": "DOGE",
+      "action": "BUY",
+      "price": 0.05207492445,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "time": "2026-11-21T04:59:10.234890+00:00"
+    },
+    {
+      "coin": "LINK",
+      "action": "BUY",
+      "price": 8.17814703,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "time": "2026-11-21T04:59:10.410566+00:00"
+    },
+    {
+      "coin": "AVAX",
+      "action": "SELL",
+      "price": 6.1550484612375,
+      "profit": -5.03806374140224,
+      "reason": "Stop-Loss 5 %",
+      "strategy": "bollinger_rsi40_4h",
+      "time": "2026-11-21T04:59:10.585738+00:00"
+    },
+    {
+      "coin": "LTC",
+      "action": "BUY",
+      "price": 38.69934,
+      "cost": 100.0,
+      "strategy": "bollinger_rsi40_4h",
+      "time": "2026-11-21T04:59:10.784399+00:00"
     }
   ],
   "last": {
@@ -397,129 +461,129 @@
     "SOL": "1794250800",
     "XRP": "1794250800"
   },
-  "realized": -44.81828338266968,
+  "realized": -53.93276583832622,
   "invested": 0,
-  "updated": "2026-11-21T03:55:41.891753+00:00",
+  "updated": "2026-11-21T04:59:11.709204+00:00",
   "signals": {
     "BTC": {
-      "price": 58806.3,
-      "rsi": 22.33,
-      "bb_middle": 62542.13,
-      "bb_lower": 58960.18074402,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:40.587506+00:00",
+      "price": 56642.1,
+      "rsi": 18.13,
+      "bb_middle": 62190.44,
+      "bb_lower": 57826.88629166,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:09.410900+00:00",
       "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "reason": "kein frischer R\u00fcckkehr-/Durchbruch-Trigger"
     },
     "ETH": {
-      "price": 1619.32,
-      "rsi": 24.68,
-      "bb_middle": 1757.484,
-      "bb_lower": 1637.3108898,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:40.653369+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 1568.63,
+      "rsi": 21.86,
+      "bb_middle": 1746.4705,
+      "bb_lower": 1601.92929017,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:09.439884+00:00",
+      "decision": "SELL",
+      "reason": "Stop-Loss 5 %"
     },
     "SOL": {
-      "price": 68.72,
-      "rsi": 25.39,
-      "bb_middle": 72.909,
-      "bb_lower": 68.70316168,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:40.795164+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 66.2,
+      "rsi": 20.74,
+      "bb_middle": 72.581,
+      "bb_lower": 67.45689657,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:09.639275+00:00",
+      "decision": "HOLD",
+      "reason": "Kein Ausstiegssignal"
     },
     "XRP": {
-      "price": 0.90871,
-      "rsi": 28.01,
-      "bb_middle": 0.962107,
-      "bb_lower": 0.90790003,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:40.916455+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 0.88019,
+      "rsi": 25.09,
+      "bb_middle": 0.957897,
+      "bb_lower": 0.89302377,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:09.819885+00:00",
+      "decision": "HOLD",
+      "reason": "Kein Ausstiegssignal"
     },
     "ADA": {
-      "price": 0.142886,
-      "rsi": 32.92,
-      "bb_middle": 0.1503495,
-      "bb_lower": 0.14137254,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.055852+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 0.136152,
+      "rsi": 23.37,
+      "bb_middle": 0.1495271,
+      "bb_lower": 0.13870207,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:10.017769+00:00",
+      "decision": "BUY",
+      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
     },
     "DOGE": {
-      "price": 0.0542612,
-      "rsi": 25.03,
-      "bb_middle": 0.05797941,
-      "bb_lower": 0.05405065,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.200335+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 0.0520489,
+      "rsi": 20.03,
+      "bb_middle": 0.05763311,
+      "bb_lower": 0.05296498,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:10.234856+00:00",
+      "decision": "BUY",
+      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
     },
     "LINK": {
-      "price": 8.52974,
-      "rsi": 29.84,
-      "bb_middle": 8.972077,
-      "bb_lower": 8.42586707,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.351818+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 8.17406,
+      "rsi": 23.28,
+      "bb_middle": 8.925372,
+      "bb_lower": 8.28250158,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:10.410520+00:00",
+      "decision": "BUY",
+      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
     },
     "AVAX": {
-      "price": 6.508,
-      "rsi": 24.62,
-      "bb_middle": 6.9566,
-      "bb_lower": 6.5181261,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.388462+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 6.188,
+      "rsi": 18.6,
+      "bb_middle": 6.9115,
+      "bb_lower": 6.3649532,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:10.585720+00:00",
+      "decision": "SELL",
+      "reason": "Stop-Loss 5 %"
     },
     "LTC": {
-      "price": 40.57,
-      "rsi": 25.8,
-      "bb_middle": 43.114,
-      "bb_lower": 39.79251599,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.523013+00:00",
-      "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "price": 38.68,
+      "rsi": 20.19,
+      "bb_middle": 42.825,
+      "bb_lower": 39.04771261,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:10.784380+00:00",
+      "decision": "BUY",
+      "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"
     },
     "DOT": {
-      "price": 0.661,
-      "rsi": 22.39,
-      "bb_middle": 0.70923,
-      "bb_lower": 0.66152222,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.581333+00:00",
+      "price": 0.6329,
+      "rsi": 18.2,
+      "bb_middle": 0.70441,
+      "bb_lower": 0.64724536,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:11.264951+00:00",
       "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "reason": "kein frischer R\u00fcckkehr-/Durchbruch-Trigger"
     },
     "GOLD": {
-      "price": 3541.08,
-      "rsi": 20.82,
-      "bb_middle": 3685.093,
-      "bb_lower": 3481.20220942,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.745291+00:00",
+      "price": 3521.45,
+      "rsi": 21.51,
+      "bb_middle": 3668.714,
+      "bb_lower": 3467.51979975,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:11.502180+00:00",
       "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band"
     },
     "SILVER": {
-      "price": 41.3376,
-      "rsi": 22.12,
-      "bb_middle": 44.282965,
-      "bb_lower": 40.41663881,
-      "candle_time": "1795204800",
-      "updated": "2026-11-21T03:55:41.891674+00:00",
+      "price": 40.891,
+      "rsi": 21.28,
+      "bb_middle": 43.96605,
+      "bb_lower": 40.07868006,
+      "candle_time": "1795219200",
+      "updated": "2026-11-21T04:59:11.709143+00:00",
       "decision": "WAIT",
-      "reason": "Keine neue abgeschlossene 4h-Kerze"
+      "reason": "Kurs nicht unter dem unteren Bollinger-Band"
     }
   },
   "last_candle": {
@@ -547,18 +611,18 @@
     }
   },
   "last_4h_candle": {
-    "BTC": "1795204800",
-    "ETH": "1795204800",
-    "SOL": "1795204800",
-    "XRP": "1795204800",
-    "ADA": "1795204800",
-    "DOGE": "1795204800",
-    "LINK": "1795204800",
-    "AVAX": "1795204800",
-    "LTC": "1795204800",
-    "DOT": "1795204800",
-    "GOLD": "1795204800",
-    "SILVER": "1795204800"
+    "BTC": "1795219200",
+    "ETH": "1795219200",
+    "SOL": "1795219200",
+    "XRP": "1795219200",
+    "ADA": "1795219200",
+    "DOGE": "1795219200",
+    "LINK": "1795219200",
+    "AVAX": "1795219200",
+    "LTC": "1795219200",
+    "DOT": "1795219200",
+    "GOLD": "1795219200",
+    "SILVER": "1795219200"
   },
   "strategy_version": "5.1_bollinger_rsi40_4h_crypto_gold_silver_paper"
 }
