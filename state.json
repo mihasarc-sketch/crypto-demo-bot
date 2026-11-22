@@ -474,7 +474,7 @@
   },
   "realized": -45.36143748781646,
   "invested": 0,
-  "updated": "2026-11-22T14:00:25.898506+00:00",
+  "updated": "2026-11-22T14:54:05.623891+00:00",
   "signals": {
     "BTC": {
       "price": 60972.8,
@@ -484,7 +484,7 @@
       "ema50": 63280.25734768,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.067499+00:00",
+      "updated": "2026-11-22T14:54:03.510700+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -496,7 +496,7 @@
       "ema50": 1780.20515034,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.260292+00:00",
+      "updated": "2026-11-22T14:54:03.778258+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -508,7 +508,7 @@
       "ema50": 73.1496053,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.297696+00:00",
+      "updated": "2026-11-22T14:54:03.848685+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -520,7 +520,7 @@
       "ema50": 0.96345692,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.483980+00:00",
+      "updated": "2026-11-22T14:54:04.031671+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -532,7 +532,7 @@
       "ema50": 0.15181389,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.649107+00:00",
+      "updated": "2026-11-22T14:54:04.092777+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -544,7 +544,7 @@
       "ema50": 0.05837813,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.825860+00:00",
+      "updated": "2026-11-22T14:54:04.324388+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -556,7 +556,7 @@
       "ema50": 9.04936361,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:24.995018+00:00",
+      "updated": "2026-11-22T14:54:04.557435+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -568,7 +568,7 @@
       "ema50": 7.04840491,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:25.174942+00:00",
+      "updated": "2026-11-22T14:54:04.755211+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -580,7 +580,7 @@
       "ema50": 43.28332305,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:25.346476+00:00",
+      "updated": "2026-11-22T14:54:04.976279+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -592,7 +592,7 @@
       "ema50": 0.71394521,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:25.512038+00:00",
+      "updated": "2026-11-22T14:54:05.152876+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -604,7 +604,7 @@
       "ema50": 3706.89320335,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:25.719709+00:00",
+      "updated": "2026-11-22T14:54:05.385907+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -616,7 +616,7 @@
       "ema50": 44.78524144,
       "trend_up": false,
       "candle_time": "1795334400",
-      "updated": "2026-11-22T14:00:25.898413+00:00",
+      "updated": "2026-11-22T14:54:05.623802+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
