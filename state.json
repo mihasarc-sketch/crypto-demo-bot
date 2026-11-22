@@ -474,7 +474,7 @@
   },
   "realized": -56.30278913954318,
   "invested": 0,
-  "updated": "2026-11-22T05:01:35.115766+00:00",
+  "updated": "2026-11-22T05:59:49.906896+00:00",
   "signals": {
     "BTC": {
       "price": 59225.1,
@@ -484,9 +484,9 @@
       "ema50": 63550.81639372,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:33.821080+00:00",
+      "updated": "2026-11-22T05:59:48.884224+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ETH": {
       "price": 1657.66,
@@ -496,9 +496,9 @@
       "ema50": 1788.14428823,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:33.924769+00:00",
+      "updated": "2026-11-22T05:59:48.904810+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SOL": {
       "price": 69.32,
@@ -508,9 +508,9 @@
       "ema50": 73.42698183,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:33.949789+00:00",
+      "updated": "2026-11-22T05:59:48.923839+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "XRP": {
       "price": 0.91736,
@@ -520,9 +520,9 @@
       "ema50": 0.96702288,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.090135+00:00",
+      "updated": "2026-11-22T05:59:49.020963+00:00",
       "decision": "WAIT",
-      "reason": "Maximale Anzahl offener Positionen erreicht"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ADA": {
       "price": 0.141737,
@@ -532,9 +532,9 @@
       "ema50": 0.15248363,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.223839+00:00",
-      "decision": "SELL",
-      "reason": "Gewinnsicherung / Trailing-Stop (mind. +1% brutto)"
+      "updated": "2026-11-22T05:59:49.121388+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOGE": {
       "price": 0.0542747,
@@ -544,9 +544,9 @@
       "ema50": 0.0586791,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.342178+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal \u00b7 Gewinnsicherung aktiv"
+      "updated": "2026-11-22T05:59:49.232416+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LINK": {
       "price": 8.52423,
@@ -556,9 +556,9 @@
       "ema50": 9.08024491,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.464815+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal \u00b7 Gewinnsicherung aktiv"
+      "updated": "2026-11-22T05:59:49.329786+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "AVAX": {
       "price": 6.508,
@@ -568,9 +568,9 @@
       "ema50": 7.08561149,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.577638+00:00",
+      "updated": "2026-11-22T05:59:49.431923+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LTC": {
       "price": 39.35,
@@ -580,9 +580,9 @@
       "ema50": 43.60652363,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.700943+00:00",
-      "decision": "HOLD",
-      "reason": "Kein Ausstiegssignal \u00b7 Gewinnsicherung ab +3%"
+      "updated": "2026-11-22T05:59:49.545790+00:00",
+      "decision": "WAIT",
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOT": {
       "price": 0.6431,
@@ -592,9 +592,9 @@
       "ema50": 0.71922627,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.827329+00:00",
+      "updated": "2026-11-22T05:59:49.648112+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "GOLD": {
       "price": 3540.55,
@@ -604,9 +604,9 @@
       "ema50": 3719.74283294,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:34.963426+00:00",
+      "updated": "2026-11-22T05:59:49.774139+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SILVER": {
       "price": 41.2504,
@@ -616,9 +616,9 @@
       "ema50": 45.0613561,
       "trend_up": false,
       "candle_time": "1795305600",
-      "updated": "2026-11-22T05:01:35.115686+00:00",
+      "updated": "2026-11-22T05:59:49.906813+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
   },
   "last_candle": {

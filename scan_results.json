@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 59110.6,
-    "volume_usd_24h": 262747706.61,
-    "spread_percent": 0.001
+    "price_usd": 58794.4,
+    "volume_usd_24h": 254909989.41,
+    "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1659.16,
-    "volume_usd_24h": 62019612.67,
+    "price_usd": 1653.76,
+    "volume_usd_24h": 60662705.29,
     "spread_percent": 0.001
   },
   {
-    "coin": "XRP/USD",
-    "price_usd": 0.91872,
-    "volume_usd_24h": 36632145.72,
-    "spread_percent": 0.009
+    "coin": "ZEC/USD",
+    "price_usd": 777.66,
+    "volume_usd_24h": 36110077.33,
+    "spread_percent": 0.046
   },
   {
-    "coin": "ZEC/USD",
-    "price_usd": 768.66,
-    "volume_usd_24h": 33970774.15,
-    "spread_percent": 0.029
+    "coin": "XRP/USD",
+    "price_usd": 0.9137,
+    "volume_usd_24h": 35615355.5,
+    "spread_percent": 0.008
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 69.21,
-    "volume_usd_24h": 23246716.24,
-    "spread_percent": 0.014
+    "price_usd": 68.8,
+    "volume_usd_24h": 22299938.71,
+    "spread_percent": 0.029
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 59.92,
-    "volume_usd_24h": 18266256.78,
-    "spread_percent": 0.017
+    "price_usd": 59.82,
+    "volume_usd_24h": 16367120.62,
+    "spread_percent": 0.033
   },
   {
     "coin": "SUI/USD",
-    "price_usd": 0.6376,
-    "volume_usd_24h": 7030833.01,
+    "price_usd": 0.6351,
+    "volume_usd_24h": 6483679.4,
     "spread_percent": 0.031
   },
   {
-    "coin": "NEAR/USD",
-    "price_usd": 2.8645,
-    "volume_usd_24h": 6661282.42,
-    "spread_percent": 0.042
-  },
-  {
     "coin": "USDG/USD",
-    "price_usd": 0.9999,
-    "volume_usd_24h": 6547875.68,
+    "price_usd": 1.0,
+    "volume_usd_24h": 6301750.81,
     "spread_percent": 0.01
   },
   {
+    "coin": "NEAR/USD",
+    "price_usd": 2.8605,
+    "volume_usd_24h": 6137275.27,
+    "spread_percent": 0.035
+  },
+  {
     "coin": "XMR/USD",
-    "price_usd": 482.74,
-    "volume_usd_24h": 5281944.15,
-    "spread_percent": 0.091
+    "price_usd": 480.88,
+    "volume_usd_24h": 5318673.55,
+    "spread_percent": 0.048
   }
 ]
