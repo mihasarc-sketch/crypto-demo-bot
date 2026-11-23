@@ -6,8 +6,8 @@ import urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
-# CRYPTO DEMO BOT 5.3 - PAPER TRADING ONLY - NO REAL ORDERS
-# Strategy 5.2 plus a profit-lock trailing stop; virtual-only.
+# CRYPTO DEMO BOT 5.4 - PAPER TRADING ONLY - NO REAL ORDERS
+# Strategy 5.3 plus a filtered momentum-breakout entry; virtual-only.
 COINS = {
     "BTC": ["XBTUSD"], "ETH": ["ETHUSD"], "SOL": ["SOLUSD"], "XRP": ["XRPUSD"],
     "ADA": ["ADAUSD"], "DOGE": ["DOGEUSD", "XDGUSD"], "LINK": ["LINKUSD"],
@@ -27,6 +27,10 @@ PROFIT_LOCK_ACTIVATION = 0.03  # activate after a completed candle closes +3% ab
 PROFIT_LOCK_FLOOR = 0.01       # protect at least +1% gross above entry
 PROFIT_TRAIL_GIVEBACK = 0.025  # trail 2.5% below the best completed-candle high
 MAX_OPEN_POSITIONS = 4
+MOMENTUM_RSI_MIN = 48.0
+MOMENTUM_RSI_MAX = 68.0
+MOMENTUM_MAX_EMA_DISTANCE = 0.025
+MOMENTUM_BREAKOUT_LOOKBACK = 10
 BB_PERIOD = 20
 BB_DEVIATIONS = 2.0
 RSI_PERIOD = 14
@@ -134,6 +138,7 @@ def market(coin):
             "middle": middle, "lower": lower, "previous_close": closes[-2],
             "previous_lower": previous_lower, "rsi": rsi(closes),
             "ema50": ema50, "ema50_previous": ema50_previous,
+            "prior_high": max(row["high"] for row in rows[-11:-1]),
             "candle_time": str(last["time"])
         }
 
@@ -161,6 +166,7 @@ def market(coin):
                 "middle": middle, "lower": lower, "previous_close": closes[-2],
                 "previous_lower": previous_lower, "rsi": rsi(closes),
                 "ema50": ema50, "ema50_previous": ema50_previous,
+                "prior_high": max(float(row[2]) for row in rows[-11:-1]),
                 "candle_time": str(int(float(last[0])))
             }
         except Exception as error:
@@ -168,7 +174,7 @@ def market(coin):
     raise RuntimeError("; ".join(errors))
 
 
-def buy(state, coin, price):
+def buy(state, coin, price, strategy="bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock"): 
     budget = min(MAX_BUY, state["cash"] * 0.20)
     if budget < 10:
         return None
@@ -177,14 +183,14 @@ def buy(state, coin, price):
     state["cash"] -= budget
     state["positions"][coin] = {
         "entry": execution_price, "quantity": quantity, "cost": budget,
-        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock",
+        "strategy": strategy,
         "stop_loss_pct": NEW_STOP_LOSS, "take_profit_pct": NEW_TAKE_PROFIT,
         "peak_price": execution_price, "profit_lock_active": False,
         "opened_at": datetime.now(timezone.utc).isoformat()
     }
     state["trades"].append({
         "coin": coin, "action": "BUY", "price": execution_price, "cost": budget,
-        "strategy": "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock",
+        "strategy": strategy,
         "stop_loss_pct": NEW_STOP_LOSS, "take_profit_pct": NEW_TAKE_PROFIT,
         "time": datetime.now(timezone.utc).isoformat()
     })
@@ -213,7 +219,7 @@ def main():
     state.setdefault("last_4h_candle", {})
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals, prices = {}, {}
-    print("CRYPTO DEMO BOT 5.3 - BOLLINGER / EMA50 / PROFIT LOCK / 4H")
+    print("CRYPTO DEMO BOT 5.4 - BOLLINGER + MOMENTUM BREAKOUT / EMA50 / PROFIT LOCK / 4H")
     print("PAPER TRADING - KEIN ECHTHANDEL - KEINE ECHTEN ORDERS")
 
     for coin in COINS:
@@ -291,15 +297,24 @@ def main():
                         and price > data["ema50"]
                         and data["ema50"] > data["ema50_previous"]
                     )
+                    momentum_signal = (
+                        price > data["prior_high"]
+                        and price > data["ema50"]
+                        and data["ema50"] > data["ema50_previous"]
+                        and MOMENTUM_RSI_MIN <= data["rsi"] <= MOMENTUM_RSI_MAX
+                        and price <= data["ema50"] * (1 + MOMENTUM_MAX_EMA_DISTANCE)
+                    )
                     if len(state["positions"]) >= MAX_OPEN_POSITIONS:
                         decision_lines.append(f"{coin}: WARTEN - maximal {MAX_OPEN_POSITIONS} Positionen gleichzeitig")
                         signal.update({"decision": "WAIT", "reason": "Maximale Anzahl offener Positionen erreicht"})
-                    elif entry_signal:
-                        result = buy(state, coin, price)
+                    elif entry_signal or momentum_signal:
+                        strategy = ("bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock" if entry_signal
+                                    else "momentum_breakout_ema50_rsi48_68_4h_v1")
+                        result = buy(state, coin, price, strategy)
                         if result:
                             messages.append(result)
-                            decision_lines.append(f"{coin}: KAUFSIGNAL - DEMO-KAUF")
-                            signal.update({"decision": "BUY", "reason": "Kurs unter unterem Bollinger-Band und RSI <= 40"})
+                            decision_lines.append(f"{coin}: KAUFSIGNAL - DEMO-KAUF ({'Bollinger-Reclaim' if entry_signal else 'Momentum-Ausbruch'})")
+                            signal.update({"decision": "BUY", "reason": ("Bollinger-Reclaim + RSI <= 40" if entry_signal else "Momentum-Ausbruch über 10-Kerzen-Hoch; EMA50 steigend; RSI 48-68; max. 2,5 % über EMA50")})
                         else:
                             decision_lines.append(f"{coin}: KEIN KAUF - virtuelles Budget zu klein")
                             signal.update({"decision": "WAIT", "reason": "Virtuelles Budget zu klein"})
@@ -308,7 +323,7 @@ def main():
                         if not (data["previous_close"] < data["previous_lower"] and price > data["lower"]):
                             reasons.append("kein bestätigter Rücklauf über das untere Bollinger-Band")
                         if data["rsi"] > 40:
-                            reasons.append("RSI über 40")
+                            reasons.append("RSI über 40 für Bollinger-Einstieg")
                         if not (price > data["ema50"] and data["ema50"] > data["ema50_previous"]):
                             reasons.append("Trendfilter EMA50 nicht aufwärts")
                         reason = "; ".join(reasons) or "Einstiegsbedingungen nicht vollständig"
@@ -339,8 +354,9 @@ def main():
     profit_factor = gross_profit / gross_loss if gross_loss else None
 
     report = [
-        "🤖 CRYPTO DEMO BOT 5.3",
-        "Strategie: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
+        "🤖 CRYPTO DEMO BOT 5.4",
+        "Strategie A: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
+        f"Strategie B: Momentum-Ausbruch über {MOMENTUM_BREAKOUT_LOOKBACK}-Kerzen-Hoch + EMA50 steigend + RSI {MOMENTUM_RSI_MIN:.0f}-{MOMENTUM_RSI_MAX:.0f} + max. {MOMENTUM_MAX_EMA_DISTANCE:.1%} über EMA50 | 4H",
         "Neue Trades: Stop-Loss 4 % | Take-Profit 6 % | Gewinnsicherung ab +3 %, mindestens +1 % brutto, Trailing 2,5 % | max. 4 Positionen",
         "Bestehende Positionen behalten ihre gespeicherten Stop-/Zielwerte.",
         "PAPER TRADING - KEIN ECHTHANDEL",
@@ -371,7 +387,7 @@ def main():
     print(report_text)
     state["signals"] = signals
     state["updated"] = datetime.now(timezone.utc).isoformat()
-    state["strategy_version"] = "5.3_bollinger_reclaim_ema50_rsi40_profit_lock_4h_paper"
+    state["strategy_version"] = "5.4_bollinger_plus_momentum_breakout_ema50_profit_lock_4h_paper"
     save_state(state)
     telegram(report_text)
 
