@@ -474,7 +474,7 @@
   },
   "realized": -41.459651049481835,
   "invested": 0,
-  "updated": "2026-11-23T08:40:49.415857+00:00",
+  "updated": "2026-11-23T10:17:39.111510+00:00",
   "signals": {
     "BTC": {
       "price": 61371.2,
@@ -484,9 +484,9 @@
       "ema50": 62875.68388738,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:47.012579+00:00",
+      "updated": "2026-11-23T10:17:37.914654+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ETH": {
       "price": 1719.98,
@@ -496,9 +496,9 @@
       "ema50": 1769.35940163,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:47.191851+00:00",
+      "updated": "2026-11-23T10:17:37.951553+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SOL": {
       "price": 71.94,
@@ -508,9 +508,9 @@
       "ema50": 72.74004471,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:47.369251+00:00",
+      "updated": "2026-11-23T10:17:37.977687+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "XRP": {
       "price": 0.93623,
@@ -520,9 +520,9 @@
       "ema50": 0.95730334,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:47.601827+00:00",
+      "updated": "2026-11-23T10:17:38.106034+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ADA": {
       "price": 0.14602,
@@ -532,9 +532,9 @@
       "ema50": 0.15053446,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:47.828068+00:00",
+      "updated": "2026-11-23T10:17:38.215170+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOGE": {
       "price": 0.0555129,
@@ -544,9 +544,9 @@
       "ema50": 0.05781689,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:48.025872+00:00",
+      "updated": "2026-11-23T10:17:38.363157+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LINK": {
       "price": 8.91732,
@@ -556,9 +556,9 @@
       "ema50": 9.01107113,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:48.228839+00:00",
+      "updated": "2026-11-23T10:17:38.404080+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "AVAX": {
       "price": 6.712,
@@ -568,9 +568,9 @@
       "ema50": 6.98218246,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:48.415947+00:00",
+      "updated": "2026-11-23T10:17:38.520561+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LTC": {
       "price": 40.53,
@@ -580,9 +580,9 @@
       "ema50": 42.71476186,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:48.626538+00:00",
+      "updated": "2026-11-23T10:17:38.648286+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOT": {
       "price": 0.6715,
@@ -592,9 +592,9 @@
       "ema50": 0.70462453,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:48.912555+00:00",
+      "updated": "2026-11-23T10:17:38.768847+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "GOLD": {
       "price": 3618.38,
@@ -604,9 +604,9 @@
       "ema50": 3685.14099322,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:49.202874+00:00",
+      "updated": "2026-11-23T10:17:38.964470+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SILVER": {
       "price": 42.6496,
@@ -616,9 +616,9 @@
       "ema50": 44.29723333,
       "trend_up": false,
       "candle_time": "1795406400",
-      "updated": "2026-11-23T08:40:49.415769+00:00",
+      "updated": "2026-11-23T10:17:39.111430+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
   },
   "last_candle": {
