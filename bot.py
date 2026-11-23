@@ -27,6 +27,10 @@ PROFIT_LOCK_ACTIVATION = 0.03  # activate after a completed candle closes +3% ab
 PROFIT_LOCK_FLOOR = 0.01       # protect at least +1% gross above entry
 PROFIT_TRAIL_GIVEBACK = 0.025  # trail 2.5% below the best completed-candle high
 MAX_OPEN_POSITIONS = 4
+DAILY_MAX_LOSS = START_CASH * 0.02
+MAX_CONSECUTIVE_LOSSES = 3
+BREAKOUT_VOLUME_MULTIPLE = 1.20
+VOLUME_LOOKBACK = 20
 MOMENTUM_RSI_MIN = 48.0
 MOMENTUM_RSI_MAX = 68.0
 MOMENTUM_MAX_EMA_DISTANCE = 0.025
@@ -122,7 +126,8 @@ def market(coin):
                 rows.append({
                     "time": candle_time, "open": float(candle["open"]),
                     "high": float(candle["high"]), "low": float(candle["low"]),
-                    "close": float(candle["close"])
+                    "close": float(candle["close"]),
+                    "volume": float(candle.get("volume", 0) or 0)
                 })
         rows.sort(key=lambda row: row["time"])
         closes = [row["close"] for row in rows]
@@ -139,6 +144,9 @@ def market(coin):
             "previous_lower": previous_lower, "rsi": rsi(closes),
             "ema50": ema50, "ema50_previous": ema50_previous,
             "prior_high": max(row["high"] for row in rows[-11:-1]),
+            "volume": last.get("volume", 0.0),
+            "average_volume": (sum(row.get("volume", 0.0) for row in rows[-VOLUME_LOOKBACK-1:-1]) / VOLUME_LOOKBACK
+                               if len(rows) >= VOLUME_LOOKBACK + 1 else 0.0),
             "candle_time": str(last["time"])
         }
 
@@ -167,6 +175,9 @@ def market(coin):
                 "previous_lower": previous_lower, "rsi": rsi(closes),
                 "ema50": ema50, "ema50_previous": ema50_previous,
                 "prior_high": max(float(row[2]) for row in rows[-11:-1]),
+                "volume": float(last[6]),
+                "average_volume": (sum(float(row[6]) for row in rows[-VOLUME_LOOKBACK-1:-1]) / VOLUME_LOOKBACK
+                                   if len(rows) >= VOLUME_LOOKBACK + 1 else 0.0),
                 "candle_time": str(int(float(last[0])))
             }
         except Exception as error:
@@ -205,11 +216,19 @@ def sell(state, coin, price, reason):
     profit = proceeds - position["cost"]
     state["cash"] += proceeds
     state["realized"] += profit
+    strategy = position.get("strategy", "legacy_unclassified")
     state["trades"].append({
         "coin": coin, "action": "SELL", "price": execution_price, "profit": profit,
-        "reason": reason, "strategy": "bollinger_rsi40_4h",
+        "reason": reason, "strategy": strategy,
         "time": datetime.now(timezone.utc).isoformat()
     })
+    today = datetime.now(timezone.utc).date().isoformat()
+    if state.get("risk_day") != today:
+        state["risk_day"] = today
+        state["daily_realized"] = 0.0
+        state["consecutive_losses"] = 0
+    state["daily_realized"] = float(state.get("daily_realized", 0.0)) + profit
+    state["consecutive_losses"] = (int(state.get("consecutive_losses", 0)) + 1) if profit < 0 else 0
     return (f"🔴 DEMO-VERKAUF {coin}: ca. {execution_price:.6f} USD\n"
             f"Grund: {reason}\nErgebnis: {profit:+.2f} USD")
 
@@ -217,9 +236,16 @@ def sell(state, coin, price, reason):
 def main():
     state = load_state()
     state.setdefault("last_4h_candle", {})
+    today = datetime.now(timezone.utc).date().isoformat()
+    if state.get("risk_day") != today:
+        state["risk_day"] = today
+        state["daily_realized"] = 0.0
+        state["consecutive_losses"] = 0
+    state.setdefault("daily_realized", 0.0)
+    state.setdefault("consecutive_losses", 0)
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals, prices = {}, {}
-    print("CRYPTO DEMO BOT 5.4 - BOLLINGER + MOMENTUM BREAKOUT / EMA50 / PROFIT LOCK / 4H")
+    print("CRYPTO DEMO BOT 5.5 - BALANCED / VOLUME FILTER / RISK GUARDS / 4H")
     print("PAPER TRADING - KEIN ECHTHANDEL - KEINE ECHTEN ORDERS")
 
     for coin in COINS:
@@ -238,6 +264,10 @@ def main():
                 "price": round(price, 8), "rsi": round(data["rsi"], 2),
                 "bb_middle": round(data["middle"], 8), "bb_lower": round(data["lower"], 8),
                 "ema50": round(data["ema50"], 8),
+                "volume": round(float(data.get("volume", 0.0)), 4),
+                "average_volume": round(float(data.get("average_volume", 0.0)), 4),
+                "volume_ratio": (round(float(data["volume"]) / float(data["average_volume"]), 2)
+                                 if float(data.get("average_volume", 0.0)) > 0 else None),
                 "trend_up": bool(price > data["ema50"] and data["ema50"] > data["ema50_previous"]),
                 "candle_time": data["candle_time"],
                 "updated": datetime.now(timezone.utc).isoformat()
@@ -297,14 +327,29 @@ def main():
                         and price > data["ema50"]
                         and data["ema50"] > data["ema50_previous"]
                     )
+                    volume_ok = (
+                        float(data.get("average_volume", 0.0)) > 0
+                        and float(data.get("volume", 0.0)) >=
+                            float(data["average_volume"]) * BREAKOUT_VOLUME_MULTIPLE
+                    )
                     momentum_signal = (
                         price > data["prior_high"]
                         and price > data["ema50"]
                         and data["ema50"] > data["ema50_previous"]
                         and MOMENTUM_RSI_MIN <= data["rsi"] <= MOMENTUM_RSI_MAX
                         and price <= data["ema50"] * (1 + MOMENTUM_MAX_EMA_DISTANCE)
+                        and volume_ok
                     )
-                    if len(state["positions"]) >= MAX_OPEN_POSITIONS:
+                    risk_pause = (
+                        float(state.get("daily_realized", 0.0)) <= -DAILY_MAX_LOSS
+                        or int(state.get("consecutive_losses", 0)) >= MAX_CONSECUTIVE_LOSSES
+                    )
+                    if risk_pause:
+                        pause_reason = ("Tagesverlust-Limit erreicht" if float(state.get("daily_realized", 0.0)) <= -DAILY_MAX_LOSS
+                                        else f"{MAX_CONSECUTIVE_LOSSES} Verlusttrades in Folge")
+                        decision_lines.append(f"{coin}: KAUFPAUSE - {pause_reason}")
+                        signal.update({"decision": "WAIT", "reason": f"Kaufsperre bis UTC-Tageswechsel: {pause_reason}"})
+                    elif len(state["positions"]) >= MAX_OPEN_POSITIONS:
                         decision_lines.append(f"{coin}: WARTEN - maximal {MAX_OPEN_POSITIONS} Positionen gleichzeitig")
                         signal.update({"decision": "WAIT", "reason": "Maximale Anzahl offener Positionen erreicht"})
                     elif entry_signal or momentum_signal:
@@ -314,7 +359,7 @@ def main():
                         if result:
                             messages.append(result)
                             decision_lines.append(f"{coin}: KAUFSIGNAL - DEMO-KAUF ({'Bollinger-Reclaim' if entry_signal else 'Momentum-Ausbruch'})")
-                            signal.update({"decision": "BUY", "reason": ("Bollinger-Reclaim + RSI <= 40" if entry_signal else "Momentum-Ausbruch über 10-Kerzen-Hoch; EMA50 steigend; RSI 48-68; max. 2,5 % über EMA50")})
+                            signal.update({"decision": "BUY", "reason": ("Bollinger-Reclaim + RSI <= 40" if entry_signal else f"Momentum-Ausbruch + Volumen {float(data['volume']) / float(data['average_volume']):.2f}x Durchschnitt; EMA50 steigend; RSI 48-68")})
                         else:
                             decision_lines.append(f"{coin}: KEIN KAUF - virtuelles Budget zu klein")
                             signal.update({"decision": "WAIT", "reason": "Virtuelles Budget zu klein"})
@@ -324,6 +369,8 @@ def main():
                             reasons.append("kein bestätigter Rücklauf über das untere Bollinger-Band")
                         if data["rsi"] > 40:
                             reasons.append("RSI über 40 für Bollinger-Einstieg")
+                        if not volume_ok:
+                            reasons.append(f"Ausbruchsvolumen unter {BREAKOUT_VOLUME_MULTIPLE:.2f}x Durchschnitt")
                         if not (price > data["ema50"] and data["ema50"] > data["ema50_previous"]):
                             reasons.append("Trendfilter EMA50 nicht aufwärts")
                         reason = "; ".join(reasons) or "Einstiegsbedingungen nicht vollständig"
@@ -352,11 +399,27 @@ def main():
     gross_loss = abs(sum(trade["profit"] for trade in losers))
     win_rate = len(winners) / len(closed) * 100 if closed else 0
     profit_factor = gross_profit / gross_loss if gross_loss else None
+    tracked_strategies = {
+        "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock",
+        "momentum_breakout_ema50_rsi48_68_4h_v1"
+    }
+    strategy_performance = {}
+    for strategy in tracked_strategies:
+        strategy_sells = [t for t in closed if t.get("strategy") == strategy]
+        strategy_wins = sum(1 for t in strategy_sells if float(t.get("profit", 0)) > 0)
+        strategy_performance[strategy] = {
+            "closed": len(strategy_sells),
+            "wins": strategy_wins,
+            "losses": sum(1 for t in strategy_sells if float(t.get("profit", 0)) < 0),
+            "win_rate": round(strategy_wins / len(strategy_sells) * 100, 1) if strategy_sells else None,
+            "net_profit": round(sum(float(t.get("profit", 0)) for t in strategy_sells), 2)
+        }
 
     report = [
-        "🤖 CRYPTO DEMO BOT 5.4",
+        "🤖 CRYPTO DEMO BOT 5.5 - AUSGEWOGEN",
         "Strategie A: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
-        f"Strategie B: Momentum-Ausbruch über {MOMENTUM_BREAKOUT_LOOKBACK}-Kerzen-Hoch + EMA50 steigend + RSI {MOMENTUM_RSI_MIN:.0f}-{MOMENTUM_RSI_MAX:.0f} + max. {MOMENTUM_MAX_EMA_DISTANCE:.1%} über EMA50 | 4H",
+        f"Strategie B: Momentum-Ausbruch über {MOMENTUM_BREAKOUT_LOOKBACK}-Kerzen-Hoch + EMA50 steigend + RSI {MOMENTUM_RSI_MIN:.0f}-{MOMENTUM_RSI_MAX:.0f} + max. {MOMENTUM_MAX_EMA_DISTANCE:.1%} über EMA50 + Volumen >= {BREAKOUT_VOLUME_MULTIPLE:.2f}x Durchschnitt | 4H",
+        f"Risikokontrolle: Tagesverlust-Limit {DAILY_MAX_LOSS:.2f} USD | Kaufpause nach {MAX_CONSECUTIVE_LOSSES} Verlusten in Folge | max. {MAX_OPEN_POSITIONS} Positionen",
         "Neue Trades: Stop-Loss 4 % | Take-Profit 6 % | Gewinnsicherung ab +3 %, mindestens +1 % brutto, Trailing 2,5 % | max. 4 Positionen",
         "Bestehende Positionen behalten ihre gespeicherten Stop-/Zielwerte.",
         "PAPER TRADING - KEIN ECHTHANDEL",
@@ -376,6 +439,9 @@ def main():
         f"Gewinner / Verlierer: {len(winners)} / {len(losers)}",
         f"Trefferquote: {win_rate:.1f} %",
         f"Profit-Faktor: {profit_factor:.2f}" if profit_factor is not None else "Profit-Faktor: noch nicht berechenbar",
+        f"Tagesergebnis: {float(state.get('daily_realized', 0.0)):+.2f} USD | Verlustserie: {int(state.get('consecutive_losses', 0))}",
+        "Strategie A (nur korrekt zugeordnete Abschlüsse): " + json.dumps(strategy_performance["bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock"]),
+        "Strategie B (nur korrekt zugeordnete Abschlüsse): " + json.dumps(strategy_performance["momentum_breakout_ema50_rsi48_68_4h_v1"]),
         "━━━━━━━━━━━━━━━━", "PAPER TRADING - KEINE ECHTEN BÖRSENORDERS"
     ]
     if messages:
@@ -386,8 +452,17 @@ def main():
     report_text = "\n".join(report)
     print(report_text)
     state["signals"] = signals
+    state["strategy_performance"] = strategy_performance
+    state["risk_controls"] = {
+        "daily_max_loss": DAILY_MAX_LOSS,
+        "daily_realized": float(state.get("daily_realized", 0.0)),
+        "consecutive_losses": int(state.get("consecutive_losses", 0)),
+        "max_consecutive_losses": MAX_CONSECUTIVE_LOSSES,
+        "buy_paused": (float(state.get("daily_realized", 0.0)) <= -DAILY_MAX_LOSS
+                       or int(state.get("consecutive_losses", 0)) >= MAX_CONSECUTIVE_LOSSES)
+    }
     state["updated"] = datetime.now(timezone.utc).isoformat()
-    state["strategy_version"] = "5.4_bollinger_plus_momentum_breakout_ema50_profit_lock_4h_paper"
+    state["strategy_version"] = "5.5_balanced_volume_filter_daily_risk_guard_strategy_stats_4h_paper"
     save_state(state)
     telegram(report_text)
 
