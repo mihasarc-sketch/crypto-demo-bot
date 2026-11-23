@@ -96,7 +96,7 @@ tbody tr:last-child td{border-bottom:0}
 
 </style></head>
 <body><main>
-<header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.4 · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
+<header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.5 · Ausgewogen · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
 <div class="grid">
 <div class="card"><div class="k">Virtuelles Guthaben</div><div class="v" id="cash">—</div><div class="small">Nicht investiertes Demo-Geld</div></div>
 <div class="card"><div class="k">Realisierter Gesamtgewinn</div><div class="v" id="pnl">—</div><div class="small">Seit Beginn des Demo-Kontos</div></div>
@@ -127,6 +127,14 @@ tbody tr:last-child td{border-bottom:0}
 </div>
 <div class="notice"><b>Wichtiger Status:</b> Die öffentlichen Vorschauen liefern aktuell nicht zuverlässig alle Angaben für einen exakten Trade-Kopiervorgang. Deshalb ist die automatische Signalübernahme noch nicht aktiviert. Es werden keine Trades erfunden, keine kostenpflichtigen VIP-Signale verwendet und keine echten Orders ausgeführt. Sobald ein Signal öffentlich vollständig und eindeutig vorliegt, kann es im Paper-Test erfasst werden.</div>
 </section>
+<section id="strategyStats"><h2>Strategie-Auswertung 5.5</h2>
+<div class="grid">
+ <div class="card"><div class="k">Bollinger-Reclaim · abgeschlossene Trades</div><div class="v" id="bollingerClosed">—</div><div class="small" id="bollingerStats">Wird geladen</div></div>
+ <div class="card"><div class="k">Momentum-Ausbruch · abgeschlossene Trades</div><div class="v" id="momentumClosed">—</div><div class="small" id="momentumStats">Wird geladen</div></div>
+</div>
+<div class="notice" id="riskStatus">Risikokontrollen werden geladen …</div>
+<div class="small">Nur korrekt zugeordnete Abschlüsse werden den beiden Strategien zugerechnet. Ältere oder nicht eindeutig zuordenbare Verkäufe bleiben unklassifiziert.</div>
+</section>
 <section><h2>Markt-Signale · 12 Märkte</h2><div class="tablewrap"><table><thead><tr><th>Coin</th><th>Kurs (USD)</th><th>RSI</th><th>Signal</th><th>Begründung</th></tr></thead><tbody id="signals"><tr><td colspan="5">Lade Daten …</td></tr></tbody></table></div></section>
 <section><h2>15-Minuten-Charts · Coin auswählen</h2>
 <div class="chart-status" id="chartStatus">Lade öffentliche Kraken-Kursdaten …</div>
@@ -137,11 +145,11 @@ tbody tr:last-child td{border-bottom:0}
  <div class="chart-foot" id="activeFoot">—</div>
 </div>
 </section>
-<section id="positionsSection"><h2>Offene Positionen · Gewinnsicherung 5.4</h2>
+<section id="positionsSection"><h2>Offene Positionen · Gewinnsicherung 5.5</h2>
 <div class="trader-note">Aktueller Positionswert basiert auf dem letzten verfügbaren Bot-Kurs. Gewinn/Verlust ist eine Schätzung nach simulierten Gebühren und Slippage, kein realisierter Gewinn.</div>
 <div class="tablewrap"><table><thead><tr><th>Coin</th><th>Aktueller Kurs</th><th>Einstieg</th><th>Offener Gewinn/Verlust</th><th>Gewinnsicherung</th><th>Trailing-Stop / Aktivierung</th></tr></thead><tbody id="open"><tr><td colspan="6">Lade Daten …</td></tr></tbody></table></div>
 <div class="notice"><b>Gewinnsicherung 5.3:</b> Die Gewinnsicherung wird nach einer abgeschlossenen 4-Stunden-Kerze ab +3 % Kursgewinn aktiviert. Danach liegt der Stop mindestens 1 % über dem Einstieg (brutto) und folgt dem höchsten abgeschlossenen Kerzenhoch mit 2,5 % Abstand. Gebühren und Slippage können den tatsächlichen Nettoerlös verringern. Bei älteren Positionen werden gespeicherte Stop-/Zielwerte beibehalten.</div>
-<div class="notice"><b>Neue Einstiegsstrategie 5.4:</b> Zusätzlich zum bisherigen Bollinger-Reclaim prüft der Bot einen bestätigten Ausbruch über das Hoch der letzten 10 abgeschlossenen 4h-Kerzen. Dafür müssen der Kurs über einem steigenden EMA50 liegen, der RSI zwischen 48 und 68 liegen und der Kurs höchstens 2,5 % über dem EMA50 stehen. Bei überhitzten Kursen (RSI über 68) wird nicht hinterhergekauft. Maximal 4 offene Positionen; Einsatz und Ausstiegsregeln bleiben begrenzt. Alle Trades sind virtuell.</div>
+<div class="notice"><b>Strategie 5.5 · Ausgewogen:</b> Momentum-Ausbrüche benötigen zusätzlich mindestens das 1,20-Fache des durchschnittlichen Volumens der vorherigen 20 abgeschlossenen 4h-Kerzen. Neue Käufe pausieren beim Tagesverlust von 2 % des Startkapitals oder nach 3 Verlusttrades in Folge (bis zum UTC-Tageswechsel). Offene Positionen werden weiterhin normal überwacht und können verkauft werden. Maximal 4 offene Positionen; bestehende Stop-/Zielwerte bleiben erhalten. Alle Trades sind virtuell.</div>
 </section>
 <section><h2>Letzte Aktivitäten</h2><div class="tablewrap"><table><thead><tr><th>Zeit (UTC)</th><th>Coin</th><th>Aktion</th><th>Kurs</th><th>Ergebnis</th></tr></thead><tbody id="trades"></tbody></table></div></section>
 <div class="status" id="updated">Daten werden geladen …</div>
@@ -157,6 +165,18 @@ function render(s){
  const pnl=Number(s.realized||0), p=document.getElementById('pnl');p.textContent=(pnl>0?'+':'')+money(pnl);p.className='v '+(pnl>=0?'pos':'neg');
  const positions=s.positions||{};document.getElementById('positions').textContent=Object.keys(positions).length;
  const trades=s.trades||[], sells=trades.filter(t=>t.action==='SELL');document.getElementById('closed').textContent=sells.length;
+ const perf=s.strategy_performance||{};
+ const b=perf.bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock||{};
+ const m=perf.momentum_breakout_ema50_rsi48_68_4h_v1||{};
+ document.getElementById('bollingerClosed').textContent=b.closed??0;
+ document.getElementById('momentumClosed').textContent=m.closed??0;
+ const statText=x=>x.closed?('Trefferquote '+num(x.win_rate,1)+' % · Netto '+money(x.net_profit)):'Noch keine sauber zugeordneten Abschlüsse';
+ document.getElementById('bollingerStats').textContent=statText(b);
+ document.getElementById('momentumStats').textContent=statText(m);
+ const risk=s.risk_controls||{};
+ document.getElementById('riskStatus').textContent=risk.buy_paused
+  ? 'KAUFPAUSE aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)
+  : 'Risikokontrollen aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)+' · Tageslimit '+money(risk.daily_max_loss);
  const sig=s.signals||{};document.getElementById('signals').innerHTML=Object.entries(sig).map(([coin,x])=>'<tr><td><button type="button" class="signal-coin" data-open-chart="'+esc(coin)+'">'+esc(coin)+' ↗</button></td><td>'+num(x.price,6)+'</td><td>'+num(x.rsi,2)+'</td><td class="wait">'+esc(x.decision||'—')+'</td><td>'+esc(x.reason||'—')+'</td></tr>').join('')||'<tr><td colspan="5">Keine Signale vorhanden.</td></tr>';
  const open=Object.entries(positions), signals=s.signals||{};document.getElementById('open').innerHTML=open.map(([coin,x])=>{
   const entry=Number(x.entry_price??x.entry??0), qty=Number(x.amount??x.quantity??0), cost=Number(x.cost??x.invested??0);
