@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#0b1220"><title>Crypto Demo Bot</title>
+<meta name="theme-color" content="#05070b"><meta name="description" content="Crypto Demo Bot · Paper Trading Dashboard"><title>Crypto Demo Bot · Night Session</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1220;--panel:#121d30;--line:#26354d;--muted:#9aabc2;--text:#edf4ff;--green:#39d6a0;--red:#ff7885;--blue:#7db5ff}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#172b49 0,var(--bg) 52%);color:var(--text);font:15px system-ui,-apple-system,Segoe UI,sans-serif}
@@ -94,14 +94,82 @@ tbody tr:last-child td{border-bottom:0}
 }
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
 
+
+/* NIGHT SESSION UI — visual redesign inspired by the supplied reference */
+:root{color-scheme:dark;--bg:#050608;--panel:#0b0e12;--line:#20262c;--muted:#7e8a91;--text:#f1f5f4;--green:#63e7bd;--red:#ff6878;--blue:#67baff;--gold:#f4c45f}
+html{background:#050608}
+body{background:radial-gradient(ellipse at 52% 0%,#101b1c 0%,#07090b 42%,#050608 78%);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+main{max-width:1440px;padding:22px 22px 56px}
+.top{margin:0 0 16px;padding:17px 20px;border:1px solid #1e2928;border-radius:18px;background:linear-gradient(110deg,#0e1516,#090c0e 65%,#101014);box-shadow:0 14px 45px #0008}
+.top h1{font-size:23px;letter-spacing:.1em;text-transform:uppercase}
+.top .sub{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:#74817e}
+.top>div:last-child{gap:8px!important}
+.pill{border:1px solid #245849;background:#0c211c;color:#79efc2;font-size:10px;letter-spacing:.13em;padding:8px 11px}
+#refresh{background:#171e20;border:1px solid #303a3b;border-radius:10px;font-size:12px}
+.grid{gap:10px}
+body>main>.grid:first-of-type{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:10px}
+.card{border:1px solid #20272b;border-radius:13px;background:linear-gradient(145deg,#101417,#0a0d10);box-shadow:0 8px 22px #0006;padding:17px}
+.card:before{height:2px;background:linear-gradient(90deg,transparent,#52dcb4,transparent);opacity:.55}
+.k{font-size:9px;letter-spacing:.16em;color:#74817f}
+.v{font-size:clamp(23px,2.6vw,31px);font-weight:760;letter-spacing:-1px}
+.small{font-size:10px;color:#77827f}
+section{margin-top:14px;padding:15px;border:1px solid #1b2225;border-radius:15px;background:linear-gradient(145deg,#0c1012,#080a0c)}
+h2{font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:#c8d1ce}
+h2:before{background:linear-gradient(180deg,#62e9c0,#b2f5dd);box-shadow:0 0 12px #63e7bd55}
+.tablewrap{border:1px solid #1c2427;border-radius:10px;background:#080b0d}
+table{background:transparent}th{background:#101719;color:#84918d;font-size:9px;letter-spacing:.12em}td{font-size:11px;color:#d7dfdc}
+tbody tr:hover{background:#14201d}
+.notice{background:#17140c;border-color:#51401e;color:#e8d39b}
+.trader-note{color:#84918d}
+.chart-card,.chart-detail,.coin-choice{background:linear-gradient(145deg,#101719,#090c0e);border-color:#202a2b}
+.coin-choice.active,.coin-choice:hover{border-color:#55d9b2;background:#10221d}
+.chart-canvas-large{filter:drop-shadow(0 0 10px #5be1b022)}
+.status{color:#687571}
+.night-overview{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,.9fr);gap:10px;margin:10px 0}
+.night-panel{min-width:0;border:1px solid #20272b;border-radius:14px;background:linear-gradient(145deg,#0d1214,#080b0d);padding:14px;overflow:hidden}
+.night-panel h2{margin:0 0 12px;font-size:10px;letter-spacing:.18em;color:#82908b}
+.night-panel h2:before{display:none}
+.profit-chart{display:block;width:100%;height:220px}
+.activity-log{height:220px;overflow:auto;display:flex;flex-direction:column;gap:0}
+.activity-row{display:grid;grid-template-columns:52px 1fr auto;gap:8px;align-items:center;padding:8px 3px;border-bottom:1px solid #1b2224;font:10px ui-monospace,SFMono-Regular,Menlo,monospace}
+.activity-row:last-child{border-bottom:0}
+.activity-tag{font-weight:800;letter-spacing:.06em}
+.activity-tag.buy{color:#65c8ff}.activity-tag.sell{color:#63e7bd}.activity-tag.error{color:#ff7683}
+.activity-main{color:#d1dbd7;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.activity-value{color:#a9b5af;text-align:right}
+.night-strip{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 16px}
+.night-chip{border:1px solid #202a2a;border-radius:99px;padding:7px 10px;background:#0b1011;color:#8d9a95;font-size:9px;letter-spacing:.11em;text-transform:uppercase}
+.night-chip strong{color:#d8e2dd;margin-left:4px}
+@media(max-width:760px){
+ main{padding:10px 9px 34px}
+ .top{padding:13px;border-radius:13px}
+ .top h1{font-size:18px}
+ .top .sub{font-size:8px;letter-spacing:.13em}
+ body>main>.grid:first-of-type{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .card{padding:13px;border-radius:11px}
+ .v{font-size:22px}
+ .night-overview{grid-template-columns:1fr;gap:8px}
+ .night-panel{padding:11px}
+ .profit-chart,.activity-log{height:185px}
+ section{padding:12px 9px;margin-top:11px}
+ h2{font-size:11px}
+ .night-chip{font-size:8px;padding:6px 8px}
+}
+@media(max-width:390px){.top>div:last-child{width:100%;justify-content:space-between}.v{font-size:20px}}
+
 </style></head>
 <body><main>
-<header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.5 · Ausgewogen · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
+<header class="top"><div><h1>◉ Crypto Demo Bot</h1><div class="sub">Night session · Strategy 5.5 · Balanced risk · 12 markets</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING ONLY</span><button id="refresh">↻ Aktualisieren</button></div></header>
+<div class="night-strip"><span class="night-chip">System <strong>ONLINE</strong></span><span class="night-chip">Strategie <strong>5.5 AUSGEWOGEN</strong></span><span class="night-chip">Zeitfenster <strong>4H</strong></span><span class="night-chip">Ausführung <strong>NUR VIRTUELL</strong></span></div>
 <div class="grid">
 <div class="card"><div class="k">Virtuelles Guthaben</div><div class="v" id="cash">—</div><div class="small">Nicht investiertes Demo-Geld</div></div>
 <div class="card"><div class="k">Realisierter Gesamtgewinn</div><div class="v" id="pnl">—</div><div class="small">Seit Beginn des Demo-Kontos</div></div>
 <div class="card"><div class="k">Offene Positionen</div><div class="v" id="positions">—</div><div class="small">Virtuelle Käufe</div></div>
 <div class="card"><div class="k">Abgeschlossene Verkäufe</div><div class="v" id="closed">—</div><div class="small">Historische Trades</div></div>
+</div>
+<div class="night-overview">
+ <section class="night-panel" style="margin:0"><h2>Profit-Verlauf · kumulierte abgeschlossene Trades</h2><canvas id="profitHistory" class="profit-chart" aria-label="Kumuliertes Ergebnis der abgeschlossenen Paper-Trades"></canvas><div class="small">Historische Paper-Trades · keine Prognose</div></section>
+ <section class="night-panel" style="margin:0"><h2>Aktivitätsprotokoll · letzte Aktionen</h2><div id="activityLog" class="activity-log"><div class="empty">Lade Aktivitäten …</div></div></section>
 </div>
 <section><h2>Trader-Analyse · Top 5 externe Signale</h2>
 <div class="trader-note">Momentaufnahme vom 20.11.2026 · Rangfolge nach durchschnittlichem Risiko-Ertrags-Verhältnis (RR), nicht nach Gewinnquote. Die Ergebnisse sind vor Gebühren und ohne Hebel. Diese Tabelle ist ein externer Vergleich und wird nicht automatisch live aktualisiert. <a class="trader-link" href="https://x-trades.live/" target="_blank" rel="noopener">Quelle und aktuelle Rangliste ↗</a></div>
@@ -160,7 +228,21 @@ const DATA='https://raw.githubusercontent.com/mihasarc-sketch/crypto-demo-bot/ma
 const money=n=>Number(n||0).toLocaleString('de-AT',{style:'currency',currency:'USD'});
 const num=(n,d=4)=>n==null?'—':Number(n).toLocaleString('de-AT',{maximumFractionDigits:d});
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function render(s){
+
+function drawProfitHistory(trades){
+ const canvas=document.getElementById('profitHistory');if(!canvas)return;
+ const w=canvas.clientWidth||480,h=canvas.clientHeight||220,dpr=window.devicePixelRatio||1;
+ canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ const sells=trades.filter(t=>t.action==='SELL'&&Number.isFinite(Number(t.profit)));
+ let points=[0],sum=0;sells.forEach(t=>{sum+=Number(t.profit);points.push(sum)});
+ const left=34,right=12,top=12,bottom=24,pw=w-left-right,ph=h-top-bottom;
+ let lo=Math.min(0,...points),hi=Math.max(0,...points);if(hi-lo<1){hi+=1;lo-=1}
+ const pad=(hi-lo)*.12;lo-=pad;hi+=pad;
+ const x=i=>left+(points.length<2?0:i/(points.length-1))*pw;
+ const y=v=>top+(hi-v)/(hi-lo)*ph;
+ ctx.font='9px ui-monospace,monospace';ctx.fillStyle='#71817a';ctx.strokeStyle='#202a28';ctx.lineWidth=1;
+ for(let i=0;i<=3;i++){const val=hi-(hi-lo)*i/3,yy=top+ph*i/3;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(w-right,yy);ctx.stroke();ctx.textAlign='right';ctx.fillText(val.toFixed(0)+' 
  document.getElementById('cash').textContent=money(s.cash);
  const pnl=Number(s.realized||0), p=document.getElementById('pnl');p.textContent=(pnl>0?'+':'')+money(pnl);p.className='v '+(pnl>=0?'pos':'neg');
  const positions=s.positions||{};document.getElementById('positions').textContent=Object.keys(positions).length;
@@ -191,6 +273,378 @@ function render(s){
   const stop=active?num(trail,6)+' USD':'Aktivierung ab '+num(activation,6)+' USD';
   return '<tr><td><b>'+esc(coin)+'</b></td><td>'+ (hasMarket?num(market,6)+' USD':'—')+'</td><td>'+num(entry,6)+' USD</td><td class="'+resultClass+'">'+result+'</td><td>'+lock+'</td><td>'+stop+'</td></tr>';
  }).join('')||'<tr><td colspan="6" class="empty">Derzeit keine offenen Positionen.</td></tr>';
+ drawProfitHistory(trades);
+ renderActivityLog(trades);
+ document.getElementById('trades').innerHTML=trades.slice().reverse().slice(0,15).map(t=>'<tr><td>'+esc((t.time||'').replace('T',' ').replace('+00:00',''))+'</td><td>'+esc(t.coin)+'</td><td>'+esc(t.action)+'</td><td>'+num(t.price,6)+'</td><td class="'+(Number(t.profit||0)>=0?'pos':'neg')+'">'+(t.profit==null?'—':(t.profit>=0?'+':'')+money(t.profit))+'</td></tr>').join('')||'<tr><td colspan="5" class="empty">Noch keine Aktivitäten.</td></tr>';
+ document.getElementById('updated').textContent='Letzter Bot-Lauf: '+(s.updated?new Date(s.updated).toLocaleString('de-AT'):'unbekannt')+' · Dashboard lädt automatisch jede Minute neu.';
+}
+async function load(){const b=document.getElementById('refresh');b.disabled=true;try{const r=await fetch(DATA+'?t='+Date.now());if(!r.ok)throw Error('HTTP '+r.status);render(await r.json())}catch(e){document.getElementById('updated').textContent='Daten konnten nicht geladen werden. Bitte später erneut versuchen.'}finally{b.disabled=false}}
+document.getElementById('refresh').addEventListener('click',load);load();setInterval(load,60000);
+
+document.getElementById('signals').addEventListener('click',e=>{const b=e.target.closest('[data-open-chart]');if(!b)return;const coin=b.dataset.openChart;const section=document.getElementById('coinPicker');if(section){const target=section.querySelector('[data-coin="'+coin+'"]');if(target){showSelected(coin);document.getElementById('chartDetail').scrollIntoView({behavior:'smooth',block:'center'});if(!chartCache[coin])loadOneChart(coin,CHARTS[coin]).catch(()=>{document.getElementById('activeFoot').textContent='Chartdaten momentan nicht verfügbar.'});}else{document.getElementById('chartStatus').scrollIntoView({behavior:'smooth'});}}});
+const CHARTS={
+ BTC:{pair:'XBTUSD'},ETH:{pair:'ETHUSD'},SOL:{pair:'SOLUSD'},XRP:{pair:'XRPUSD'},
+ ADA:{pair:'ADAUSD'},DOGE:{pair:'DOGEUSD'},LINK:{pair:'LINKUSD'},AVAX:{pair:'AVAXUSD'},
+ LTC:{pair:'LTCUSD'},DOT:{pair:'DOTUSD'},GOLD:{future:'PF_XAUUSD'},SILVER:{future:'PF_XAGUSD'}
+};
+const chartCache={};let selectedCoin=null;
+const picker=document.getElementById('coinPicker');
+picker.innerHTML=Object.keys(CHARTS).map(coin=>'<button type="button" class="coin-choice" data-coin="'+coin+'"><b>'+coin+'</b><span>15-Minuten-Chart öffnen</span></button>').join('');
+function drawSelectedChart(coin,rows){
+ const canvas=document.getElementById('activeChart');if(!canvas)return;
+ const w=canvas.clientWidth||320,h=canvas.clientHeight||250,dpr=window.devicePixelRatio||1;
+ canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ if(!rows||rows.length<2){ctx.fillStyle='#9aabc2';ctx.font='12px system-ui';ctx.fillText('Keine Chartdaten verfügbar',10,24);return}
+ const left=48,right=12,top=12,bottom=42,plotW=w-left-right,plotH=h-top-bottom;
+ const lo=Math.min(...rows.map(x=>x.low)),hi=Math.max(...rows.map(x=>x.high)),pad=(hi-lo)*.08||1;
+ const min=lo-pad,max=hi+pad,step=plotW/rows.length,y=v=>top+(max-v)/(max-min)*plotH;
+ ctx.font='10px system-ui';ctx.strokeStyle='#26354d';ctx.fillStyle='#9aabc2';ctx.lineWidth=1;
+ for(let i=0;i<=4;i++){const val=max-(max-min)*i/4,yy=top+plotH*i/4;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(w-right,yy);ctx.stroke();ctx.textAlign='right';ctx.fillText(num(val,coin==='GOLD'||coin==='SILVER'?2:4),left-6,yy+3)}
+ rows.forEach((r,i)=>{const x=left+i*step+step/2,up=r.close>=r.open;ctx.strokeStyle=up?'#39d6a0':'#ff7885';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=1;
+ ctx.beginPath();ctx.moveTo(x,y(r.high));ctx.lineTo(x,y(r.low));ctx.stroke();
+ const bodyW=Math.max(2,Math.min(9,step*.58)),bodyY=Math.min(y(r.open),y(r.close)),bodyH=Math.max(1,Math.abs(y(r.open)-y(r.close)));
+ ctx.fillRect(x-bodyW/2,bodyY,bodyW,bodyH);
+ });
+ const labels=[0,Math.floor((rows.length-1)/3),Math.floor(2*(rows.length-1)/3),rows.length-1];
+ ctx.fillStyle='#9aabc2';ctx.textAlign='center';
+ labels.forEach(i=>{const x=left+i*step+step/2;const d=new Date(rows[i].time*1000);const label=d.toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'});ctx.fillText(label,x,h-23);ctx.fillText(d.toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit'}),x,h-9)});
+}
+async function loadOneChart(coin,cfg){
+ const now=Math.floor(Date.now()/1000);let rows=[];
+ if(cfg.future){
+  const from=now-36*3600,url='https://futures.kraken.com/api/charts/v1/trade/'+cfg.future+'/15m?from='+from+'&to='+now;
+  const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();
+  rows=(j.candles||[]).map(x=>({time:Number(x.time),open:+x.open,high:+x.high,low:+x.low,close:+x.close})).filter(x=>Number.isFinite(x.close));
+  if(rows.length&&rows[0].time>1e12)rows=rows.map(x=>({...x,time:x.time/1000}));
+  rows=rows.filter(x=>x.time+900<=now).slice(-48);
+ }else{
+  const r=await fetch('https://api.kraken.com/0/public/OHLC?pair='+cfg.pair+'&interval=15');
+  if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();if(j.error?.length)throw Error(j.error.join(', '));
+  const key=Object.keys(j.result||{}).find(x=>x!=='last');if(!key)throw Error('Kein Handelspaar gefunden');
+  rows=(j.result[key]||[]).slice(0,-1).slice(-48).map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4]}));
+ }
+ if(!rows.length)throw Error('Keine abgeschlossenen 15-Minuten-Kerzen');
+ chartCache[coin]=rows;
+ const last=rows[rows.length-1];
+ const button=picker.querySelector('[data-coin="'+coin+'"]');
+ if(button)button.querySelector('span').textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?2:4)+' USD';
+ if(selectedCoin===coin)showSelected(coin);
+ return true;
+}
+function showSelected(coin){
+ selectedCoin=coin;
+ document.querySelectorAll('.coin-choice').forEach(b=>b.classList.toggle('active',b.dataset.coin===coin));
+ const detail=document.getElementById('chartDetail');detail.hidden=false;
+ document.getElementById('activeCoin').textContent=coin+' · 15 Minuten';
+ const rows=chartCache[coin]||[];
+ if(rows.length){
+  const last=rows[rows.length-1];document.getElementById('activePrice').textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?4:6)+' USD';
+  document.getElementById('activeFoot').textContent='48 abgeschlossene Kerzen · Zeitraum: '+new Date(rows[0].time*1000).toLocaleString('de-AT')+' bis '+new Date(last.time*1000).toLocaleString('de-AT')+' · Zeiten in lokaler Zeit';
+  drawSelectedChart(coin,rows);
+ }else{
+  document.getElementById('activePrice').textContent='Lade Kurs …';
+  document.getElementById('activeFoot').textContent='Kursdaten werden geladen …';
+ }
+}
+picker.addEventListener('click',e=>{const b=e.target.closest('[data-coin]');if(!b)return;showSelected(b.dataset.coin);if(!chartCache[b.dataset.coin])loadOneChart(b.dataset.coin,CHARTS[b.dataset.coin]).catch(()=>{document.getElementById('activeFoot').textContent='Chartdaten momentan nicht verfügbar.'})});
+document.getElementById('closeChart').addEventListener('click',()=>{document.getElementById('chartDetail').hidden=true;document.querySelectorAll('.coin-choice').forEach(b=>b.classList.remove('active'));selectedCoin=null});
+async function loadCharts(){
+ const status=document.getElementById('chartStatus');status.textContent='Aktualisiere Coin-Kurse …';
+ const results=await Promise.allSettled(Object.entries(CHARTS).map(([coin,cfg])=>loadOneChart(coin,cfg)));
+ const ok=results.filter(x=>x.status==='fulfilled').length;
+ status.textContent=ok+' von 12 Kursen geladen · Tippe auf einen Coin, um seinen Chart zu öffnen. Aktualisierung alle 5 Minuten.';
+ if(selectedCoin&&chartCache[selectedCoin])showSelected(selectedCoin);
+}
+loadCharts();setInterval(loadCharts,300000);
+window.addEventListener('resize',()=>{if(selectedCoin&&chartCache[selectedCoin])drawSelectedChart(selectedCoin,chartCache[selectedCoin]);const s=window.__lastDashboardState;if(s)drawProfitHistory(s.trades||[])});
+</script></body></html>,left-6,yy+3)}
+ if(!sells.length){ctx.fillStyle='#82908b';ctx.textAlign='center';ctx.fillText('Noch keine abgeschlossenen Trades',w/2,h/2);return}
+ const grad=ctx.createLinearGradient(0,top,0,top+ph);grad.addColorStop(0,'rgba(85,224,179,.24)');grad.addColorStop(1,'rgba(85,224,179,0)');
+ ctx.beginPath();points.forEach((v,i)=>i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v)));ctx.lineTo(x(points.length-1),top+ph);ctx.lineTo(x(0),top+ph);ctx.closePath();ctx.fillStyle=grad;ctx.fill();
+ ctx.beginPath();points.forEach((v,i)=>i?ctx.lineTo(x(i),y(v)):ctx.moveTo(x(i),y(v)));ctx.strokeStyle='#65e4bb';ctx.lineWidth=2;ctx.shadowColor='#65e4bb66';ctx.shadowBlur=8;ctx.stroke();ctx.shadowBlur=0;
+ const last=points[points.length-1],lx=x(points.length-1),ly=y(last);
+ ctx.beginPath();ctx.arc(lx,ly,4,0,Math.PI*2);ctx.fillStyle='#d6fff0';ctx.fill();
+ ctx.textAlign='left';ctx.fillStyle=last>=0?'#65e4bb':'#ff7885';ctx.font='bold 10px ui-monospace,monospace';ctx.fillText((last>=0?'+':'')+last.toFixed(2)+' USD',Math.min(lx+8,w-94),Math.max(ly-10,12));
+ ctx.fillStyle='#71817a';ctx.font='9px ui-monospace,monospace';ctx.textAlign='left';ctx.fillText('Start',left,h-6);ctx.textAlign='right';ctx.fillText(sells.length+' Verkäufe',w-right,h-6);
+}
+function renderActivityLog(trades){
+ const el=document.getElementById('activityLog');if(!el)return;
+ const recent=trades.slice().reverse().slice(0,18);
+ el.innerHTML=recent.map(t=>{
+  const sell=t.action==='SELL',kind=sell?'sell':'buy',tag=sell?'FILL':'PAPER BUY';
+  const detail=sell?(t.reason||'Verkauf'):'Virtueller Einstieg';
+  const value=sell&&t.profit!=null?((t.profit>=0?'+':'')+Number(t.profit).toFixed(2)+' 
+ document.getElementById('cash').textContent=money(s.cash);
+ const pnl=Number(s.realized||0), p=document.getElementById('pnl');p.textContent=(pnl>0?'+':'')+money(pnl);p.className='v '+(pnl>=0?'pos':'neg');
+ const positions=s.positions||{};document.getElementById('positions').textContent=Object.keys(positions).length;
+ const trades=s.trades||[], sells=trades.filter(t=>t.action==='SELL');document.getElementById('closed').textContent=sells.length;
+ const perf=s.strategy_performance||{};
+ const b=perf.bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock||{};
+ const m=perf.momentum_breakout_ema50_rsi48_68_4h_v1||{};
+ document.getElementById('bollingerClosed').textContent=b.closed??0;
+ document.getElementById('momentumClosed').textContent=m.closed??0;
+ const statText=x=>x.closed?('Trefferquote '+num(x.win_rate,1)+' % · Netto '+money(x.net_profit)):'Noch keine sauber zugeordneten Abschlüsse';
+ document.getElementById('bollingerStats').textContent=statText(b);
+ document.getElementById('momentumStats').textContent=statText(m);
+ const risk=s.risk_controls||{};
+ document.getElementById('riskStatus').textContent=risk.buy_paused
+  ? 'KAUFPAUSE aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)
+  : 'Risikokontrollen aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)+' · Tageslimit '+money(risk.daily_max_loss);
+ const sig=s.signals||{};document.getElementById('signals').innerHTML=Object.entries(sig).map(([coin,x])=>'<tr><td><button type="button" class="signal-coin" data-open-chart="'+esc(coin)+'">'+esc(coin)+' ↗</button></td><td>'+num(x.price,6)+'</td><td>'+num(x.rsi,2)+'</td><td class="wait">'+esc(x.decision||'—')+'</td><td>'+esc(x.reason||'—')+'</td></tr>').join('')||'<tr><td colspan="5">Keine Signale vorhanden.</td></tr>';
+ const open=Object.entries(positions), signals=s.signals||{};document.getElementById('open').innerHTML=open.map(([coin,x])=>{
+  const entry=Number(x.entry_price??x.entry??0), qty=Number(x.amount??x.quantity??0), cost=Number(x.cost??x.invested??0);
+  const market=Number(signals[coin]?.price??0), hasMarket=market>0, active=Boolean(x.profit_lock_active);
+  const peak=Number(x.peak_price??entry), floor=entry*1.01, trail=Math.max(floor,peak*0.975);
+  const activation=entry*1.03;
+  const estimated=hasMarket?qty*market*0.9985-cost:null;
+  const pct=cost>0&&estimated!==null?estimated/cost*100:0;
+  const result=estimated===null?'—':(estimated>=0?'+':'')+money(estimated)+' ('+(pct>=0?'+':'')+num(pct,2)+' %)';
+  const resultClass=estimated===null?'wait':estimated>=0?'pos':'neg';
+  const lock=active?'<span class="pos"><b>AKTIV</b></span>':'<span class="wait">Noch nicht aktiv</span>';
+  const stop=active?num(trail,6)+' USD':'Aktivierung ab '+num(activation,6)+' USD';
+  return '<tr><td><b>'+esc(coin)+'</b></td><td>'+ (hasMarket?num(market,6)+' USD':'—')+'</td><td>'+num(entry,6)+' USD</td><td class="'+resultClass+'">'+result+'</td><td>'+lock+'</td><td>'+stop+'</td></tr>';
+ }).join('')||'<tr><td colspan="6" class="empty">Derzeit keine offenen Positionen.</td></tr>';
+ drawProfitHistory(trades);
+ renderActivityLog(trades);
+ document.getElementById('trades').innerHTML=trades.slice().reverse().slice(0,15).map(t=>'<tr><td>'+esc((t.time||'').replace('T',' ').replace('+00:00',''))+'</td><td>'+esc(t.coin)+'</td><td>'+esc(t.action)+'</td><td>'+num(t.price,6)+'</td><td class="'+(Number(t.profit||0)>=0?'pos':'neg')+'">'+(t.profit==null?'—':(t.profit>=0?'+':'')+money(t.profit))+'</td></tr>').join('')||'<tr><td colspan="5" class="empty">Noch keine Aktivitäten.</td></tr>';
+ document.getElementById('updated').textContent='Letzter Bot-Lauf: '+(s.updated?new Date(s.updated).toLocaleString('de-AT'):'unbekannt')+' · Dashboard lädt automatisch jede Minute neu.';
+}
+async function load(){const b=document.getElementById('refresh');b.disabled=true;try{const r=await fetch(DATA+'?t='+Date.now());if(!r.ok)throw Error('HTTP '+r.status);render(await r.json())}catch(e){document.getElementById('updated').textContent='Daten konnten nicht geladen werden. Bitte später erneut versuchen.'}finally{b.disabled=false}}
+document.getElementById('refresh').addEventListener('click',load);load();setInterval(load,60000);
+
+document.getElementById('signals').addEventListener('click',e=>{const b=e.target.closest('[data-open-chart]');if(!b)return;const coin=b.dataset.openChart;const section=document.getElementById('coinPicker');if(section){const target=section.querySelector('[data-coin="'+coin+'"]');if(target){showSelected(coin);document.getElementById('chartDetail').scrollIntoView({behavior:'smooth',block:'center'});if(!chartCache[coin])loadOneChart(coin,CHARTS[coin]).catch(()=>{document.getElementById('activeFoot').textContent='Chartdaten momentan nicht verfügbar.'});}else{document.getElementById('chartStatus').scrollIntoView({behavior:'smooth'});}}});
+const CHARTS={
+ BTC:{pair:'XBTUSD'},ETH:{pair:'ETHUSD'},SOL:{pair:'SOLUSD'},XRP:{pair:'XRPUSD'},
+ ADA:{pair:'ADAUSD'},DOGE:{pair:'DOGEUSD'},LINK:{pair:'LINKUSD'},AVAX:{pair:'AVAXUSD'},
+ LTC:{pair:'LTCUSD'},DOT:{pair:'DOTUSD'},GOLD:{future:'PF_XAUUSD'},SILVER:{future:'PF_XAGUSD'}
+};
+const chartCache={};let selectedCoin=null;
+const picker=document.getElementById('coinPicker');
+picker.innerHTML=Object.keys(CHARTS).map(coin=>'<button type="button" class="coin-choice" data-coin="'+coin+'"><b>'+coin+'</b><span>15-Minuten-Chart öffnen</span></button>').join('');
+function drawSelectedChart(coin,rows){
+ const canvas=document.getElementById('activeChart');if(!canvas)return;
+ const w=canvas.clientWidth||320,h=canvas.clientHeight||250,dpr=window.devicePixelRatio||1;
+ canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ if(!rows||rows.length<2){ctx.fillStyle='#9aabc2';ctx.font='12px system-ui';ctx.fillText('Keine Chartdaten verfügbar',10,24);return}
+ const left=48,right=12,top=12,bottom=42,plotW=w-left-right,plotH=h-top-bottom;
+ const lo=Math.min(...rows.map(x=>x.low)),hi=Math.max(...rows.map(x=>x.high)),pad=(hi-lo)*.08||1;
+ const min=lo-pad,max=hi+pad,step=plotW/rows.length,y=v=>top+(max-v)/(max-min)*plotH;
+ ctx.font='10px system-ui';ctx.strokeStyle='#26354d';ctx.fillStyle='#9aabc2';ctx.lineWidth=1;
+ for(let i=0;i<=4;i++){const val=max-(max-min)*i/4,yy=top+plotH*i/4;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(w-right,yy);ctx.stroke();ctx.textAlign='right';ctx.fillText(num(val,coin==='GOLD'||coin==='SILVER'?2:4),left-6,yy+3)}
+ rows.forEach((r,i)=>{const x=left+i*step+step/2,up=r.close>=r.open;ctx.strokeStyle=up?'#39d6a0':'#ff7885';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=1;
+ ctx.beginPath();ctx.moveTo(x,y(r.high));ctx.lineTo(x,y(r.low));ctx.stroke();
+ const bodyW=Math.max(2,Math.min(9,step*.58)),bodyY=Math.min(y(r.open),y(r.close)),bodyH=Math.max(1,Math.abs(y(r.open)-y(r.close)));
+ ctx.fillRect(x-bodyW/2,bodyY,bodyW,bodyH);
+ });
+ const labels=[0,Math.floor((rows.length-1)/3),Math.floor(2*(rows.length-1)/3),rows.length-1];
+ ctx.fillStyle='#9aabc2';ctx.textAlign='center';
+ labels.forEach(i=>{const x=left+i*step+step/2;const d=new Date(rows[i].time*1000);const label=d.toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'});ctx.fillText(label,x,h-23);ctx.fillText(d.toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit'}),x,h-9)});
+}
+async function loadOneChart(coin,cfg){
+ const now=Math.floor(Date.now()/1000);let rows=[];
+ if(cfg.future){
+  const from=now-36*3600,url='https://futures.kraken.com/api/charts/v1/trade/'+cfg.future+'/15m?from='+from+'&to='+now;
+  const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();
+  rows=(j.candles||[]).map(x=>({time:Number(x.time),open:+x.open,high:+x.high,low:+x.low,close:+x.close})).filter(x=>Number.isFinite(x.close));
+  if(rows.length&&rows[0].time>1e12)rows=rows.map(x=>({...x,time:x.time/1000}));
+  rows=rows.filter(x=>x.time+900<=now).slice(-48);
+ }else{
+  const r=await fetch('https://api.kraken.com/0/public/OHLC?pair='+cfg.pair+'&interval=15');
+  if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();if(j.error?.length)throw Error(j.error.join(', '));
+  const key=Object.keys(j.result||{}).find(x=>x!=='last');if(!key)throw Error('Kein Handelspaar gefunden');
+  rows=(j.result[key]||[]).slice(0,-1).slice(-48).map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4]}));
+ }
+ if(!rows.length)throw Error('Keine abgeschlossenen 15-Minuten-Kerzen');
+ chartCache[coin]=rows;
+ const last=rows[rows.length-1];
+ const button=picker.querySelector('[data-coin="'+coin+'"]');
+ if(button)button.querySelector('span').textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?2:4)+' USD';
+ if(selectedCoin===coin)showSelected(coin);
+ return true;
+}
+function showSelected(coin){
+ selectedCoin=coin;
+ document.querySelectorAll('.coin-choice').forEach(b=>b.classList.toggle('active',b.dataset.coin===coin));
+ const detail=document.getElementById('chartDetail');detail.hidden=false;
+ document.getElementById('activeCoin').textContent=coin+' · 15 Minuten';
+ const rows=chartCache[coin]||[];
+ if(rows.length){
+  const last=rows[rows.length-1];document.getElementById('activePrice').textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?4:6)+' USD';
+  document.getElementById('activeFoot').textContent='48 abgeschlossene Kerzen · Zeitraum: '+new Date(rows[0].time*1000).toLocaleString('de-AT')+' bis '+new Date(last.time*1000).toLocaleString('de-AT')+' · Zeiten in lokaler Zeit';
+  drawSelectedChart(coin,rows);
+ }else{
+  document.getElementById('activePrice').textContent='Lade Kurs …';
+  document.getElementById('activeFoot').textContent='Kursdaten werden geladen …';
+ }
+}
+picker.addEventListener('click',e=>{const b=e.target.closest('[data-coin]');if(!b)return;showSelected(b.dataset.coin);if(!chartCache[b.dataset.coin])loadOneChart(b.dataset.coin,CHARTS[b.dataset.coin]).catch(()=>{document.getElementById('activeFoot').textContent='Chartdaten momentan nicht verfügbar.'})});
+document.getElementById('closeChart').addEventListener('click',()=>{document.getElementById('chartDetail').hidden=true;document.querySelectorAll('.coin-choice').forEach(b=>b.classList.remove('active'));selectedCoin=null});
+async function loadCharts(){
+ const status=document.getElementById('chartStatus');status.textContent='Aktualisiere Coin-Kurse …';
+ const results=await Promise.allSettled(Object.entries(CHARTS).map(([coin,cfg])=>loadOneChart(coin,cfg)));
+ const ok=results.filter(x=>x.status==='fulfilled').length;
+ status.textContent=ok+' von 12 Kursen geladen · Tippe auf einen Coin, um seinen Chart zu öffnen. Aktualisierung alle 5 Minuten.';
+ if(selectedCoin&&chartCache[selectedCoin])showSelected(selectedCoin);
+}
+loadCharts();setInterval(loadCharts,300000);
+window.addEventListener('resize',()=>{if(selectedCoin&&chartCache[selectedCoin])drawSelectedChart(selectedCoin,chartCache[selectedCoin])});
+</script></body></html>):(Number(t.price||0).toFixed(4)+' 
+ document.getElementById('cash').textContent=money(s.cash);
+ const pnl=Number(s.realized||0), p=document.getElementById('pnl');p.textContent=(pnl>0?'+':'')+money(pnl);p.className='v '+(pnl>=0?'pos':'neg');
+ const positions=s.positions||{};document.getElementById('positions').textContent=Object.keys(positions).length;
+ const trades=s.trades||[], sells=trades.filter(t=>t.action==='SELL');document.getElementById('closed').textContent=sells.length;
+ const perf=s.strategy_performance||{};
+ const b=perf.bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock||{};
+ const m=perf.momentum_breakout_ema50_rsi48_68_4h_v1||{};
+ document.getElementById('bollingerClosed').textContent=b.closed??0;
+ document.getElementById('momentumClosed').textContent=m.closed??0;
+ const statText=x=>x.closed?('Trefferquote '+num(x.win_rate,1)+' % · Netto '+money(x.net_profit)):'Noch keine sauber zugeordneten Abschlüsse';
+ document.getElementById('bollingerStats').textContent=statText(b);
+ document.getElementById('momentumStats').textContent=statText(m);
+ const risk=s.risk_controls||{};
+ document.getElementById('riskStatus').textContent=risk.buy_paused
+  ? 'KAUFPAUSE aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)
+  : 'Risikokontrollen aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)+' · Tageslimit '+money(risk.daily_max_loss);
+ const sig=s.signals||{};document.getElementById('signals').innerHTML=Object.entries(sig).map(([coin,x])=>'<tr><td><button type="button" class="signal-coin" data-open-chart="'+esc(coin)+'">'+esc(coin)+' ↗</button></td><td>'+num(x.price,6)+'</td><td>'+num(x.rsi,2)+'</td><td class="wait">'+esc(x.decision||'—')+'</td><td>'+esc(x.reason||'—')+'</td></tr>').join('')||'<tr><td colspan="5">Keine Signale vorhanden.</td></tr>';
+ const open=Object.entries(positions), signals=s.signals||{};document.getElementById('open').innerHTML=open.map(([coin,x])=>{
+  const entry=Number(x.entry_price??x.entry??0), qty=Number(x.amount??x.quantity??0), cost=Number(x.cost??x.invested??0);
+  const market=Number(signals[coin]?.price??0), hasMarket=market>0, active=Boolean(x.profit_lock_active);
+  const peak=Number(x.peak_price??entry), floor=entry*1.01, trail=Math.max(floor,peak*0.975);
+  const activation=entry*1.03;
+  const estimated=hasMarket?qty*market*0.9985-cost:null;
+  const pct=cost>0&&estimated!==null?estimated/cost*100:0;
+  const result=estimated===null?'—':(estimated>=0?'+':'')+money(estimated)+' ('+(pct>=0?'+':'')+num(pct,2)+' %)';
+  const resultClass=estimated===null?'wait':estimated>=0?'pos':'neg';
+  const lock=active?'<span class="pos"><b>AKTIV</b></span>':'<span class="wait">Noch nicht aktiv</span>';
+  const stop=active?num(trail,6)+' USD':'Aktivierung ab '+num(activation,6)+' USD';
+  return '<tr><td><b>'+esc(coin)+'</b></td><td>'+ (hasMarket?num(market,6)+' USD':'—')+'</td><td>'+num(entry,6)+' USD</td><td class="'+resultClass+'">'+result+'</td><td>'+lock+'</td><td>'+stop+'</td></tr>';
+ }).join('')||'<tr><td colspan="6" class="empty">Derzeit keine offenen Positionen.</td></tr>';
+ drawProfitHistory(trades);
+ renderActivityLog(trades);
+ document.getElementById('trades').innerHTML=trades.slice().reverse().slice(0,15).map(t=>'<tr><td>'+esc((t.time||'').replace('T',' ').replace('+00:00',''))+'</td><td>'+esc(t.coin)+'</td><td>'+esc(t.action)+'</td><td>'+num(t.price,6)+'</td><td class="'+(Number(t.profit||0)>=0?'pos':'neg')+'">'+(t.profit==null?'—':(t.profit>=0?'+':'')+money(t.profit))+'</td></tr>').join('')||'<tr><td colspan="5" class="empty">Noch keine Aktivitäten.</td></tr>';
+ document.getElementById('updated').textContent='Letzter Bot-Lauf: '+(s.updated?new Date(s.updated).toLocaleString('de-AT'):'unbekannt')+' · Dashboard lädt automatisch jede Minute neu.';
+}
+async function load(){const b=document.getElementById('refresh');b.disabled=true;try{const r=await fetch(DATA+'?t='+Date.now());if(!r.ok)throw Error('HTTP '+r.status);render(await r.json())}catch(e){document.getElementById('updated').textContent='Daten konnten nicht geladen werden. Bitte später erneut versuchen.'}finally{b.disabled=false}}
+document.getElementById('refresh').addEventListener('click',load);load();setInterval(load,60000);
+
+document.getElementById('signals').addEventListener('click',e=>{const b=e.target.closest('[data-open-chart]');if(!b)return;const coin=b.dataset.openChart;const section=document.getElementById('coinPicker');if(section){const target=section.querySelector('[data-coin="'+coin+'"]');if(target){showSelected(coin);document.getElementById('chartDetail').scrollIntoView({behavior:'smooth',block:'center'});if(!chartCache[coin])loadOneChart(coin,CHARTS[coin]).catch(()=>{document.getElementById('activeFoot').textContent='Chartdaten momentan nicht verfügbar.'});}else{document.getElementById('chartStatus').scrollIntoView({behavior:'smooth'});}}});
+const CHARTS={
+ BTC:{pair:'XBTUSD'},ETH:{pair:'ETHUSD'},SOL:{pair:'SOLUSD'},XRP:{pair:'XRPUSD'},
+ ADA:{pair:'ADAUSD'},DOGE:{pair:'DOGEUSD'},LINK:{pair:'LINKUSD'},AVAX:{pair:'AVAXUSD'},
+ LTC:{pair:'LTCUSD'},DOT:{pair:'DOTUSD'},GOLD:{future:'PF_XAUUSD'},SILVER:{future:'PF_XAGUSD'}
+};
+const chartCache={};let selectedCoin=null;
+const picker=document.getElementById('coinPicker');
+picker.innerHTML=Object.keys(CHARTS).map(coin=>'<button type="button" class="coin-choice" data-coin="'+coin+'"><b>'+coin+'</b><span>15-Minuten-Chart öffnen</span></button>').join('');
+function drawSelectedChart(coin,rows){
+ const canvas=document.getElementById('activeChart');if(!canvas)return;
+ const w=canvas.clientWidth||320,h=canvas.clientHeight||250,dpr=window.devicePixelRatio||1;
+ canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);
+ const ctx=canvas.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
+ if(!rows||rows.length<2){ctx.fillStyle='#9aabc2';ctx.font='12px system-ui';ctx.fillText('Keine Chartdaten verfügbar',10,24);return}
+ const left=48,right=12,top=12,bottom=42,plotW=w-left-right,plotH=h-top-bottom;
+ const lo=Math.min(...rows.map(x=>x.low)),hi=Math.max(...rows.map(x=>x.high)),pad=(hi-lo)*.08||1;
+ const min=lo-pad,max=hi+pad,step=plotW/rows.length,y=v=>top+(max-v)/(max-min)*plotH;
+ ctx.font='10px system-ui';ctx.strokeStyle='#26354d';ctx.fillStyle='#9aabc2';ctx.lineWidth=1;
+ for(let i=0;i<=4;i++){const val=max-(max-min)*i/4,yy=top+plotH*i/4;ctx.beginPath();ctx.moveTo(left,yy);ctx.lineTo(w-right,yy);ctx.stroke();ctx.textAlign='right';ctx.fillText(num(val,coin==='GOLD'||coin==='SILVER'?2:4),left-6,yy+3)}
+ rows.forEach((r,i)=>{const x=left+i*step+step/2,up=r.close>=r.open;ctx.strokeStyle=up?'#39d6a0':'#ff7885';ctx.fillStyle=ctx.strokeStyle;ctx.lineWidth=1;
+ ctx.beginPath();ctx.moveTo(x,y(r.high));ctx.lineTo(x,y(r.low));ctx.stroke();
+ const bodyW=Math.max(2,Math.min(9,step*.58)),bodyY=Math.min(y(r.open),y(r.close)),bodyH=Math.max(1,Math.abs(y(r.open)-y(r.close)));
+ ctx.fillRect(x-bodyW/2,bodyY,bodyW,bodyH);
+ });
+ const labels=[0,Math.floor((rows.length-1)/3),Math.floor(2*(rows.length-1)/3),rows.length-1];
+ ctx.fillStyle='#9aabc2';ctx.textAlign='center';
+ labels.forEach(i=>{const x=left+i*step+step/2;const d=new Date(rows[i].time*1000);const label=d.toLocaleTimeString('de-AT',{hour:'2-digit',minute:'2-digit'});ctx.fillText(label,x,h-23);ctx.fillText(d.toLocaleDateString('de-AT',{day:'2-digit',month:'2-digit'}),x,h-9)});
+}
+async function loadOneChart(coin,cfg){
+ const now=Math.floor(Date.now()/1000);let rows=[];
+ if(cfg.future){
+  const from=now-36*3600,url='https://futures.kraken.com/api/charts/v1/trade/'+cfg.future+'/15m?from='+from+'&to='+now;
+  const r=await fetch(url);if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();
+  rows=(j.candles||[]).map(x=>({time:Number(x.time),open:+x.open,high:+x.high,low:+x.low,close:+x.close})).filter(x=>Number.isFinite(x.close));
+  if(rows.length&&rows[0].time>1e12)rows=rows.map(x=>({...x,time:x.time/1000}));
+  rows=rows.filter(x=>x.time+900<=now).slice(-48);
+ }else{
+  const r=await fetch('https://api.kraken.com/0/public/OHLC?pair='+cfg.pair+'&interval=15');
+  if(!r.ok)throw Error('HTTP '+r.status);const j=await r.json();if(j.error?.length)throw Error(j.error.join(', '));
+  const key=Object.keys(j.result||{}).find(x=>x!=='last');if(!key)throw Error('Kein Handelspaar gefunden');
+  rows=(j.result[key]||[]).slice(0,-1).slice(-48).map(x=>({time:+x[0],open:+x[1],high:+x[2],low:+x[3],close:+x[4]}));
+ }
+ if(!rows.length)throw Error('Keine abgeschlossenen 15-Minuten-Kerzen');
+ chartCache[coin]=rows;
+ const last=rows[rows.length-1];
+ const button=picker.querySelector('[data-coin="'+coin+'"]');
+ if(button)button.querySelector('span').textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?2:4)+' USD';
+ if(selectedCoin===coin)showSelected(coin);
+ return true;
+}
+function showSelected(coin){
+ selectedCoin=coin;
+ document.querySelectorAll('.coin-choice').forEach(b=>b.classList.toggle('active',b.dataset.coin===coin));
+ const detail=document.getElementById('chartDetail');detail.hidden=false;
+ document.getElementById('activeCoin').textContent=coin+' · 15 Minuten';
+ const rows=chartCache[coin]||[];
+ if(rows.length){
+  const last=rows[rows.length-1];document.getElementById('activePrice').textContent=num(last.close,coin==='GOLD'||coin==='SILVER'?4:6)+' USD';
+  document.getElementById('activeFoot').textContent='48 abgeschlossene Kerzen · Zeitraum: '+new Date(rows[0].time*1000).toLocaleString('de-AT')+' bis '+new Date(last.time*1000).toLocaleString('de-AT')+' · Zeiten in lokaler Zeit';
+  drawSelectedChart(coin,rows);
+ }else{
+  document.getElementById('activePrice').textContent='Lade Kurs …';
+  document.getElementById('activeFoot').textContent='Kursdaten werden geladen …';
+ }
+}
+picker.addEventListener('click',e=>{const b=e.target.closest('[data-coin]');if(!b)return;showSelected(b.dataset.coin);if(!chartCache[b.dataset.coin])loadOneChart(b.dataset.coin,CHARTS[b.dataset.coin]).catch(()=>{document.getElementById('activeFoot').textContent='Chartdaten momentan nicht verfügbar.'})});
+document.getElementById('closeChart').addEventListener('click',()=>{document.getElementById('chartDetail').hidden=true;document.querySelectorAll('.coin-choice').forEach(b=>b.classList.remove('active'));selectedCoin=null});
+async function loadCharts(){
+ const status=document.getElementById('chartStatus');status.textContent='Aktualisiere Coin-Kurse …';
+ const results=await Promise.allSettled(Object.entries(CHARTS).map(([coin,cfg])=>loadOneChart(coin,cfg)));
+ const ok=results.filter(x=>x.status==='fulfilled').length;
+ status.textContent=ok+' von 12 Kursen geladen · Tippe auf einen Coin, um seinen Chart zu öffnen. Aktualisierung alle 5 Minuten.';
+ if(selectedCoin&&chartCache[selectedCoin])showSelected(selectedCoin);
+}
+loadCharts();setInterval(loadCharts,300000);
+window.addEventListener('resize',()=>{if(selectedCoin&&chartCache[selectedCoin])drawSelectedChart(selectedCoin,chartCache[selectedCoin])});
+</script></body></html>);
+  return '<div class="activity-row"><span class="activity-tag '+kind+'">['+tag+']</span><span class="activity-main">'+esc(t.coin)+' · '+esc(detail)+'</span><span class="activity-value">'+esc(value)+'</span></div>';
+ }).join('')||'<div class="empty">Noch keine Aktivitäten.</div>';
+}
+
+function render(s){
+ window.__lastDashboardState=s;
+ document.getElementById('cash').textContent=money(s.cash);
+ const pnl=Number(s.realized||0), p=document.getElementById('pnl');p.textContent=(pnl>0?'+':'')+money(pnl);p.className='v '+(pnl>=0?'pos':'neg');
+ const positions=s.positions||{};document.getElementById('positions').textContent=Object.keys(positions).length;
+ const trades=s.trades||[], sells=trades.filter(t=>t.action==='SELL');document.getElementById('closed').textContent=sells.length;
+ const perf=s.strategy_performance||{};
+ const b=perf.bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock||{};
+ const m=perf.momentum_breakout_ema50_rsi48_68_4h_v1||{};
+ document.getElementById('bollingerClosed').textContent=b.closed??0;
+ document.getElementById('momentumClosed').textContent=m.closed??0;
+ const statText=x=>x.closed?('Trefferquote '+num(x.win_rate,1)+' % · Netto '+money(x.net_profit)):'Noch keine sauber zugeordneten Abschlüsse';
+ document.getElementById('bollingerStats').textContent=statText(b);
+ document.getElementById('momentumStats').textContent=statText(m);
+ const risk=s.risk_controls||{};
+ document.getElementById('riskStatus').textContent=risk.buy_paused
+  ? 'KAUFPAUSE aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)
+  : 'Risikokontrollen aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)+' · Tageslimit '+money(risk.daily_max_loss);
+ const sig=s.signals||{};document.getElementById('signals').innerHTML=Object.entries(sig).map(([coin,x])=>'<tr><td><button type="button" class="signal-coin" data-open-chart="'+esc(coin)+'">'+esc(coin)+' ↗</button></td><td>'+num(x.price,6)+'</td><td>'+num(x.rsi,2)+'</td><td class="wait">'+esc(x.decision||'—')+'</td><td>'+esc(x.reason||'—')+'</td></tr>').join('')||'<tr><td colspan="5">Keine Signale vorhanden.</td></tr>';
+ const open=Object.entries(positions), signals=s.signals||{};document.getElementById('open').innerHTML=open.map(([coin,x])=>{
+  const entry=Number(x.entry_price??x.entry??0), qty=Number(x.amount??x.quantity??0), cost=Number(x.cost??x.invested??0);
+  const market=Number(signals[coin]?.price??0), hasMarket=market>0, active=Boolean(x.profit_lock_active);
+  const peak=Number(x.peak_price??entry), floor=entry*1.01, trail=Math.max(floor,peak*0.975);
+  const activation=entry*1.03;
+  const estimated=hasMarket?qty*market*0.9985-cost:null;
+  const pct=cost>0&&estimated!==null?estimated/cost*100:0;
+  const result=estimated===null?'—':(estimated>=0?'+':'')+money(estimated)+' ('+(pct>=0?'+':'')+num(pct,2)+' %)';
+  const resultClass=estimated===null?'wait':estimated>=0?'pos':'neg';
+  const lock=active?'<span class="pos"><b>AKTIV</b></span>':'<span class="wait">Noch nicht aktiv</span>';
+  const stop=active?num(trail,6)+' USD':'Aktivierung ab '+num(activation,6)+' USD';
+  return '<tr><td><b>'+esc(coin)+'</b></td><td>'+ (hasMarket?num(market,6)+' USD':'—')+'</td><td>'+num(entry,6)+' USD</td><td class="'+resultClass+'">'+result+'</td><td>'+lock+'</td><td>'+stop+'</td></tr>';
+ }).join('')||'<tr><td colspan="6" class="empty">Derzeit keine offenen Positionen.</td></tr>';
+ drawProfitHistory(trades);
+ renderActivityLog(trades);
  document.getElementById('trades').innerHTML=trades.slice().reverse().slice(0,15).map(t=>'<tr><td>'+esc((t.time||'').replace('T',' ').replace('+00:00',''))+'</td><td>'+esc(t.coin)+'</td><td>'+esc(t.action)+'</td><td>'+num(t.price,6)+'</td><td class="'+(Number(t.profit||0)>=0?'pos':'neg')+'">'+(t.profit==null?'—':(t.profit>=0?'+':'')+money(t.profit))+'</td></tr>').join('')||'<tr><td colspan="5" class="empty">Noch keine Aktivitäten.</td></tr>';
  document.getElementById('updated').textContent='Letzter Bot-Lauf: '+(s.updated?new Date(s.updated).toLocaleString('de-AT'):'unbekannt')+' · Dashboard lädt automatisch jede Minute neu.';
 }
