@@ -3,6 +3,7 @@ import math
 import os
 import urllib.request
 import urllib.parse
+import urllib.error
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -51,16 +52,36 @@ def api(url):
 
 
 def telegram(message):
+    """Send a notification without allowing Telegram outages to fail the paper-trading run."""
     if not TOKEN or not CHAT_ID:
-        print("Telegram nicht konfiguriert.")
-        return
+        print("TELEGRAM WARNING: nicht konfiguriert; Paper-Trading-Lauf wird fortgesetzt.")
+        return False
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
     data = urllib.parse.urlencode({"chat_id": CHAT_ID, "text": message}).encode()
     req = urllib.request.Request(url, data=data)
-    with urllib.request.urlopen(req, timeout=20) as response:
-        result = json.loads(response.read().decode())
-        if not result.get("ok"):
-            raise RuntimeError("Telegram-Nachricht fehlgeschlagen")
+    try:
+        with urllib.request.urlopen(req, timeout=20) as response:
+            body = response.read().decode("utf-8", errors="replace")
+        result = json.loads(body)
+        if result.get("ok"):
+            print("Telegram-Benachrichtigung erfolgreich gesendet.")
+            return True
+        print("TELEGRAM WARNING: API meldet Fehler: " + str(result.get("description", "unbekannter Fehler")))
+        return False
+    except urllib.error.HTTPError as error:
+        details = error.read().decode("utf-8", errors="replace")
+        try:
+            details = json.loads(details).get("description", details)
+        except (ValueError, TypeError):
+            pass
+        print(f"TELEGRAM WARNING: HTTP {error.code}: {details}")
+        return False
+    except (urllib.error.URLError, TimeoutError, OSError) as error:
+        print(f"TELEGRAM WARNING: Verbindungsfehler: {error}")
+        return False
+    except (ValueError, TypeError) as error:
+        print(f"TELEGRAM WARNING: Antwort konnte nicht verarbeitet werden: {error}")
+        return False
 
 
 def load_state():
