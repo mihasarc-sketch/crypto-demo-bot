@@ -218,9 +218,12 @@ function render(s){
  document.getElementById('bollingerStats').textContent=statText(b);
  document.getElementById('momentumStats').textContent=statText(m);
  const risk=s.risk_controls||{};
- document.getElementById('riskStatus').textContent=risk.buy_paused
-  ? 'KAUFPAUSE aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)
-  : 'Risikokontrollen aktiv · Tagesergebnis '+money(risk.daily_realized)+' · Verlustserie '+(risk.consecutive_losses||0)+' · Tageslimit '+money(risk.daily_max_loss);
+ document.getElementById('riskStatus').textContent=(risk.buy_paused?'KAUFPAUSE aktiv':'Risikokontrollen aktiv')
+  +' · Realisiert '+money(risk.daily_realized)
+  +' · Offen '+money(risk.open_unrealized)
+  +' · Zusammen '+money(risk.daily_combined_pnl)
+  +' · Verlustserie '+(risk.consecutive_losses||0)
+  +' · Tageslimit '+money(risk.daily_max_loss);
  const sig=s.signals||{};document.getElementById('signals').innerHTML=Object.entries(sig).map(([coin,x])=>'<tr><td><button type="button" class="signal-coin" data-open-chart="'+esc(coin)+'">'+esc(coin)+' ↗</button></td><td>'+num(x.price,6)+'</td><td>'+num(x.rsi,2)+'</td><td class="wait">'+esc(x.decision||'—')+'</td><td>'+esc(x.reason||'—')+'</td></tr>').join('')||'<tr><td colspan="5">Keine Signale vorhanden.</td></tr>';
  const open=Object.entries(positions), signals=s.signals||{};document.getElementById('open').innerHTML=open.map(([coin,x])=>{
   const entry=Number(x.entry_price??x.entry??0), qty=Number(x.amount??x.quantity??0), cost=Number(x.cost??x.invested??0);
