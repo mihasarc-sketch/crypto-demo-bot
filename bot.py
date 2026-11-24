@@ -502,6 +502,7 @@ def main():
         "daily_realized": float(state.get("daily_realized", 0.0)),
         "open_unrealized": open_positions_unrealized(state, prices),
         "daily_combined_pnl": combined_daily_pnl,
+        "consecutive_losses": int(state.get("consecutive_losses", 0)),
         "max_consecutive_losses": MAX_CONSECUTIVE_LOSSES,
         "buy_paused": (daily_loss_limit_reached
                        or int(state.get("consecutive_losses", 0)) >= MAX_CONSECUTIVE_LOSSES)
