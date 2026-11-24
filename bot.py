@@ -229,6 +229,21 @@ def buy(state, coin, price, strategy="bollinger_reclaim_ema50_rsi40_4h_v3_profit
     return f"🟢 DEMO-KAUF {coin}: ca. {execution_price:.6f} USD (virtuell)"
 
 
+def open_positions_unrealized(state, prices):
+    """Estimate open-position P&L at liquidation prices, including simulated exit costs."""
+    total = 0.0
+    for coin, position in state.get("positions", {}).items():
+        mark = float(prices.get(coin, position.get("last_price", position["entry"])))
+        exit_price = mark * (1 - SLIPPAGE)
+        proceeds = float(position["quantity"]) * exit_price * (1 - FEE)
+        total += proceeds - float(position["cost"])
+    return total
+
+
+def daily_risk_pnl(state, prices):
+    return float(state.get("daily_realized", 0.0)) + open_positions_unrealized(state, prices)
+
+
 def sell(state, coin, price, reason):
     position = state["positions"].pop(coin)
     execution_price = price * (1 - SLIPPAGE)
@@ -266,7 +281,7 @@ def main():
     state.setdefault("consecutive_losses", 0)
     messages, market_lines, decision_lines, errors = [], [], [], []
     signals, prices = {}, {}
-    print("CRYPTO DEMO BOT 5.5 - BALANCED / VOLUME FILTER / RISK GUARDS / 4H")
+    print("CRYPTO DEMO BOT 5.6 - BALANCED / TRAILING PRIORITY / COMBINED DAILY RISK / 4H")
     print("PAPER TRADING - KEIN ECHTHANDEL - KEINE ECHTEN ORDERS")
 
     for coin in COINS:
@@ -281,6 +296,8 @@ def main():
                 f"BB-Mitte: {data['middle']:.6f} | BB-Unterband: {data['lower']:.6f}"
             )
             position = state["positions"].get(coin)
+            if position:
+                position["last_price"] = float(price)
             signal = {
                 "price": round(price, 8), "rsi": round(data["rsi"], 2),
                 "bb_middle": round(data["middle"], 8), "bb_lower": round(data["lower"], 8),
@@ -313,17 +330,19 @@ def main():
                         entry_price * (1 + PROFIT_LOCK_FLOOR),
                         previous_peak * (1 - PROFIT_TRAIL_GIVEBACK)
                     )
-                    if data["low"] <= stop_price:
-                        exit_price = data["open"] if data["open"] <= stop_price else stop_price
-                        messages.append(sell(state, coin, exit_price, f"Stop-Loss {stop_pct:.0%}"))
-                        decision_lines.append(f"{coin}: VERKAUF - Stop-Loss {stop_pct:.0%}")
-                        signal.update({"decision": "SELL", "reason": f"Stop-Loss {stop_pct:.0%}"})
-                    elif lock_was_active and data["low"] <= trailing_stop:
+                    if lock_was_active and data["low"] <= trailing_stop:
+                        # Active profit protection is checked before the original hard stop.
+                        # A gap can still produce a worse simulated fill at the candle open.
                         exit_price = data["open"] if data["open"] <= trailing_stop else trailing_stop
                         reason = f"Gewinnsicherung / Trailing-Stop (mind. +{PROFIT_LOCK_FLOOR:.0%} brutto)"
                         messages.append(sell(state, coin, exit_price, reason))
                         decision_lines.append(f"{coin}: VERKAUF - Gewinnsicherung")
                         signal.update({"decision": "SELL", "reason": reason})
+                    elif data["low"] <= stop_price:
+                        exit_price = data["open"] if data["open"] <= stop_price else stop_price
+                        messages.append(sell(state, coin, exit_price, f"Stop-Loss {stop_pct:.0%}"))
+                        decision_lines.append(f"{coin}: VERKAUF - Stop-Loss {stop_pct:.0%}")
+                        signal.update({"decision": "SELL", "reason": f"Stop-Loss {stop_pct:.0%}"})
                     elif data["high"] >= target_price:
                         exit_price = data["open"] if data["open"] >= target_price else target_price
                         messages.append(sell(state, coin, exit_price, f"Take-Profit {target_pct:.0%}"))
@@ -361,12 +380,14 @@ def main():
                         and price <= data["ema50"] * (1 + MOMENTUM_MAX_EMA_DISTANCE)
                         and volume_ok
                     )
+                    combined_daily_pnl = daily_risk_pnl(state, prices)
                     risk_pause = (
-                        float(state.get("daily_realized", 0.0)) <= -DAILY_MAX_LOSS
+                        combined_daily_pnl <= -DAILY_MAX_LOSS
                         or int(state.get("consecutive_losses", 0)) >= MAX_CONSECUTIVE_LOSSES
                     )
                     if risk_pause:
-                        pause_reason = ("Tagesverlust-Limit erreicht" if float(state.get("daily_realized", 0.0)) <= -DAILY_MAX_LOSS
+                        pause_reason = (f"Tagesverlust-Limit erreicht (realisiert + offen: {combined_daily_pnl:+.2f} USD)"
+                                        if combined_daily_pnl <= -DAILY_MAX_LOSS
                                         else f"{MAX_CONSECUTIVE_LOSSES} Verlusttrades in Folge")
                         decision_lines.append(f"{coin}: KAUFPAUSE - {pause_reason}")
                         signal.update({"decision": "WAIT", "reason": f"Kaufsperre bis UTC-Tageswechsel: {pause_reason}"})
@@ -413,6 +434,8 @@ def main():
     )
     total = state["cash"] + market_value
     unrealized = total - START_CASH - state["realized"]
+    combined_daily_pnl = daily_risk_pnl(state, prices)
+    daily_loss_limit_reached = combined_daily_pnl <= -DAILY_MAX_LOSS
     closed = [trade for trade in state["trades"] if trade.get("action") == "SELL" and "profit" in trade]
     winners = [trade for trade in closed if trade["profit"] > 0]
     losers = [trade for trade in closed if trade["profit"] < 0]
@@ -437,10 +460,10 @@ def main():
         }
 
     report = [
-        "🤖 CRYPTO DEMO BOT 5.5 - AUSGEWOGEN",
+        "🤖 CRYPTO DEMO BOT 5.6 - AUSGEWOGEN",
         "Strategie A: Bollinger-Reclaim + EMA50-Aufwärtstrend + RSI <= 40 | 4H",
         f"Strategie B: Momentum-Ausbruch über {MOMENTUM_BREAKOUT_LOOKBACK}-Kerzen-Hoch + EMA50 steigend + RSI {MOMENTUM_RSI_MIN:.0f}-{MOMENTUM_RSI_MAX:.0f} + max. {MOMENTUM_MAX_EMA_DISTANCE:.1%} über EMA50 + Volumen >= {BREAKOUT_VOLUME_MULTIPLE:.2f}x Durchschnitt | 4H",
-        f"Risikokontrolle: Tagesverlust-Limit {DAILY_MAX_LOSS:.2f} USD | Kaufpause nach {MAX_CONSECUTIVE_LOSSES} Verlusten in Folge | max. {MAX_OPEN_POSITIONS} Positionen",
+        f"Risikokontrolle: Tagesverlust-Limit {DAILY_MAX_LOSS:.2f} USD (realisierte + offene Verluste) | Kaufpause nach {MAX_CONSECUTIVE_LOSSES} Verlusten in Folge | max. {MAX_OPEN_POSITIONS} Positionen",
         "Neue Trades: Stop-Loss 4 % | Take-Profit 6 % | Gewinnsicherung ab +3 %, mindestens +1 % brutto, Trailing 2,5 % | max. 4 Positionen",
         "Bestehende Positionen behalten ihre gespeicherten Stop-/Zielwerte.",
         "PAPER TRADING - KEIN ECHTHANDEL",
@@ -460,7 +483,7 @@ def main():
         f"Gewinner / Verlierer: {len(winners)} / {len(losers)}",
         f"Trefferquote: {win_rate:.1f} %",
         f"Profit-Faktor: {profit_factor:.2f}" if profit_factor is not None else "Profit-Faktor: noch nicht berechenbar",
-        f"Tagesergebnis: {float(state.get('daily_realized', 0.0)):+.2f} USD | Verlustserie: {int(state.get('consecutive_losses', 0))}",
+        f"Tagesergebnis realisiert: {float(state.get('daily_realized', 0.0)):+.2f} USD | offene Positionen: {open_positions_unrealized(state, prices):+.2f} USD | zusammen: {combined_daily_pnl:+.2f} USD | Verlustserie: {int(state.get('consecutive_losses', 0))}",
         "Strategie A (nur korrekt zugeordnete Abschlüsse): " + json.dumps(strategy_performance["bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock"]),
         "Strategie B (nur korrekt zugeordnete Abschlüsse): " + json.dumps(strategy_performance["momentum_breakout_ema50_rsi48_68_4h_v1"]),
         "━━━━━━━━━━━━━━━━", "PAPER TRADING - KEINE ECHTEN BÖRSENORDERS"
@@ -477,13 +500,14 @@ def main():
     state["risk_controls"] = {
         "daily_max_loss": DAILY_MAX_LOSS,
         "daily_realized": float(state.get("daily_realized", 0.0)),
-        "consecutive_losses": int(state.get("consecutive_losses", 0)),
+        "open_unrealized": open_positions_unrealized(state, prices),
+        "daily_combined_pnl": combined_daily_pnl,
         "max_consecutive_losses": MAX_CONSECUTIVE_LOSSES,
-        "buy_paused": (float(state.get("daily_realized", 0.0)) <= -DAILY_MAX_LOSS
+        "buy_paused": (daily_loss_limit_reached
                        or int(state.get("consecutive_losses", 0)) >= MAX_CONSECUTIVE_LOSSES)
     }
     state["updated"] = datetime.now(timezone.utc).isoformat()
-    state["strategy_version"] = "5.5_balanced_volume_filter_daily_risk_guard_strategy_stats_4h_paper"
+    state["strategy_version"] = "5.6_balanced_trailing_priority_combined_daily_loss_paper"
     save_state(state)
     telegram(report_text)
 
