@@ -118,7 +118,7 @@ td{color:#dce8e2}tbody tr:hover{background:#11201a}
 
 </style></head>
 <body><main>
-<header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.5 · Ausgewogen · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
+<header class="top"><div><h1>📊 Crypto Demo Bot</h1><div class="sub">Dein virtuelles Trading-Dashboard · Strategie 5.6 · Ausgewogen · 12 Märkte</div></div><div style="display:flex;gap:9px;align-items:center"><span class="pill">● PAPER TRADING</span><button id="refresh">↻ Aktualisieren</button></div></header>
 <div class="grid">
 <div class="card"><div class="k">Virtuelles Guthaben</div><div class="v" id="cash">—</div><div class="small">Nicht investiertes Demo-Geld</div></div>
 <div class="card"><div class="k">Realisierter Gesamtgewinn</div><div class="v" id="pnl">—</div><div class="small">Seit Beginn des Demo-Kontos</div></div>
@@ -150,7 +150,7 @@ td{color:#dce8e2}tbody tr:hover{background:#11201a}
 </div>
 <div class="notice"><b>Wichtiger Status:</b> Die öffentlichen Vorschauen liefern aktuell nicht zuverlässig alle Angaben für einen exakten Trade-Kopiervorgang. Deshalb ist die automatische Signalübernahme noch nicht aktiviert. Es werden keine Trades erfunden, keine kostenpflichtigen VIP-Signale verwendet und keine echten Orders ausgeführt. Sobald ein Signal öffentlich vollständig und eindeutig vorliegt, kann es im Paper-Test erfasst werden.</div>
 </section>
-<section id="strategyStats"><h2>Strategie-Auswertung 5.5</h2>
+<section id="strategyStats"><h2>Strategie-Auswertung 5.6</h2>
 <div class="grid">
  <div class="card"><div class="k">Bollinger-Reclaim · abgeschlossene Trades</div><div class="v" id="bollingerClosed">—</div><div class="small" id="bollingerStats">Wird geladen</div></div>
  <div class="card"><div class="k">Momentum-Ausbruch · abgeschlossene Trades</div><div class="v" id="momentumClosed">—</div><div class="small" id="momentumStats">Wird geladen</div></div>
@@ -168,11 +168,11 @@ td{color:#dce8e2}tbody tr:hover{background:#11201a}
  <div class="chart-foot" id="activeFoot">—</div>
 </div>
 </section>
-<section id="positionsSection"><h2>Offene Positionen · Gewinnsicherung 5.5</h2>
+<section id="positionsSection"><h2>Offene Positionen · Gewinnsicherung 5.6</h2>
 <div class="trader-note">Aktueller Positionswert basiert auf dem letzten verfügbaren Bot-Kurs. Gewinn/Verlust ist eine Schätzung nach simulierten Gebühren und Slippage, kein realisierter Gewinn.</div>
 <div class="tablewrap"><table><thead><tr><th>Coin</th><th>Aktueller Kurs</th><th>Einstieg</th><th>Offener Gewinn/Verlust</th><th>Gewinnsicherung</th><th>Trailing-Stop / Aktivierung</th></tr></thead><tbody id="open"><tr><td colspan="6">Lade Daten …</td></tr></tbody></table></div>
 <div class="notice"><b>Gewinnsicherung 5.3:</b> Die Gewinnsicherung wird nach einer abgeschlossenen 4-Stunden-Kerze ab +3 % Kursgewinn aktiviert. Danach liegt der Stop mindestens 1 % über dem Einstieg (brutto) und folgt dem höchsten abgeschlossenen Kerzenhoch mit 2,5 % Abstand. Gebühren und Slippage können den tatsächlichen Nettoerlös verringern. Bei älteren Positionen werden gespeicherte Stop-/Zielwerte beibehalten.</div>
-<div class="notice"><b>Strategie 5.5 · Ausgewogen:</b> Momentum-Ausbrüche benötigen zusätzlich mindestens das 1,20-Fache des durchschnittlichen Volumens der vorherigen 20 abgeschlossenen 4h-Kerzen. Neue Käufe pausieren beim Tagesverlust von 2 % des Startkapitals oder nach 3 Verlusttrades in Folge (bis zum UTC-Tageswechsel). Offene Positionen werden weiterhin normal überwacht und können verkauft werden. Maximal 4 offene Positionen; bestehende Stop-/Zielwerte bleiben erhalten. Alle Trades sind virtuell.</div>
+<div class="notice"><b>Strategie 5.6 · Ausgewogen:</b> Momentum-Ausbrüche benötigen zusätzlich mindestens das 1,20-Fache des durchschnittlichen Volumens der vorherigen 20 abgeschlossenen 4h-Kerzen. Neue Käufe pausieren beim Tagesverlust von 2 % des Startkapitals oder nach 3 Verlusttrades in Folge (bis zum UTC-Tageswechsel). Offene Positionen werden weiterhin normal überwacht und können verkauft werden. Maximal 4 offene Positionen; bestehende Stop-/Zielwerte bleiben erhalten. Alle Trades sind virtuell.</div>
 </section>
 <section><h2>Letzte Aktivitäten</h2><div class="tablewrap"><table><thead><tr><th>Zeit (UTC)</th><th>Coin</th><th>Aktion</th><th>Kurs</th><th>Ergebnis</th></tr></thead><tbody id="trades"></tbody></table></div></section>
 <div class="status" id="updated">Daten werden geladen …</div>
