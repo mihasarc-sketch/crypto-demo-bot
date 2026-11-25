@@ -497,7 +497,7 @@
   },
   "realized": -41.459651049481835,
   "invested": 0,
-  "updated": "2026-11-25T22:59:02.127581+00:00",
+  "updated": "2026-11-25T23:54:40.612911+00:00",
   "signals": {
     "BTC": {
       "price": 59811.3,
@@ -510,7 +510,7 @@
       "volume_ratio": 2.01,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:58:59.492892+00:00",
+      "updated": "2026-11-25T23:54:38.619806+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -525,7 +525,7 @@
       "volume_ratio": 1.19,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:58:59.740987+00:00",
+      "updated": "2026-11-25T23:54:38.824725+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -540,7 +540,7 @@
       "volume_ratio": 1.66,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:58:59.999054+00:00",
+      "updated": "2026-11-25T23:54:38.859197+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -555,7 +555,7 @@
       "volume_ratio": 2.11,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:00.178610+00:00",
+      "updated": "2026-11-25T23:54:39.037146+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -570,7 +570,7 @@
       "volume_ratio": 1.62,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:00.705098+00:00",
+      "updated": "2026-11-25T23:54:39.230439+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -585,7 +585,7 @@
       "volume_ratio": 1.08,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:00.919917+00:00",
+      "updated": "2026-11-25T23:54:39.427242+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -600,7 +600,7 @@
       "volume_ratio": 1.79,
       "trend_up": true,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:01.041775+00:00",
+      "updated": "2026-11-25T23:54:39.609640+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -615,7 +615,7 @@
       "volume_ratio": 1.22,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:01.261675+00:00",
+      "updated": "2026-11-25T23:54:39.794690+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -630,7 +630,7 @@
       "volume_ratio": 3.01,
       "trend_up": true,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:01.463982+00:00",
+      "updated": "2026-11-25T23:54:39.987417+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -645,7 +645,7 @@
       "volume_ratio": 0.97,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:01.700677+00:00",
+      "updated": "2026-11-25T23:54:40.197604+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -660,7 +660,7 @@
       "volume_ratio": 2.89,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:01.914039+00:00",
+      "updated": "2026-11-25T23:54:40.402639+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -675,7 +675,7 @@
       "volume_ratio": 2.29,
       "trend_up": false,
       "candle_time": "1795622400",
-      "updated": "2026-11-25T22:59:02.127433+00:00",
+      "updated": "2026-11-25T23:54:40.612769+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
