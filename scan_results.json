@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 59730.2,
-    "volume_usd_24h": 377446627.24,
+    "price_usd": 59849.4,
+    "volume_usd_24h": 384316056.02,
     "spread_percent": 0.0
   },
   {
-    "coin": "ETH/USD",
-    "price_usd": 1680.88,
-    "volume_usd_24h": 55767665.46,
-    "spread_percent": 0.007
+    "coin": "ZEC/USD",
+    "price_usd": 750.02,
+    "volume_usd_24h": 57259732.85,
+    "spread_percent": 0.059
   },
   {
-    "coin": "ZEC/USD",
-    "price_usd": 746.91,
-    "volume_usd_24h": 47189138.24,
-    "spread_percent": 0.051
+    "coin": "ETH/USD",
+    "price_usd": 1683.37,
+    "volume_usd_24h": 55522774.46,
+    "spread_percent": 0.001
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 69.85,
-    "volume_usd_24h": 34047507.99,
+    "price_usd": 70.3,
+    "volume_usd_24h": 34257398.76,
     "spread_percent": 0.014
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.92891,
-    "volume_usd_24h": 27281521.03,
-    "spread_percent": 0.001
+    "price_usd": 0.9387,
+    "volume_usd_24h": 31483971.21,
+    "spread_percent": 0.013
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 60.55,
-    "volume_usd_24h": 13878475.48,
+    "price_usd": 61.02,
+    "volume_usd_24h": 14269111.38,
     "spread_percent": 0.033
   },
   {
-    "coin": "SUI/USD",
-    "price_usd": 0.6563,
-    "volume_usd_24h": 5298933.34,
-    "spread_percent": 0.015
-  },
-  {
     "coin": "NEAR/USD",
-    "price_usd": 2.8939,
-    "volume_usd_24h": 5141879.59,
+    "price_usd": 2.9185,
+    "volume_usd_24h": 5745724.62,
     "spread_percent": 0.048
   },
   {
-    "coin": "XMR/USD",
-    "price_usd": 513.8,
-    "volume_usd_24h": 4742892.59,
-    "spread_percent": 0.002
+    "coin": "SUI/USD",
+    "price_usd": 0.6616,
+    "volume_usd_24h": 5512307.62,
+    "spread_percent": 0.03
   },
   {
     "coin": "VVV/USD",
-    "price_usd": 26.808,
-    "volume_usd_24h": 4583000.21,
-    "spread_percent": 0.082
+    "price_usd": 27.947,
+    "volume_usd_24h": 5133164.97,
+    "spread_percent": 0.104
+  },
+  {
+    "coin": "XMR/USD",
+    "price_usd": 516.96,
+    "volume_usd_24h": 5000965.81,
+    "spread_percent": 0.211
   }
 ]
