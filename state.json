@@ -493,7 +493,7 @@
   },
   "realized": -40.864916644658734,
   "invested": 0,
-  "updated": "2026-11-26T21:59:20.800679+00:00",
+  "updated": "2026-11-26T23:02:09.629234+00:00",
   "signals": {
     "BTC": {
       "price": 60638.5,
@@ -506,7 +506,7 @@
       "volume_ratio": 0.26,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:18.439262+00:00",
+      "updated": "2026-11-26T23:02:08.614463+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -521,7 +521,7 @@
       "volume_ratio": 0.44,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:18.650575+00:00",
+      "updated": "2026-11-26T23:02:08.634726+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -536,7 +536,7 @@
       "volume_ratio": 0.47,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:18.824382+00:00",
+      "updated": "2026-11-26T23:02:08.662148+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -551,7 +551,7 @@
       "volume_ratio": 0.25,
       "trend_up": true,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:18.992199+00:00",
+      "updated": "2026-11-26T23:02:08.765951+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -566,7 +566,7 @@
       "volume_ratio": 0.67,
       "trend_up": true,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:19.156410+00:00",
+      "updated": "2026-11-26T23:02:08.867739+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -581,7 +581,7 @@
       "volume_ratio": 0.63,
       "trend_up": true,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:19.354249+00:00",
+      "updated": "2026-11-26T23:02:08.973116+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -596,7 +596,7 @@
       "volume_ratio": 0.69,
       "trend_up": true,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:19.532108+00:00",
+      "updated": "2026-11-26T23:02:09.070259+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -611,7 +611,7 @@
       "volume_ratio": 0.32,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:19.707493+00:00",
+      "updated": "2026-11-26T23:02:09.176332+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -626,7 +626,7 @@
       "volume_ratio": 0.6,
       "trend_up": true,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:20.193973+00:00",
+      "updated": "2026-11-26T23:02:09.280338+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -641,7 +641,7 @@
       "volume_ratio": 0.64,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:20.366554+00:00",
+      "updated": "2026-11-26T23:02:09.395746+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -656,7 +656,7 @@
       "volume_ratio": 0.16,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:20.593081+00:00",
+      "updated": "2026-11-26T23:02:09.520569+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
@@ -671,7 +671,7 @@
       "volume_ratio": 0.17,
       "trend_up": false,
       "candle_time": "1795708800",
-      "updated": "2026-11-26T21:59:20.800532+00:00",
+      "updated": "2026-11-26T23:02:09.629101+00:00",
       "decision": "WAIT",
       "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
@@ -719,19 +719,19 @@
   "daily_realized": 0.5947344048231002,
   "consecutive_losses": 0,
   "strategy_performance": {
-    "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock": {
-      "closed": 0,
-      "wins": 0,
-      "losses": 0,
-      "win_rate": null,
-      "net_profit": 0
-    },
     "momentum_breakout_ema50_rsi48_68_4h_v1": {
       "closed": 1,
       "wins": 1,
       "losses": 0,
       "win_rate": 100.0,
       "net_profit": 0.59
+    },
+    "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock": {
+      "closed": 0,
+      "wins": 0,
+      "losses": 0,
+      "win_rate": null,
+      "net_profit": 0
     }
   },
   "risk_controls": {
