@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 60527.6,
-    "volume_usd_24h": 436721730.86,
+    "price_usd": 60781.5,
+    "volume_usd_24h": 429109185.87,
     "spread_percent": 0.0
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 748.4,
-    "volume_usd_24h": 65761678.27,
-    "spread_percent": 0.025
+    "price_usd": 746.9,
+    "volume_usd_24h": 65813203.46,
+    "spread_percent": 0.04
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1690.15,
-    "volume_usd_24h": 53048549.14,
+    "price_usd": 1698.41,
+    "volume_usd_24h": 50852926.8,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.95214,
-    "volume_usd_24h": 36029660.43,
+    "price_usd": 0.9538,
+    "volume_usd_24h": 34793960.3,
     "spread_percent": 0.006
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 71.0,
-    "volume_usd_24h": 31515680.94,
+    "price_usd": 70.98,
+    "volume_usd_24h": 30045561.39,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 61.13,
-    "volume_usd_24h": 14389751.69,
+    "price_usd": 61.29,
+    "volume_usd_24h": 13647059.75,
     "spread_percent": 0.016
   },
   {
     "coin": "VVV/USD",
-    "price_usd": 27.391,
-    "volume_usd_24h": 12113944.54,
-    "spread_percent": 0.128
+    "price_usd": 27.252,
+    "volume_usd_24h": 12668278.47,
+    "spread_percent": 0.073
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.064,
-    "volume_usd_24h": 9828519.71,
-    "spread_percent": 0.029
+    "price_usd": 3.0675,
+    "volume_usd_24h": 9584300.25,
+    "spread_percent": 0.049
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 522.36,
-    "volume_usd_24h": 6558394.87,
-    "spread_percent": 0.174
+    "price_usd": 521.77,
+    "volume_usd_24h": 6520920.77,
+    "spread_percent": 0.086
   },
   {
-    "coin": "SUI/USD",
-    "price_usd": 0.6691,
-    "volume_usd_24h": 5971843.06,
-    "spread_percent": 0.015
+    "coin": "LTC/USD",
+    "price_usd": 43.74,
+    "volume_usd_24h": 5992752.93,
+    "spread_percent": 0.023
   }
 ]
