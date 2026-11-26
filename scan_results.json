@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 60781.5,
-    "volume_usd_24h": 429109185.87,
+    "price_usd": 60427.6,
+    "volume_usd_24h": 401350428.58,
     "spread_percent": 0.0
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 746.9,
-    "volume_usd_24h": 65813203.46,
-    "spread_percent": 0.04
+    "price_usd": 730.03,
+    "volume_usd_24h": 65199902.65,
+    "spread_percent": 0.012
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1698.41,
-    "volume_usd_24h": 50852926.8,
+    "price_usd": 1691.98,
+    "volume_usd_24h": 48882678.42,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.9538,
-    "volume_usd_24h": 34793960.3,
-    "spread_percent": 0.006
+    "price_usd": 0.94936,
+    "volume_usd_24h": 33279986.6,
+    "spread_percent": 0.004
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 70.98,
-    "volume_usd_24h": 30045561.39,
+    "price_usd": 70.41,
+    "volume_usd_24h": 28981121.33,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 61.29,
-    "volume_usd_24h": 13647059.75,
-    "spread_percent": 0.016
+    "price_usd": 60.48,
+    "volume_usd_24h": 13248854.67,
+    "spread_percent": 0.033
   },
   {
     "coin": "VVV/USD",
-    "price_usd": 27.252,
-    "volume_usd_24h": 12668278.47,
-    "spread_percent": 0.073
+    "price_usd": 27.522,
+    "volume_usd_24h": 12887552.36,
+    "spread_percent": 0.091
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.0675,
-    "volume_usd_24h": 9584300.25,
-    "spread_percent": 0.049
+    "price_usd": 3.0517,
+    "volume_usd_24h": 9628778.54,
+    "spread_percent": 0.029
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 521.77,
-    "volume_usd_24h": 6520920.77,
-    "spread_percent": 0.086
+    "price_usd": 518.97,
+    "volume_usd_24h": 6396637.08,
+    "spread_percent": 0.131
   },
   {
     "coin": "LTC/USD",
-    "price_usd": 43.74,
-    "volume_usd_24h": 5992752.93,
+    "price_usd": 43.36,
+    "volume_usd_24h": 5956113.96,
     "spread_percent": 0.023
   }
 ]
