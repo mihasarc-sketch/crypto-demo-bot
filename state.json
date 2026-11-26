@@ -493,7 +493,7 @@
   },
   "realized": -40.864916644658734,
   "invested": 0,
-  "updated": "2026-11-26T12:06:13.110637+00:00",
+  "updated": "2026-11-26T13:30:30.056463+00:00",
   "signals": {
     "BTC": {
       "price": 60642.4,
@@ -506,9 +506,9 @@
       "volume_ratio": 0.33,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:11.515710+00:00",
+      "updated": "2026-11-26T13:30:27.909263+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ETH": {
       "price": 1698.26,
@@ -521,9 +521,9 @@
       "volume_ratio": 0.3,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:11.657925+00:00",
+      "updated": "2026-11-26T13:30:28.121240+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SOL": {
       "price": 70.79,
@@ -536,9 +536,9 @@
       "volume_ratio": 0.33,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:11.696320+00:00",
+      "updated": "2026-11-26T13:30:28.294912+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "XRP": {
       "price": 0.9512,
@@ -551,9 +551,9 @@
       "volume_ratio": 0.25,
       "trend_up": true,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:11.842875+00:00",
+      "updated": "2026-11-26T13:30:28.476288+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "ADA": {
       "price": 0.148434,
@@ -566,9 +566,9 @@
       "volume_ratio": 0.6,
       "trend_up": true,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:11.957218+00:00",
+      "updated": "2026-11-26T13:30:28.673510+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOGE": {
       "price": 0.0568113,
@@ -581,9 +581,9 @@
       "volume_ratio": 0.44,
       "trend_up": true,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:12.115840+00:00",
+      "updated": "2026-11-26T13:30:28.880454+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LINK": {
       "price": 9.22782,
@@ -596,9 +596,9 @@
       "volume_ratio": 0.63,
       "trend_up": true,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:12.265464+00:00",
+      "updated": "2026-11-26T13:30:29.090376+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "AVAX": {
       "price": 6.649,
@@ -611,9 +611,9 @@
       "volume_ratio": 0.31,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:12.539706+00:00",
+      "updated": "2026-11-26T13:30:29.329097+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "LTC": {
       "price": 43.51,
@@ -626,9 +626,9 @@
       "volume_ratio": 0.55,
       "trend_up": true,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:12.672934+00:00",
+      "updated": "2026-11-26T13:30:29.362294+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "DOT": {
       "price": 0.6758,
@@ -641,9 +641,9 @@
       "volume_ratio": 0.28,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:12.810836+00:00",
+      "updated": "2026-11-26T13:30:29.592674+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "GOLD": {
       "price": 3569.4,
@@ -656,9 +656,9 @@
       "volume_ratio": 0.26,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:12.968805+00:00",
+      "updated": "2026-11-26T13:30:29.864718+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     },
     "SILVER": {
       "price": 41.5524,
@@ -671,9 +671,9 @@
       "volume_ratio": 0.3,
       "trend_up": false,
       "candle_time": "1795680000",
-      "updated": "2026-11-26T12:06:13.110476+00:00",
+      "updated": "2026-11-26T13:30:30.056325+00:00",
       "decision": "WAIT",
-      "reason": "kein best\u00e4tigter R\u00fccklauf \u00fcber das untere Bollinger-Band; RSI \u00fcber 40 f\u00fcr Bollinger-Einstieg; Ausbruchsvolumen unter 1.20x Durchschnitt; Trendfilter EMA50 nicht aufw\u00e4rts"
+      "reason": "Keine neue abgeschlossene 4h-Kerze"
     }
   },
   "last_candle": {
@@ -719,19 +719,19 @@
   "daily_realized": 0.5947344048231002,
   "consecutive_losses": 0,
   "strategy_performance": {
-    "momentum_breakout_ema50_rsi48_68_4h_v1": {
-      "closed": 1,
-      "wins": 1,
-      "losses": 0,
-      "win_rate": 100.0,
-      "net_profit": 0.59
-    },
     "bollinger_reclaim_ema50_rsi40_4h_v3_profit_lock": {
       "closed": 0,
       "wins": 0,
       "losses": 0,
       "win_rate": null,
       "net_profit": 0
+    },
+    "momentum_breakout_ema50_rsi48_68_4h_v1": {
+      "closed": 1,
+      "wins": 1,
+      "losses": 0,
+      "win_rate": 100.0,
+      "net_profit": 0.59
     }
   },
   "risk_controls": {

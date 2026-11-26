@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 60778.7,
-    "volume_usd_24h": 393553009.41,
+    "price_usd": 60779.0,
+    "volume_usd_24h": 386150014.85,
     "spread_percent": 0.0
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 730.44,
-    "volume_usd_24h": 65224567.71,
-    "spread_percent": 0.033
+    "price_usd": 721.4,
+    "volume_usd_24h": 63731875.07,
+    "spread_percent": 0.039
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1704.98,
-    "volume_usd_24h": 49933184.7,
-    "spread_percent": 0.001
+    "price_usd": 1703.93,
+    "volume_usd_24h": 49366195.76,
+    "spread_percent": 0.004
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.95427,
-    "volume_usd_24h": 33418035.4,
-    "spread_percent": 0.005
+    "price_usd": 0.94975,
+    "volume_usd_24h": 32538811.95,
+    "spread_percent": 0.001
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 71.02,
-    "volume_usd_24h": 28934496.29,
+    "price_usd": 70.88,
+    "volume_usd_24h": 28432057.74,
     "spread_percent": 0.014
   },
   {
-    "coin": "HYPE/USD",
-    "price_usd": 60.82,
-    "volume_usd_24h": 13183355.25,
-    "spread_percent": 0.033
+    "coin": "VVV/USD",
+    "price_usd": 27.672,
+    "volume_usd_24h": 13061374.91,
+    "spread_percent": 0.072
   },
   {
-    "coin": "VVV/USD",
-    "price_usd": 27.61,
-    "volume_usd_24h": 13029059.89,
-    "spread_percent": 0.076
+    "coin": "HYPE/USD",
+    "price_usd": 61.07,
+    "volume_usd_24h": 12928617.74,
+    "spread_percent": 0.016
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.0891,
-    "volume_usd_24h": 9905746.2,
-    "spread_percent": 0.003
+    "price_usd": 3.0778,
+    "volume_usd_24h": 9920944.28,
+    "spread_percent": 0.036
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 510.09,
-    "volume_usd_24h": 6743256.33,
-    "spread_percent": 0.09
+    "price_usd": 492.06,
+    "volume_usd_24h": 7137715.97,
+    "spread_percent": 0.073
   },
   {
-    "coin": "SUI/USD",
-    "price_usd": 0.6716,
-    "volume_usd_24h": 5928279.11,
-    "spread_percent": 0.03
+    "coin": "LTC/USD",
+    "price_usd": 43.63,
+    "volume_usd_24h": 6145546.59,
+    "spread_percent": 0.023
   }
 ]
