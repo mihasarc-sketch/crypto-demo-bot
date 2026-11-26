@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 60127.3,
-    "volume_usd_24h": 321196743.83,
+    "price_usd": 60512.5,
+    "volume_usd_24h": 273678727.4,
     "spread_percent": 0.0
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 673.98,
-    "volume_usd_24h": 56626123.01,
-    "spread_percent": 0.092
+    "price_usd": 704.24,
+    "volume_usd_24h": 54747434.6,
+    "spread_percent": 0.048
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1673.27,
-    "volume_usd_24h": 44539447.99,
-    "spread_percent": 0.064
+    "price_usd": 1692.73,
+    "volume_usd_24h": 42197083.12,
+    "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.93574,
-    "volume_usd_24h": 31456872.79,
-    "spread_percent": 0.049
+    "price_usd": 0.95009,
+    "volume_usd_24h": 31708214.61,
+    "spread_percent": 0.004
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 70.11,
-    "volume_usd_24h": 21470946.05,
+    "price_usd": 71.03,
+    "volume_usd_24h": 18302758.8,
     "spread_percent": 0.014
   },
   {
     "coin": "VVV/USD",
-    "price_usd": 26.47,
-    "volume_usd_24h": 12217278.34,
-    "spread_percent": 0.091
+    "price_usd": 27.097,
+    "volume_usd_24h": 11629287.54,
+    "spread_percent": 0.085
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 59.79,
-    "volume_usd_24h": 11039733.3,
-    "spread_percent": 0.033
+    "price_usd": 60.33,
+    "volume_usd_24h": 10614869.73,
+    "spread_percent": 0.017
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 2.9733,
-    "volume_usd_24h": 8638724.04,
-    "spread_percent": 0.172
+    "price_usd": 3.065,
+    "volume_usd_24h": 8868342.47,
+    "spread_percent": 0.039
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 447.2,
-    "volume_usd_24h": 8147284.0,
-    "spread_percent": 0.259
+    "price_usd": 449.29,
+    "volume_usd_24h": 8558952.56,
+    "spread_percent": 0.169
   },
   {
     "coin": "LTC/USD",
-    "price_usd": 43.23,
-    "volume_usd_24h": 5902213.14,
-    "spread_percent": 0.069
+    "price_usd": 43.43,
+    "volume_usd_24h": 5313528.74,
+    "spread_percent": 0.046
   }
 ]
