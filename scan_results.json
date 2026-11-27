@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 59726.9,
-    "volume_usd_24h": 288435737.96,
+    "price_usd": 59845.7,
+    "volume_usd_24h": 296112851.96,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1656.19,
-    "volume_usd_24h": 64010311.15,
+    "price_usd": 1660.45,
+    "volume_usd_24h": 63138880.19,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.946,
-    "volume_usd_24h": 42970304.44,
+    "price_usd": 0.94778,
+    "volume_usd_24h": 43457467.8,
     "spread_percent": 0.001
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 729.2,
-    "volume_usd_24h": 41861698.11,
-    "spread_percent": 0.032
+    "price_usd": 733.13,
+    "volume_usd_24h": 38016395.27,
+    "spread_percent": 0.048
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 71.53,
-    "volume_usd_24h": 27178598.29,
+    "price_usd": 71.58,
+    "volume_usd_24h": 27464063.99,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 63.65,
-    "volume_usd_24h": 14005571.82,
-    "spread_percent": 0.016
+    "price_usd": 63.46,
+    "volume_usd_24h": 15622758.09,
+    "spread_percent": 0.032
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 407.3,
-    "volume_usd_24h": 7238019.25,
-    "spread_percent": 0.108
+    "price_usd": 405.57,
+    "volume_usd_24h": 7230211.5,
+    "spread_percent": 0.173
   },
   {
     "coin": "XDG/USD",
-    "price_usd": 0.057533,
-    "volume_usd_24h": 7083896.11,
-    "spread_percent": 0.002
+    "price_usd": 0.0576425,
+    "volume_usd_24h": 7176476.16,
+    "spread_percent": 0.0
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 3.0338,
-    "volume_usd_24h": 6029208.86,
-    "spread_percent": 0.033
+    "price_usd": 3.018,
+    "volume_usd_24h": 6096429.23,
+    "spread_percent": 0.02
   },
   {
     "coin": "TAO/USD",
-    "price_usd": 186.3296,
-    "volume_usd_24h": 5703798.26,
-    "spread_percent": 0.09
+    "price_usd": 186.4644,
+    "volume_usd_24h": 5701697.71,
+    "spread_percent": 0.055
   }
 ]
