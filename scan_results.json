@@ -1,62 +1,62 @@
 [
   {
     "coin": "XBT/USD",
-    "price_usd": 59206.3,
-    "volume_usd_24h": 309786434.29,
+    "price_usd": 59047.3,
+    "volume_usd_24h": 312679190.33,
     "spread_percent": 0.0
   },
   {
     "coin": "ETH/USD",
-    "price_usd": 1647.64,
-    "volume_usd_24h": 47603313.99,
+    "price_usd": 1639.46,
+    "volume_usd_24h": 47436972.86,
     "spread_percent": 0.001
   },
   {
     "coin": "XRP/USD",
-    "price_usd": 0.93956,
-    "volume_usd_24h": 37518424.05,
-    "spread_percent": 0.001
+    "price_usd": 0.93499,
+    "volume_usd_24h": 37420843.3,
+    "spread_percent": 0.007
   },
   {
     "coin": "ZEC/USD",
-    "price_usd": 718.96,
-    "volume_usd_24h": 22633992.31,
-    "spread_percent": 0.001
+    "price_usd": 715.19,
+    "volume_usd_24h": 22579676.64,
+    "spread_percent": 0.028
   },
   {
     "coin": "SOL/USD",
-    "price_usd": 70.89,
-    "volume_usd_24h": 19976597.23,
+    "price_usd": 70.23,
+    "volume_usd_24h": 20064383.69,
     "spread_percent": 0.014
   },
   {
     "coin": "HYPE/USD",
-    "price_usd": 62.79,
-    "volume_usd_24h": 12323104.16,
+    "price_usd": 62.43,
+    "volume_usd_24h": 11858133.22,
     "spread_percent": 0.016
   },
   {
     "coin": "XMR/USD",
-    "price_usd": 437.96,
-    "volume_usd_24h": 8788549.96,
-    "spread_percent": 0.023
+    "price_usd": 429.85,
+    "volume_usd_24h": 8703464.14,
+    "spread_percent": 0.112
   },
   {
     "coin": "XDG/USD",
-    "price_usd": 0.0565957,
-    "volume_usd_24h": 6868907.89,
-    "spread_percent": 0.0
+    "price_usd": 0.0562454,
+    "volume_usd_24h": 7052524.92,
+    "spread_percent": 0.017
   },
   {
     "coin": "TAO/USD",
-    "price_usd": 182.483,
-    "volume_usd_24h": 5529796.82,
-    "spread_percent": 0.046
+    "price_usd": 182.4175,
+    "volume_usd_24h": 5591929.2,
+    "spread_percent": 0.062
   },
   {
     "coin": "NEAR/USD",
-    "price_usd": 2.9716,
-    "volume_usd_24h": 4989098.26,
-    "spread_percent": 0.024
+    "price_usd": 2.9519,
+    "volume_usd_24h": 5105776.92,
+    "spread_percent": 0.027
   }
 ]
